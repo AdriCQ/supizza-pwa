@@ -18,3 +18,5 @@ export interface IMapGeolocation {
   lat: string;
   lon: string;
 }
+
+export * from "./data";
