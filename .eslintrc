@@ -1,15 +1,17 @@
 {
+	"root": true,
+	"parser": "vue-eslint-parser",
+	"parserOptions": {
+		"parser": "@typescript-eslint/parser"
+	},
 	"extends": [
-		"plugin:vue/vue3-recommended",
+		"plugin:vue/strongly-recommended",
+		"eslint:recommended",
+		"@vue/typescript/recommended",
 		"prettier"
 	],
-	"parserOptions": {
-		"ecmaVersion": 13,
-		"sourceType": "module"
-	},
 	"plugins": [
-		"vue",
-		"html",
+		"@typescript-eslint",
 		"prettier"
 	],
 	"rules": {
