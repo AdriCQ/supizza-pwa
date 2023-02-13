@@ -4,8 +4,8 @@ import CartWidget from "@/components/widgets/CartWidget.vue";
 
 <template>
   <div class="min-h-screen">
+    <!-- Cart Button -->
     <div class="fixed bottom-2 right-2">
-      <!-- Cart Button -->
       <CartWidget />
     </div>
   </div>
