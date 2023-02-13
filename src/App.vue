@@ -1,3 +1,5 @@
 <template>
-  <router-view />
+  <div class="min-h-screen">
+    <RouterView />
+  </div>
 </template>
