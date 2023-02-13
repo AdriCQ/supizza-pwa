@@ -1,3 +1,4 @@
 export enum ROUTE_NAME {
   HOME = "MAIN.HOME",
+  OFFER_DETAILS = "OFFER.DETAILS",
 }
