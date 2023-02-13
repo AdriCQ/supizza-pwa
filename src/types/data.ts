@@ -77,3 +77,7 @@ export interface IResponseData {
   pizzas: IPizza[];
   promos: IPromo[];
 }
+/**
+ * IResponseDataKey
+ */
+export type IResponseDataKey = keyof IResponseData;
