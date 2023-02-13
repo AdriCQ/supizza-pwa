@@ -9,7 +9,7 @@ export const routes: RouteRecordRaw[] = [
   },
   {
     path: "/details",
-    name: ROUTE_NAME.HOME,
+    name: ROUTE_NAME.OFFER_DETAILS,
     component: () => import("@/pages/OfferDetails.vue"),
   },
   // {
