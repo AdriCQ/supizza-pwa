@@ -1,0 +1,430 @@
+{
+	"promos": [
+		{
+			"title": "Promo Su Pizza ",
+			"img": "https://cfiles.link/image/su_pizza/promos_636d6e000a8a826d9e6f0436_1668116536.png/720x720",
+			"price": 199.9,
+			"desc": "2 Pizzas grandes",
+			"restrictions": "No se puede personalizar o agregar ingredientes",
+			"additional": [
+				{
+					"title": "Elige las pizzas de tu promo",
+					"desc": "",
+					"optional": false,
+					"type": "multiple",
+					"min": 2,
+					"max": 2,
+					"items": [
+						{
+							"name": "Cordon Bleu",
+							"desc": "Pollo, Jamon, Tocino, Queso Amarillo",
+							"price": 0
+						},
+						{
+							"name": "Hawaiana VIP",
+							"desc": "Jamon, Piña, Jalapeño, Tocino",
+							"price": 0
+						},
+						{
+							"name": "Hawaiana VIP",
+							"desc": "Jamon, Piña, Jalapeño, Tocino",
+							"price": 0
+						},
+						{
+							"name": "Italiana",
+							"desc": "Jamon, Salchicha, Salami, Pimiento",
+							"price": 0
+						},
+						{
+							"name": "Pastor",
+							"desc": "Pastor, Piña, Cebolla, Tocino",
+							"price": 0
+						},
+						{
+							"name": "Kanter",
+							"desc": "Champiñon , Tocino, Salami, Pepperoni",
+							"price": 0
+						},
+						{
+							"name": "4 Quesos",
+							"desc": "Queso Amarillo, Oaxaca , Mozarella, Gouda",
+							"price": 0
+						},
+						{
+							"name": "Cubana",
+							"desc": "Jamon, Tocino, Chorizo, Queso Amarillo",
+							"price": 0
+						}
+					]
+				}
+			]
+		},
+		{
+			"title": "Combo clasico ",
+			"img": "https://cfiles.link/image/su_pizza/promos_6345d0713bbb447a9952d2e8_1668116734.png/720x720",
+			"price": 179.9,
+			"desc": "2 Pizzas grandes Hawaiiana + Pepperoni",
+			"restrictions": "No se puede personalizar o agregar ingredientes",
+			"additional": []
+		},
+		{
+			"title": "Combo 4",
+			"img": "https://cfiles.link/image/su_pizza/promos_6345d0713bbb447a9952d2e8_1668116734.png/720x720",
+			"price": 399.9,
+			"desc": "4 Pizzas grandes + 2 Refrescos de 1.5 L",
+			"restrictions": "No se puede personalizar o agregar ingredientes",
+			"additional": [
+				{
+					"title": "Elige las pizzas de tu combo",
+					"desc": "",
+					"optional": false,
+					"type": "multiple",
+					"min": 4,
+					"max": 4,
+					"items": [
+						{
+							"name": "Cordon Bleu",
+							"desc": "Pollo, Jamon, Tocino, Queso Amarillo",
+							"price": 0
+						},
+						{
+							"name": "Hawaiana VIP",
+							"desc": "Jamon, Piña, Jalapeño, Tocino",
+							"price": 0
+						},
+						{
+							"name": "Hawaiana VIP",
+							"desc": "Jamon, Piña, Jalapeño, Tocino",
+							"price": 0
+						},
+						{
+							"name": "Italiana",
+							"desc": "Jamon, Salchicha, Salami, Pimiento",
+							"price": 0
+						},
+						{
+							"name": "Pastor",
+							"desc": "Pastor, Piña, Cebolla, Tocino",
+							"price": 0
+						},
+						{
+							"name": "Kanter",
+							"desc": "Champiñon , Tocino, Salami, Pepperoni",
+							"price": 0
+						},
+						{
+							"name": "4 Quesos",
+							"desc": "Queso Amarillo, Oaxaca , Mozarella, Gouda",
+							"price": 0
+						},
+						{
+							"name": "Cubana",
+							"desc": "Jamon, Tocino, Chorizo, Queso Amarillo",
+							"price": 0
+						}
+					]
+				},
+				{
+					"title": "Elige los refrescos para tu combo",
+					"desc": "",
+					"optional": false,
+					"type": "multiple",
+					"min": 2,
+					"max": 2,
+					"items": [
+						{
+							"name": "Refresco Pepsi 1.5L",
+							"desc": "",
+							"price": 0
+						},
+						{
+							"name": "Manzanita Sol 1.5L",
+							"desc": "",
+							"price": 0
+						},
+						{
+							"name": "Refresco Mirinda 1.5L",
+							"desc": "",
+							"price": 0
+						},
+						{
+							"name": "Refresco 7up De 1.5L",
+							"desc": "",
+							"price": 0
+						},
+						{
+							"name": "Agua Natural 1L",
+							"desc": "",
+							"price": 0
+						}
+					]
+				}
+			]
+		}
+	],
+	"ingredients": [
+		{
+			"name": "Pastor",
+			"desc": "",
+			"price": 0
+		},
+		{
+			"name": "Chipotle",
+			"desc": "",
+			"price": 0
+		},
+		{
+			"name": "Jalapeño",
+			"desc": "",
+			"price": 0
+		},
+		{
+			"name": "Chorizo",
+			"desc": "",
+			"price": 0
+		},
+		{
+			"name": "Queso",
+			"desc": "",
+			"price": 0
+		},
+		{
+			"name": "Pepperoni",
+			"desc": "",
+			"price": 0
+		},
+		{
+			"name": "Aceituna negra",
+			"desc": "",
+			"price": 0
+		},
+		{
+			"name": "Gouda",
+			"desc": "",
+			"price": 0
+		},
+		{
+			"name": "Oaxaca",
+			"desc": "",
+			"price": 0
+		},
+		{
+			"name": "Mozarella",
+			"desc": "",
+			"price": 0
+		},
+		{
+			"name": "Elote",
+			"desc": "",
+			"price": 0
+		},
+		{
+			"name": "Chipotle",
+			"desc": "",
+			"price": 0
+		},
+		{
+			"name": "Pastor",
+			"desc": "",
+			"price": 0
+		},
+		{
+			"name": "Pollo",
+			"desc": "",
+			"price": 0,
+			"selected": true
+		},
+		{
+			"name": "Atún",
+			"desc": "",
+			"price": 0
+		},
+		{
+			"name": "Camarón",
+			"desc": "",
+			"price": 0
+		},
+		{
+			"name": "Queso Amarillo",
+			"desc": "",
+			"price": 0,
+			"selected": true
+		},
+		{
+			"name": "Tocino",
+			"desc": "",
+			"price": 0,
+			"selected": true
+		},
+		{
+			"name": "Carne Molida",
+			"desc": "",
+			"price": 0
+		},
+		{
+			"name": "Salami",
+			"desc": "",
+			"price": 0
+		},
+		{
+			"name": "Salchicha",
+			"desc": "",
+			"price": 0
+		},
+		{
+			"name": "Jalapeño",
+			"desc": "",
+			"price": 0
+		},
+		{
+			"name": "Chorizo",
+			"desc": "",
+			"price": 0
+		},
+		{
+			"name": "Frijol",
+			"desc": "",
+			"price": 0
+		},
+		{
+			"name": "Cebolla",
+			"desc": "",
+			"price": 0
+		},
+		{
+			"name": "Pimiento",
+			"desc": "",
+			"price": 0
+		},
+		{
+			"name": "Champiñón",
+			"desc": "",
+			"price": 0
+		},
+		{
+			"name": "Cereza",
+			"desc": "",
+			"price": 0
+		},
+		{
+			"name": "Piña",
+			"desc": "",
+			"price": 0
+		},
+		{
+			"name": "Jamón",
+			"desc": "",
+			"price": 0,
+			"selected": true
+		}
+	],
+	"pizzas": [
+		{
+			"title": "A la Diabla",
+			"img": "https://cfiles.link/image/su_pizza/pizzas_5faf3faaaee23c7bef3bc65d_1605320618.png/360x360",
+			"price": 199.9,
+			"ingredients": [
+				"Pastor",
+				"Chipotle",
+				"Jalapeño",
+				"Chorizo"
+			],
+			"restrictions": "Limite de 4 ingredientes",
+			"additional": [
+				{
+					"title": "Personaliza los ingredientes de tu pizza",
+					"desc": "",
+					"optional": false,
+					"type": "check_box",
+					"min": 1,
+					"max": 4,
+					"items": []
+				}
+			]
+		},
+		{
+			"title": "Cordon Bleu",
+			"img": "https://cfiles.link/image/su_pizza/pizzas_5faf3faaaee23c7bef3bc65d_1605320618.png/360x360",
+			"price": 199.9,
+			"ingredients": [
+				"Pollo",
+				"Jamón",
+				"Tocino",
+				"Queso Amarillo"
+			],
+			"restrictions": "Limite de 4 ingredientes",
+			"additional": [
+				{
+					"title": "Personaliza los ingredientes de tu pizza",
+					"desc": "",
+					"optional": false,
+					"type": "check_box",
+					"min": 4,
+					"max": 4,
+					"items": []
+				}
+			]
+		},
+		{
+			"title": "Italiana",
+			"img": "https://cfiles.link/image/su_pizza/pizzas_5faf3faaaee23c7bef3bc65d_1605320618.png/360x360",
+			"price": 199.9,
+			"ingredients": [
+				"Jamon",
+				"Salchicha",
+				"Salami",
+				"Pimiento"
+			],
+			"restrictions": "Limite de 4 ingredientes",
+			"additional": [
+				{
+					"title": "Personaliza los ingredientes de tu pizza",
+					"desc": "",
+					"optional": false,
+					"type": "check_box",
+					"min": 4,
+					"max": 4,
+					"items": []
+				}
+			]
+		}
+	],
+	"drinks": [
+		{
+			"name": "Refresco Mirinda 355ml",
+			"img": "https://cfiles.link/image/su_pizza/bebidas_63e412a2d4e3ae1bcf7eaddb_1675891362.png/360x360",
+			"price": 14.90
+		},
+		{
+			"name": "Refresco Manzanita Sol 355ml",
+			"img": "https://cfiles.link/image/su_pizza/bebidas_63e4127cd4e3ae1bcf7eadd7_1675891324.png/360x360",
+			"price": 14.90
+		},
+		{
+			"name": "Refresco 7up 355ml",
+			"img": "https://cfiles.link/image/su_pizza/bebidas_63e41017d4e3ae1bcf7eadca_1675891262.png/360x360",
+			"price": 14.90
+		},
+		{
+			"name": "Refresco Pespi 355ml",
+			"img": "https://cfiles.link/image/su_pizza/bebidas_63cb5a64f35dcf5fdd42e3bf_1675891197.png/360x360",
+			"price": 14.90
+		}
+	],
+	"complements": [
+		{
+			"name": "Orden de Alitas Mango Habanero",
+			"desc": "Orden de alitas de pollo con salsa Mango Habanero",
+			"weight": "500g",
+			"img": "https://cfiles.link/image/su_pizza/complementos_617ca1d6f9d1d445ad953fc3_1643751564.png/360x360",
+			"price": 79.90
+		},
+		{
+			"name": "Papas a la francesa",
+			"desc": "Orden de papas a la francesa",
+			"weight": "500g",
+			"img": "https://cfiles.link/image/su_pizza/complementos_5fda30b14ad1c51d5381c6a8_1643751581.png/360x360",
+			"price": 39.90
+		}
+	]
+}
