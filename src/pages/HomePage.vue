@@ -6,27 +6,29 @@ const $dataStore = useDataStore();
 
 const complements = computed(() => $dataStore.complements);
 const drinks = computed(() => $dataStore.drinks);
-const ingredients = computed(() => $dataStore.ingredients);
 const pizzas = computed(() => $dataStore.pizzas);
 const promos = computed(() => $dataStore.promos);
 </script>
 
 <template>
-  <div>
-    <h1 class="space-y-2">
+  <div class="space-y-2">
+    <div>
       <ElementSlider
         type="complement"
         :elements="complements"
         v-if="complements"
       />
+    </div>
+
+    <div>
       <ElementSlider type="drink" :elements="drinks" v-if="drinks" />
-      <ElementSlider
-        type="ingredient"
-        :elements="ingredients"
-        v-if="ingredients"
-      />
+    </div>
+
+    <div>
       <ElementSlider type="pizza" :elements="pizzas" v-if="pizzas" />
+    </div>
+    <div>
       <ElementSlider type="promo" :elements="promos" v-if="promos" />
-    </h1>
+    </div>
   </div>
 </template>

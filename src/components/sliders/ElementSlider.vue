@@ -13,7 +13,7 @@ defineProps<{
 </script>
 
 <template>
-  <div className="carousel rounded-box w-full gap-1">
+  <div className="carousel rounded-box w-full gap-2">
     <div
       className="carousel-item w-1/2"
       v-for="(val, key) in elements"
