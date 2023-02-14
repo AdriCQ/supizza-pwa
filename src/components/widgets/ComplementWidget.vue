@@ -5,7 +5,7 @@ defineProps<{ complement: IComplement }>();
 </script>
 
 <template>
-  <div class="bg-white">
+  <div class="w-full bg-white">
     <img
       :src="complement.img"
       :alt="complement.name"

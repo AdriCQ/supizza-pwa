@@ -5,7 +5,7 @@ defineProps<{ drink: IDrink }>();
 </script>
 
 <template>
-  <div class="bg-white">
+  <div class="w-full bg-white">
     <img
       :src="drink.img"
       :alt="drink.name"

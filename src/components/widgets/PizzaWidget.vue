@@ -5,7 +5,7 @@ defineProps<{ pizza: IPizza }>();
 </script>
 
 <template>
-  <div class="bg-white">
+  <div class="w-full bg-white">
     <img
       :src="pizza.img"
       :alt="pizza.title"
