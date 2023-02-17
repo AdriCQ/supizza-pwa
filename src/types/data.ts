@@ -9,12 +9,14 @@ export interface IComplement extends IDrink {
  * IDrink
  */
 export interface IDrink extends IDataItem {
+  id: number;
   img: string;
 }
 /**
  * IIngredient
  */
 export interface IIngredient extends IDataItem {
+  id: number;
   selected?: boolean;
 }
 /**
@@ -27,6 +29,7 @@ export interface IPizza extends Omit<IPromo, "desc"> {
  * IPromo
  */
 export interface IPromo {
+  id: number;
   title: string;
   img: string;
   price: number;
@@ -61,6 +64,14 @@ export interface IDataItem {
   name: string;
   desc: string;
   price: number;
+}
+
+/**
+ * ISelectedDetails
+ */
+export interface ISelectedDetails {
+  type: IResponseDataKey;
+  value: IPizza | IPromo;
 }
 /**
  * -----------------------------------------

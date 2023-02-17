@@ -11,24 +11,25 @@ const promos = computed(() => $dataStore.promos);
 </script>
 
 <template>
-  <div class="space-y-2">
-    <div>
+  <div class="mt-2 space-y-2">
+    <div class="px-2">
       <ElementSlider
-        type="complement"
+        type="complements"
+        link
         :elements="complements"
         v-if="complements"
       />
     </div>
 
-    <div>
-      <ElementSlider type="drink" :elements="drinks" v-if="drinks" />
+    <div class="px-2">
+      <ElementSlider type="drinks" link :elements="drinks" v-if="drinks" />
     </div>
 
-    <div>
-      <ElementSlider type="pizza" :elements="pizzas" v-if="pizzas" />
+    <div class="px-2">
+      <ElementSlider type="pizzas" link :elements="pizzas" v-if="pizzas" />
     </div>
-    <div>
-      <ElementSlider type="promo" :elements="promos" v-if="promos" />
+    <div class="px-2">
+      <ElementSlider type="promos" link :elements="promos" v-if="promos" />
     </div>
   </div>
 </template>
