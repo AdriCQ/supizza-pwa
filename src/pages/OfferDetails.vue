@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import NavTop from "@/components/menu/NavTop.vue";
 import PromoDetails from "@/components/forms/PromoDetails.vue";
+import PizzaDetails from "@/components/forms/PizzaDetails.vue";
 import { useDataStore } from "@/helpers/pinia";
 import { onBeforeMount, ref } from "vue";
 import type { IPromo, IPizza, IResponseDataKey } from "@/types";
@@ -32,6 +33,10 @@ onBeforeMount(() => {
     offer.value = $dataStore.selected.value;
     offerType.value = $dataStore.selected.type;
   }
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
 });
 </script>
 
@@ -70,6 +75,11 @@ onBeforeMount(() => {
         <PromoDetails
           v-if="offerType === 'promos'"
           :promo="(offer as IPromo)"
+          @can-complete="handleCanComplete"
+        />
+        <PizzaDetails
+          v-if="offerType === 'pizzas'"
+          :pizza="(offer as IPizza)"
           @can-complete="handleCanComplete"
         />
       </div>
