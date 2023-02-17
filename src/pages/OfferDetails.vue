@@ -19,6 +19,7 @@ function handleCanComplete(complete: boolean) {
 }
 
 onBeforeMount(() => {
+  // Load data from route
   if ($route.query.type && $route.query.id) {
     const type = $route.query.type;
     const id = Number($route.query.id);
@@ -33,6 +34,7 @@ onBeforeMount(() => {
     offer.value = $dataStore.selected.value;
     offerType.value = $dataStore.selected.type;
   }
+  // Scroll to top
   window.scrollTo({
     top: 0,
     behavior: "smooth",

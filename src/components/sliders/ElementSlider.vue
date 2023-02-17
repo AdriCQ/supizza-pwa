@@ -68,7 +68,7 @@ function selectElement(sel: ISelectedDetails) {
         :pizza="type === 'pizzas' ? value as IPizza : undefined"
         :drink="type === 'drinks' ? value as IDrink : undefined"
         :promo="type === 'promos' ? value as IPromo : undefined"
-        @click="selectElement({ type, value })"
+        @click="selectElement({ type, value: value as IPromo | IPizza })"
       />
     </div>
   </div>

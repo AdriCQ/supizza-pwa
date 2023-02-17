@@ -19,6 +19,8 @@ export const useDataStore = defineStore(STORE_KEY, () => {
   const promos = computed(() => fullData.value?.promos);
   // Details Data
   const selected = ref<ISelectedDetails>();
+  // Cart
+  const cart = ref([]);
   /**
    * loadData
    */
@@ -37,6 +39,8 @@ export const useDataStore = defineStore(STORE_KEY, () => {
     pizzas,
     // Details Data
     selected,
+    // Cart
+    cart,
     // Methods
     loadData,
   };

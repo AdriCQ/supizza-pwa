@@ -17,7 +17,7 @@ const offer = computed(() => {
 
 <template>
   <div class="card w-full" v-if="offer">
-    <div class="w-full rounded-md bg-white">
+    <div class="w-full rounded-md bg-white p-1">
       <img
         :src="offer.img"
         :alt="(offer as IPromo).title??(offer as IDrink).name"

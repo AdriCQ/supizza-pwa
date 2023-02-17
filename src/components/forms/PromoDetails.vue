@@ -2,6 +2,7 @@
 import type { IPromo } from "@/types";
 import { ref, onBeforeMount } from "vue";
 import MultipleSelector from "./MultipleSelector.vue";
+import SimpleSelector from "./SimpleSelector.vue";
 
 const $props = defineProps<{
   promo: IPromo;
@@ -32,7 +33,7 @@ function canCompleteOperation() {
       if (total <= additional.max && total >= additional.min)
         canComplete[aKey] = true;
       else canComplete[aKey] = false;
-      // can o cant add
+      // can o can't add
       if (total === additional.max) canAdd.value[aKey] = false;
       else if (total < additional.max) canAdd.value[aKey] = true;
     }
@@ -68,6 +69,7 @@ onBeforeMount(() => {
       qty.value[aK].push(0);
     });
   });
+  canCompleteOperation();
 });
 </script>
 
@@ -93,6 +95,11 @@ onBeforeMount(() => {
               @update:model-value="(v) => handleUpdateQty(k, iKey, v)"
               :can-add="canAdd[k]"
               v-if="v.type === 'multiple'"
+            />
+            <SimpleSelector
+              :model-value="qty[k][iKey]"
+              can-select
+              v-if="v.type === 'check_box'"
             />
           </div>
         </div>
