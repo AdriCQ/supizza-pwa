@@ -9,8 +9,13 @@ import { useRoute } from "vue-router";
 const $dataStore = useDataStore();
 const $route = useRoute();
 
+const canComplete = ref(false);
 const offer = ref<IPizza | IPromo>();
 const offerType = ref<IResponseDataKey>();
+
+function handleCanComplete(complete: boolean) {
+  canComplete.value = complete;
+}
 
 onBeforeMount(() => {
   if ($route.query.type && $route.query.id) {
@@ -65,6 +70,7 @@ onBeforeMount(() => {
         <PromoDetails
           v-if="offerType === 'promos'"
           :promo="(offer as IPromo)"
+          @can-complete="handleCanComplete"
         />
       </div>
       <!-- / Details -->
@@ -72,7 +78,12 @@ onBeforeMount(() => {
     <!-- / Content -->
 
     <div class="fixed bottom-0 w-full bg-white px-6 pb-4">
-      <div class="btn-disabled btn-primary btn w-full">Añadir</div>
+      <div
+        class="btn-primary btn w-full"
+        :class="{ 'btn-disabled': !canComplete }"
+      >
+        Añadir
+      </div>
     </div>
   </div>
 </template>
