@@ -71,7 +71,7 @@ export interface IDataItem {
  */
 export interface ISelectedDetails {
   type: IResponseDataKey;
-  value: IPizza | IPromo;
+  value: IPizza | IPromo | IDrink;
 }
 /**
  * -----------------------------------------

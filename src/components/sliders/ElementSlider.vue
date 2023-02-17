@@ -1,31 +1,27 @@
 <script setup lang="ts">
 import type {
-  IComplement,
   IDrink,
-  IIngredient,
   IPizza,
   IPromo,
   IResponseDataKey,
   ISelectedDetails,
 } from "@/types";
 import { useDataStore } from "@/helpers/pinia";
-import ComplementWidget from "@/components/widgets/ComplementWidget.vue";
-import DrinkWidget from "@/components/widgets/DrinkWidget.vue";
-// import IngredientWidget from "@/components/widgets/IngredientWidget.vue";
-import PizzaWidget from "@/components/widgets/PizzaWidget.vue";
-import PromoWidget from "@/components/widgets/PromoWidget.vue";
+import OfferWidget from "@/components/widgets/OfferWidget.vue";
 import { useRouter } from "vue-router";
 import { ROUTE_NAME } from "@/router";
 import { computed } from "vue";
 
 const $props = defineProps<{
   type: IResponseDataKey;
-  elements: IComplement[] | IDrink[] | IIngredient[] | IPizza[] | IPromo[];
+  elements: IDrink[] | IPizza[] | IPromo[];
   link?: boolean;
 }>();
 const $dataStore = useDataStore();
 const $router = useRouter();
-
+/**
+ * title
+ */
 const title = computed(() => {
   switch ($props.type) {
     case "complements":
@@ -68,20 +64,11 @@ function selectElement(sel: ISelectedDetails) {
       v-for="(value, key) in elements"
       :key="`element-${type}-${key}`"
     >
-      <ComplementWidget
-        v-if="type === 'complements'"
-        :complement="(value as IComplement)"
-      />
-      <DrinkWidget v-else-if="type === 'drinks'" :drink="(value as IDrink)" />
-      <PizzaWidget
-        @click="selectElement({ type, value: value as IPizza })"
-        v-else-if="type === 'pizzas'"
-        :pizza="(value as IPizza)"
-      />
-      <PromoWidget
-        @click="selectElement({ type, value: value as IPromo })"
-        v-else
-        :promo="(value as IPromo)"
+      <OfferWidget
+        :pizza="type === 'pizzas' ? value as IPizza : undefined"
+        :drink="type === 'drinks' ? value as IDrink : undefined"
+        :promo="type === 'promos' ? value as IPromo : undefined"
+        @click="selectElement({ type, value })"
       />
     </div>
   </div>

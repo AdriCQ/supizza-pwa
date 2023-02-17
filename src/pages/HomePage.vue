@@ -4,7 +4,6 @@ import { useDataStore } from "@/helpers/pinia";
 import { computed } from "vue";
 const $dataStore = useDataStore();
 
-const complements = computed(() => $dataStore.complements);
 const drinks = computed(() => $dataStore.drinks);
 const pizzas = computed(() => $dataStore.pizzas);
 const promos = computed(() => $dataStore.promos);
@@ -13,23 +12,13 @@ const promos = computed(() => $dataStore.promos);
 <template>
   <div class="mt-2 space-y-2">
     <div class="px-2">
-      <ElementSlider
-        type="complements"
-        link
-        :elements="complements"
-        v-if="complements"
-      />
+      <ElementSlider type="promos" link :elements="promos" v-if="promos" />
     </div>
-
-    <div class="px-2">
-      <ElementSlider type="drinks" link :elements="drinks" v-if="drinks" />
-    </div>
-
     <div class="px-2">
       <ElementSlider type="pizzas" link :elements="pizzas" v-if="pizzas" />
     </div>
     <div class="px-2">
-      <ElementSlider type="promos" link :elements="promos" v-if="promos" />
+      <ElementSlider type="drinks" link :elements="drinks" v-if="drinks" />
     </div>
   </div>
 </template>
