@@ -18,7 +18,7 @@ api.interceptors.request.use((req) => {
  * @param api
  */
 const useService = (api: AxiosInstance) => ({
-  loadData: () => api.get<IResponseData>("/pizza.json"),
+  loadData: () => api.get<IResponseData>("/pizza.dev.json"),
 });
 /**
  * service
