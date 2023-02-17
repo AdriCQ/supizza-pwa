@@ -16,6 +16,7 @@ import PizzaWidget from "@/components/widgets/PizzaWidget.vue";
 import PromoWidget from "@/components/widgets/PromoWidget.vue";
 import { useRouter } from "vue-router";
 import { ROUTE_NAME } from "@/router";
+import { computed } from "vue";
 
 const $props = defineProps<{
   type: IResponseDataKey;
@@ -24,6 +25,23 @@ const $props = defineProps<{
 }>();
 const $dataStore = useDataStore();
 const $router = useRouter();
+
+const title = computed(() => {
+  switch ($props.type) {
+    case "complements":
+      return "Complementos";
+    case "drinks":
+      return "Bebidas";
+    case "ingredients":
+      return "Ingredientes";
+    case "pizzas":
+      return "Pizzas";
+    case "promos":
+      return "Promociones";
+    default:
+      return "";
+  }
+});
 
 /**
  * selectElement
@@ -41,6 +59,9 @@ function selectElement(sel: ISelectedDetails) {
 </script>
 
 <template>
+  <h3 class="text-xl">
+    {{ title }}
+  </h3>
   <div className="carousel rounded-box w-full gap-2">
     <div
       className="carousel-item w-1/2"
