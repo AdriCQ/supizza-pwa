@@ -38,28 +38,30 @@ export const useDataStore = defineStore(STORE_KEY, () => {
     let exists = false;
 
     cart.value.offers.filter((cartOffer, key, _cart) => {
-      // If offer is complement or drink check only id
-      if (offer.type === "complements" || offer.type === "drinks") {
-        // If exists add qty
-        if (
-          cartOffer.type === offer.type &&
-          cartOffer.offer.id === offer.offer.id
-        ) {
-          _cart[key].qty += offer.qty;
-          exists = true;
+      if (cartOffer.offer) {
+        // If offer is complement or drink check only id
+        if (offer.type === "complements" || offer.type === "drinks") {
+          // If exists add qty
+          if (
+            cartOffer.type === offer.type &&
+            cartOffer.offer.id === offer.offer?.id
+          ) {
+            _cart[key].qty += offer.qty;
+            exists = true;
+          }
         }
-      }
-      // If is promo or pizza
-      else if (
-        cartOffer.type === offer.type &&
-        cartOffer.offer.id === offer.offer.id
-      ) {
-        // If has same additional add qty
-        if (cartOffer.additional === offer.additional) {
-          _cart[key].qty += offer.qty;
-          exists = true;
-        } else {
-          _cart[key] = offer;
+        // If is promo or pizza
+        else if (
+          cartOffer.type === offer.type &&
+          cartOffer.offer.id === offer.offer?.id
+        ) {
+          // If has same additional add qty
+          if (cartOffer.additional === offer.additional) {
+            _cart[key].qty += offer.qty;
+            exists = true;
+          } else {
+            _cart[key] = offer;
+          }
         }
       }
     });
