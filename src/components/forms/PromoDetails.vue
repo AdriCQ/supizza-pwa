@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { IPromo } from "@/types";
 import { ref, onBeforeMount } from "vue";
-import MultipleSelector from "./MultipleSelector.vue";
-import SimpleSelector from "./SimpleSelector.vue";
+import MultipleSelector from "./selectors/MultipleSelector.vue";
+import SimpleSelector from "@/components/forms/selectors/SimpleSelector.vue";
 
 const $props = defineProps<{
   promo: IPromo;

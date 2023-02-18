@@ -1,3 +1,21 @@
+export interface ICart {
+  offers: ICartOffer[];
+  price: number;
+}
+/**
+ * ICartOffer
+ */
+export interface ICartOffer {
+  type: IResponseDataKey;
+  offer?: IComplement | IDrink | IPizza | IPromo;
+  additional?: [ICartOfferAdditional];
+  qty: number;
+}
+
+export interface ICartOfferAdditional {
+  id: number;
+  selected: IDataItem[];
+}
 /**
  * IComplement
  */
@@ -48,6 +66,7 @@ export interface IPromo {
  * IDataAdditional
  */
 export interface IDataAdditional {
+  id: number;
   title: string;
   desc: string;
   optional: boolean;

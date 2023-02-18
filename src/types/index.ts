@@ -20,3 +20,5 @@ export interface IMapGeolocation {
 }
 
 export * from "./data";
+export * from "./geo";
+export * from "./user";

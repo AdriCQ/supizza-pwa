@@ -4,7 +4,7 @@ import PromoDetails from "@/components/forms/PromoDetails.vue";
 import PizzaDetails from "@/components/forms/PizzaDetails.vue";
 import { useDataStore } from "@/helpers/pinia";
 import { onBeforeMount, ref } from "vue";
-import type { IPromo, IPizza, IResponseDataKey } from "@/types";
+import type { IPromo, IPizza, ICartOffer } from "@/types";
 import { useRoute } from "vue-router";
 
 const $dataStore = useDataStore();
@@ -12,10 +12,18 @@ const $route = useRoute();
 
 const canComplete = ref(false);
 const offer = ref<IPizza | IPromo>();
-const offerType = ref<IResponseDataKey>();
+const cartOffer = ref<ICartOffer>({
+  offer: undefined,
+  qty: 0,
+  type: "complements",
+});
 
 function handleCanComplete(complete: boolean) {
   canComplete.value = complete;
+}
+
+function handleSetOffer(offer: ICartOffer) {
+  console.log({ cartOffer: offer });
 }
 
 onBeforeMount(() => {
@@ -23,7 +31,7 @@ onBeforeMount(() => {
   if ($route.query.type && $route.query.id) {
     const type = $route.query.type;
     const id = Number($route.query.id);
-    if (type === "promos" || type === "pizzas") offerType.value = type;
+    if (type === "promos" || type === "pizzas") cartOffer.value.type = type;
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const resp = ($dataStore[type] as IPizza[] | IPromo[]).find(
@@ -32,8 +40,9 @@ onBeforeMount(() => {
     offer.value = resp;
   } else if ($dataStore.selected) {
     offer.value = $dataStore.selected.value;
-    offerType.value = $dataStore.selected.type;
+    cartOffer.value.type = $dataStore.selected.type;
   }
+
   // Scroll to top
   window.scrollTo({
     top: 0,
@@ -75,14 +84,15 @@ onBeforeMount(() => {
       <!-- Details -->
       <div class="mt-2">
         <PromoDetails
-          v-if="offerType === 'promos'"
+          v-if="cartOffer.type === 'promos'"
           :promo="(offer as IPromo)"
           @can-complete="handleCanComplete"
         />
         <PizzaDetails
-          v-if="offerType === 'pizzas'"
+          v-if="cartOffer.type === 'pizzas'"
           :pizza="(offer as IPizza)"
           @can-complete="handleCanComplete"
+          @set-offer="handleSetOffer"
         />
       </div>
       <!-- / Details -->

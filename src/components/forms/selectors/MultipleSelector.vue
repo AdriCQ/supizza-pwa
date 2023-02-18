@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { mdiMinus, mdiPlus } from "@mdi/js";
-import BaseIcon from "../BaseIcon.vue";
+import BaseIcon from "@/components/BaseIcon.vue";
 
 const $props = defineProps<{ modelValue: number; canAdd?: boolean }>();
 const $emit = defineEmits<{ (e: "update:model-value", v: number): void }>();
