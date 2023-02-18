@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import type { ICartOfferAdditional, IDataAdditional } from "@/types";
+import type {
+  ICartOfferAdditional,
+  IDataAdditional,
+  IIngredient,
+} from "@/types";
 import { useDataStore } from "@/helpers/pinia";
 
 const $emit = defineEmits<{
@@ -9,8 +13,11 @@ const $emit = defineEmits<{
 }>();
 const $props = defineProps<{ additional: IDataAdditional }>();
 
+// Available ingredients
 const { ingredients } = useDataStore();
+// Object constructor to parent emit
 const offerAdditional = ref<ICartOfferAdditional>();
+// list selected ingredients keys
 const selected = ref<number[]>([]);
 /**
  * handleSelect
@@ -73,9 +80,9 @@ function prepareCartOffer() {
     id: 1,
     selected: [],
   };
-  selected.value.forEach((s) => {
-    if (ingredients && ingredients[s]) {
-      const ingredient = ingredients[s];
+  selected.value.forEach((sId) => {
+    if (ingredients && ingredients.findIndex((i) => i.id === sId) >= 0) {
+      const ingredient = ingredients.find((i) => i.id === sId) as IIngredient;
       if (offerAdditional.value)
         offerAdditional.value.selected.push({
           desc: ingredient.desc,
@@ -96,7 +103,7 @@ function prepareCartOffer() {
       }`"
       v-for="(ing, iKey) in ingredients"
       :key="`ingredient-${iKey}-${ing.id}`"
-      @click="handleSelect(iKey)"
+      @click="handleSelect(ing.id)"
     >
       {{ ing.name }}
     </div>
