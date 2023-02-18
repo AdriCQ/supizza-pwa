@@ -12,6 +12,11 @@ export const routes: RouteRecordRaw[] = [
     name: ROUTE_NAME.OFFER_DETAILS,
     component: () => import("@/pages/OfferDetails.vue"),
   },
+  {
+    path: "/map",
+    name: ROUTE_NAME.MAP_SELECTOR,
+    component: () => import("@/pages/MapPage.vue"),
+  },
   // {
   // 	path: '/:catchAll(.*)*',
   // 	component: () => import('@/pages/ErrorNotFound.vue'),

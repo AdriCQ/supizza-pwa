@@ -9,7 +9,11 @@ const $app = useAppStore();
 const $dataStore = useDataStore();
 const $route = useRoute();
 
-const showNav = computed(() => $route.name !== ROUTE_NAME.OFFER_DETAILS);
+const showNav = computed(
+  () =>
+    $route.name !== ROUTE_NAME.OFFER_DETAILS &&
+    $route.name !== ROUTE_NAME.MAP_SELECTOR
+);
 
 onBeforeMount(async () => {
   try {
@@ -21,7 +25,7 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-  <main class="mb-20 min-h-screen">
+  <main class="min-h-screen" :class="{ 'mb-20': showNav }">
     <RouterView />
   </main>
 
