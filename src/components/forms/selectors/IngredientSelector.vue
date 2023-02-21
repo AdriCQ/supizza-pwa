@@ -99,7 +99,7 @@ function prepareCartOffer() {
   <div class="flex flex-wrap gap-2">
     <div
       :class="`rounded-full p-2 ${
-        isSelected(iKey) ? 'bg-primary' : 'bg-slate-100'
+        isSelected(ing.id) ? 'bg-primary' : 'bg-slate-100'
       }`"
       v-for="(ing, iKey) in ingredients"
       :key="`ingredient-${iKey}-${ing.id}`"
