@@ -9,6 +9,7 @@
       "restrictions": "No se puede personalizar o agregar ingredientes",
       "additional": [
         {
+          "id": 1,
           "title": "Elige las pizzas de tu promo",
           "desc": "",
           "optional": false,
@@ -17,41 +18,49 @@
           "max": 2,
           "items": [
             {
+              "id": 1,
               "name": "Cordon Bleu",
               "desc": "Pollo, Jamon, Tocino, Queso Amarillo",
               "price": 0
             },
             {
+              "id": 2,
               "name": "Hawaiana VIP",
               "desc": "Jamon, Piña, Jalapeño, Tocino",
               "price": 0
             },
             {
+              "id": 3,
               "name": "Hawaiana VIP",
               "desc": "Jamon, Piña, Jalapeño, Tocino",
               "price": 0
             },
             {
+              "id": 4,
               "name": "Italiana",
               "desc": "Jamon, Salchicha, Salami, Pimiento",
               "price": 0
             },
             {
+              "id": 5,
               "name": "Pastor",
               "desc": "Pastor, Piña, Cebolla, Tocino",
               "price": 0
             },
             {
+              "id": 6,
               "name": "Kanter",
               "desc": "Champiñon , Tocino, Salami, Pepperoni",
               "price": 0
             },
             {
+              "id": 7,
               "name": "4 Quesos",
               "desc": "Queso Amarillo, Oaxaca , Mozarella, Gouda",
               "price": 0
             },
             {
+              "id": 8,
               "name": "Cubana",
               "desc": "Jamon, Tocino, Chorizo, Queso Amarillo",
               "price": 0
@@ -78,6 +87,7 @@
       "restrictions": "No se puede personalizar o agregar ingredientes",
       "additional": [
         {
+          "id": 1,
           "title": "Elige las pizzas de tu combo",
           "desc": "",
           "optional": false,
@@ -86,41 +96,49 @@
           "max": 4,
           "items": [
             {
+              "id": 1,
               "name": "Cordon Bleu",
               "desc": "Pollo, Jamon, Tocino, Queso Amarillo",
               "price": 0
             },
             {
+              "id": 2,
               "name": "Hawaiana VIP",
               "desc": "Jamon, Piña, Jalapeño, Tocino",
               "price": 0
             },
             {
+              "id": 3,
               "name": "Hawaiana VIP",
               "desc": "Jamon, Piña, Jalapeño, Tocino",
               "price": 0
             },
             {
+              "id": 4,
               "name": "Italiana",
               "desc": "Jamon, Salchicha, Salami, Pimiento",
               "price": 0
             },
             {
+              "id": 5,
               "name": "Pastor",
               "desc": "Pastor, Piña, Cebolla, Tocino",
               "price": 0
             },
             {
+              "id": 6,
               "name": "Kanter",
               "desc": "Champiñon , Tocino, Salami, Pepperoni",
               "price": 0
             },
             {
+              "id": 7,
               "name": "4 Quesos",
               "desc": "Queso Amarillo, Oaxaca , Mozarella, Gouda",
               "price": 0
             },
             {
+              "id": 8,
               "name": "Cubana",
               "desc": "Jamon, Tocino, Chorizo, Queso Amarillo",
               "price": 0
@@ -128,6 +146,7 @@
           ]
         },
         {
+          "id": 2,
           "title": "Elige los refrescos para tu combo",
           "desc": "",
           "optional": false,
@@ -136,26 +155,31 @@
           "max": 2,
           "items": [
             {
+              "id": 1,
               "name": "Refresco Pepsi 1.5L",
               "desc": "",
               "price": 0
             },
             {
+              "id": 2,
               "name": "Manzanita Sol 1.5L",
               "desc": "",
               "price": 0
             },
             {
+              "id": 3,
               "name": "Refresco Mirinda 1.5L",
               "desc": "",
               "price": 0
             },
             {
+              "id": 4,
               "name": "Refresco 7up De 1.5L",
               "desc": "",
               "price": 0
             },
             {
+              "id": 5,
               "name": "Agua Natural 1L",
               "desc": "",
               "price": 0
@@ -361,6 +385,7 @@
       "restrictions": "Limite de 4 ingredientes",
       "additional": [
         {
+          "id": 1,
           "title": "Personaliza los ingredientes de tu pizza",
           "desc": "",
           "optional": false,
@@ -380,6 +405,7 @@
       "restrictions": "Limite de 4 ingredientes",
       "additional": [
         {
+          "id": 1,
           "title": "Personaliza los ingredientes de tu pizza",
           "desc": "",
           "optional": false,
@@ -399,6 +425,7 @@
       "restrictions": "Limite de 4 ingredientes",
       "additional": [
         {
+          "id": 1,
           "title": "Personaliza los ingredientes de tu pizza",
           "desc": "",
           "optional": false,
