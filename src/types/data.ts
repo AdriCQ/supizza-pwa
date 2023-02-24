@@ -8,7 +8,7 @@ export interface ICart {
 export interface ICartOffer {
   type: IResponseDataKey;
   offer?: IComplement | IDrink | IPizza | IPromo;
-  additional?: [ICartOfferAdditional];
+  additional?: ICartOfferAdditional[];
   qty: number;
 }
 
@@ -83,6 +83,8 @@ export interface IDataItem {
   name: string;
   desc: string;
   price: number;
+  qty: number;
+  id: number;
 }
 
 /**

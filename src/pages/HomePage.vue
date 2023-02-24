@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import ElementSlider from "@/components/sliders/ElementSlider.vue";
 import { useDataStore } from "@/helpers/pinia";
-import { computed } from "vue";
+import { computed, onBeforeMount } from "vue";
 const $dataStore = useDataStore();
 
 const drinks = computed(() => $dataStore.drinks);
 const pizzas = computed(() => $dataStore.pizzas);
 const promos = computed(() => $dataStore.promos);
+
+onBeforeMount(() => {
+  scrollTo({ top: 0, behavior: "smooth" });
+});
 </script>
 
 <template>

@@ -21,7 +21,7 @@ const cartOffer = ref<ICartOffer>({
 function handleOnReady(additionalIndex: number, ready: boolean) {
   if (ready) {
     $emit("can-complete", true);
-    console.log({ cart: cartOffer.value });
+    $emit("set-offer", cartOffer.value);
   }
 }
 /**
@@ -33,8 +33,10 @@ function handleSetAdditional(
   additionalIndex: number,
   value: ICartOfferAdditional
 ) {
-  if (cartOffer.value && cartOffer.value.additional)
+  if (cartOffer.value && cartOffer.value.additional) {
     cartOffer.value.additional[additionalIndex] = value;
+    $emit("set-offer", cartOffer.value);
+  }
 }
 /**
  * onBeforeMount

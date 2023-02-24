@@ -56,11 +56,15 @@ export const useDataStore = defineStore(STORE_KEY, () => {
           cartOffer.offer.id === offer.offer?.id
         ) {
           // If has same additional add qty
-          if (cartOffer.additional === offer.additional) {
+          if (
+            JSON.stringify(cartOffer.additional) ===
+            JSON.stringify(offer.additional)
+          ) {
             _cart[key].qty += offer.qty;
             exists = true;
           } else {
-            _cart[key] = offer;
+            // _cart[key] = offer;
+            console.log("Different");
           }
         }
       }
@@ -68,6 +72,7 @@ export const useDataStore = defineStore(STORE_KEY, () => {
 
     // If doesnt exists
     if (!exists) cart.value.offers.push(offer);
+    if (offer.offer) cart.value.price += offer.qty * offer.offer.price;
   }
   /**
    * loadData

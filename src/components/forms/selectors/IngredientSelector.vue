@@ -88,6 +88,8 @@ function prepareCartOffer() {
           desc: ingredient.desc,
           name: ingredient.name,
           price: ingredient.price,
+          qty: 1,
+          id: ingredient.id,
         });
     }
   });

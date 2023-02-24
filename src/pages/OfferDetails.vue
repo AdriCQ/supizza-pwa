@@ -5,25 +5,42 @@ import PizzaDetails from "@/components/forms/PizzaDetails.vue";
 import { useDataStore } from "@/helpers/pinia";
 import { onBeforeMount, ref } from "vue";
 import type { IPromo, IPizza, ICartOffer } from "@/types";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
+import { ROUTE_NAME } from "@/router";
 
 const $dataStore = useDataStore();
 const $route = useRoute();
+const $router = useRouter();
 
 const canComplete = ref(false);
 const offer = ref<IPizza | IPromo>();
 const cartOffer = ref<ICartOffer>({
   offer: undefined,
-  qty: 0,
+  qty: 1,
   type: "complements",
 });
-
+/**
+ * addToCart
+ */
+function addToCart() {
+  if (canComplete.value) {
+    $dataStore.addToCart(cartOffer.value);
+    void $router.push({ name: ROUTE_NAME.HOME });
+  }
+}
+/**
+ * handleCanComplete
+ * @param complete
+ */
 function handleCanComplete(complete: boolean) {
   canComplete.value = complete;
 }
-
+/**
+ * handleSetOffer
+ * @param offer
+ */
 function handleSetOffer(offer: ICartOffer) {
-  console.log({ cartOffer: offer });
+  cartOffer.value = offer;
 }
 
 onBeforeMount(() => {
@@ -42,6 +59,7 @@ onBeforeMount(() => {
     offer.value = $dataStore.selected.value;
     cartOffer.value.type = $dataStore.selected.type;
   }
+  cartOffer.value.offer = offer.value;
 
   // Scroll to top
   window.scrollTo({
@@ -87,6 +105,7 @@ onBeforeMount(() => {
           v-if="cartOffer.type === 'promos'"
           :promo="(offer as IPromo)"
           @can-complete="handleCanComplete"
+          @set-offer="handleSetOffer"
         />
         <PizzaDetails
           v-if="cartOffer.type === 'pizzas'"
@@ -103,6 +122,7 @@ onBeforeMount(() => {
       <div
         class="btn-primary btn w-full"
         :class="{ 'btn-disabled': !canComplete }"
+        @click="addToCart"
       >
         Añadir
       </div>
