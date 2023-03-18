@@ -3,7 +3,7 @@ import BaseIcon from "../BaseIcon.vue";
 import { mdiHome, mdiCart, mdiAccount, mdiMapMarker } from "@mdi/js";
 import { ROUTE_NAME } from "@/router";
 import { useRouter } from "vue-router";
-import { useDataStore } from "@/helpers/pinia";
+import { useDataStore } from "@/store";
 import { computed } from "vue";
 
 const $dataStore = useDataStore();

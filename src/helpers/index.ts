@@ -1,3 +1,2 @@
-export * from "./geolocation";
+export * from "../services/geolocation";
 export * from "./mix";
-export * from "./service";

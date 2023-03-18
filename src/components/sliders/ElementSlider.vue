@@ -6,7 +6,7 @@ import type {
   IResponseDataKey,
   ISelectedDetails,
 } from "@/types";
-import { useDataStore } from "@/helpers/pinia";
+import { useDataStore } from "@/store";
 import OfferWidget from "@/components/widgets/OfferWidget.vue";
 import { useRouter } from "vue-router";
 import { ROUTE_NAME } from "@/router";

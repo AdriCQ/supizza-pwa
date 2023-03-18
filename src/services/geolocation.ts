@@ -2,7 +2,7 @@ import type { IMapGeolocation } from "@/types";
 import { Capacitor } from "@capacitor/core";
 import { Geolocation } from "@capacitor/geolocation";
 import { latLng, LatLng } from "leaflet";
-import { api } from "./service";
+import { api } from "./axios";
 /**
  * useMap
  * @returns

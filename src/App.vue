@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed, onBeforeMount } from "vue";
-import { useAppStore, useDataStore } from "@/helpers/pinia";
+import { useAppStore, useDataStore } from "@/store";
 import NavBottom from "@/components/menu/NavBottom.vue";
 import { useRoute } from "vue-router";
 import { ROUTE_NAME } from "./router";

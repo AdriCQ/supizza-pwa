@@ -2,7 +2,7 @@
 import NavTop from "@/components/menu/NavTop.vue";
 import PromoDetails from "@/components/forms/PromoDetails.vue";
 import PizzaDetails from "@/components/forms/PizzaDetails.vue";
-import { useDataStore } from "@/helpers/pinia";
+import { useDataStore } from "@/store";
 import { onBeforeMount, ref } from "vue";
 import type { IPromo, IPizza, ICartOffer } from "@/types";
 import { useRoute, useRouter } from "vue-router";

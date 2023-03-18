@@ -1,5 +1,4 @@
-import { IResponseData } from "@/types";
-import axios, { AxiosRequestHeaders, AxiosInstance } from "axios";
+import axios, { AxiosRequestHeaders } from "axios";
 
 const api = axios.create({
   // baseURL: 'https://n8n.terio.xyz/',
@@ -13,16 +12,5 @@ api.interceptors.request.use((req) => {
   }
   return req;
 });
-/**
- * useService
- * @param api
- */
-const useService = (api: AxiosInstance) => ({
-  loadData: () => api.get<IResponseData>("/pizza.json"),
-});
-/**
- * service
- */
-const $service = useService(api);
 
-export { $service, useService, api };
+export { api };

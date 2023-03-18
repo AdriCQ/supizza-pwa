@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useDataStore } from "@/helpers/pinia";
+import { useDataStore } from "@/store";
 import { IComplement, IPizza } from "@/types";
 import { computed, onBeforeMount } from "vue";
 

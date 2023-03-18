@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ElementSlider from "@/components/sliders/ElementSlider.vue";
-import { useDataStore } from "@/helpers/pinia";
+import { useDataStore } from "@/store";
 import { computed, onBeforeMount } from "vue";
 const $dataStore = useDataStore();
 

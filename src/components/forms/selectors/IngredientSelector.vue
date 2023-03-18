@@ -5,7 +5,7 @@ import type {
   IDataAdditional,
   IIngredient,
 } from "@/types";
-import { useDataStore } from "@/helpers/pinia";
+import { useDataStore } from "@/store";
 
 const $emit = defineEmits<{
   (e: "set-additional", v: ICartOfferAdditional): void;

@@ -6,7 +6,7 @@ import type { IAddressCreate } from "@/types";
 import InputText from "@/components/forms/InputText.vue";
 import { useMap } from "@/helpers";
 
-const { addressFromCoordinates, currentPosition } = useMap();
+const { currentPosition } = useMap();
 
 const form = ref<IAddressCreate>({
   address: "",
@@ -47,7 +47,9 @@ function vaildate(): boolean {
 async function onSubmit() {
   console.log("onSubmit");
 }
-
+/**
+ * getLocation
+ */
 async function getLocation() {
   const resp = await currentPosition();
 }

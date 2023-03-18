@@ -6,7 +6,7 @@ import type {
 } from "@/types";
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
-import { $service } from "../service";
+import { $service } from "@/services";
 /**
  * STORE_KEY
  */

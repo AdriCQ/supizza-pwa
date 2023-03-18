@@ -8,23 +8,35 @@ const STORE_KEY = "pinia/useAppStore";
  */
 export const useAppStore = defineStore(STORE_KEY, () => {
   const notifications = ref<INotification[]>([]);
-  const timer = ref([]);
-
+  /**
+   * notify
+   * @param n
+   */
   function notify(n: INotification) {
     notifications.value.push(n);
     setTimeout(() => {
       notifications.value.pop();
     }, 4000);
   }
-
+  /**
+   * error
+   * @param content
+   */
   function error(content: string) {
     notify({ content, type: "negative" });
   }
-
+  /**
+   * success
+   * @param content
+   */
   function success(content: string) {
     notify({ content, type: "positive" });
   }
-
+  /**
+   * axiosError
+   * @param axiosError
+   * @param content
+   */
   function axiosError(axiosError: unknown, content = "Ha ocurrido un error") {
     console.log({ axiosError });
     error(content);
