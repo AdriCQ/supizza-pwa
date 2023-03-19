@@ -1,45 +1,55 @@
 <script setup lang="ts">
 import BaseIcon from "../BaseIcon.vue";
-import { mdiHome, mdiCart, mdiAccount, mdiMapMarker } from "@mdi/js";
 import { ROUTE_NAME } from "@/router";
 import { useRouter } from "vue-router";
 import { useDataStore } from "@/store";
 import { computed } from "vue";
+import { toCurrency } from "@/helpers";
+import { mdiArrowRight, mdiCart } from "@mdi/js";
 
 const $dataStore = useDataStore();
 const $router = useRouter();
-const itemClass = "flex flex-1 justify-center cursor-pointer";
-
-const cartLenght = computed(() => $dataStore.cart.offers.length);
-
-function goTo(name: ROUTE_NAME) {
-  $router.push({ name });
-}
+const cart = computed(() => $dataStore.cart);
+const qty = computed(() => {
+  let ret = 0;
+  cart.value.offers.forEach((offer) => {
+    ret += offer.qty;
+  });
+  return ret;
+});
 </script>
 
 <template>
   <nav
     id="nav-bottom"
-    class="flex gap-1 rounded-full border bg-white p-4 shadow-xl"
+    class="sticky bottom-0 p-4"
+    @click="() => $router.push({ name: ROUTE_NAME.CART })"
   >
-    <div :class="itemClass" @click="() => goTo(ROUTE_NAME.HOME)">
-      <BaseIcon :icon="mdiHome" size="1.8rem" />
-    </div>
-    <div :class="itemClass" @click="() => goTo(ROUTE_NAME.CART)">
+    <div
+      class="flex items-center gap-2 rounded-full border bg-primary p-4 shadow-xl"
+    >
       <div class="relative">
-        <BaseIcon :icon="mdiCart" size="1.8rem" />
-        <div
-          class="absolute top-0 right-0 z-10 flex h-4 w-4 -translate-y-3 translate-x-2 items-center justify-center rounded-full bg-green-500 text-xs"
-        >
-          {{ cartLenght }}
+        <BaseIcon
+          :icon="mdiCart"
+          size="1.5rem"
+          class="fill-slate-800 stroke-slate-700"
+        />
+        <div class="absolute -top-3 -right-1">
+          <div
+            class="flex h-4 w-4 items-center justify-center rounded-full bg-red-600 text-xs text-white"
+          >
+            {{ qty }}
+          </div>
         </div>
       </div>
-    </div>
-    <div :class="itemClass" @click="() => goTo(ROUTE_NAME.MAP_SELECTOR)">
-      <BaseIcon :icon="mdiMapMarker" size="1.8rem" />
-    </div>
-    <div :class="itemClass">
-      <BaseIcon :icon="mdiAccount" size="1.8rem" />
+      <div class="font-bold">Total {{ toCurrency(cart.price) }}</div>
+      <div class="ml-2 h-6 border border-slate-700"></div>
+      <div class="font-bold">Ver Carrito</div>
+      <BaseIcon
+        :icon="mdiArrowRight"
+        size="1.5rem"
+        class="fill-slate-800 stroke-slate-700"
+      />
     </div>
   </nav>
 </template>

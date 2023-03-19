@@ -27,11 +27,11 @@ const offer = computed(() => {
           class="w-full"
         />
       </div>
-      <div class="col-span-3">
+      <div class="col-span-3 text-slate-700">
         <h3 class="overflow-title text-lg font-bold">
           {{ (offer as IPromo).title ?? (offer as IDrink).name }}
         </h3>
-        <p class="overflow-description text-justify">
+        <p class="overflow-description">
           {{ (offer as IPromo).desc }}
         </p>
         <div class="absolute bottom-0 right-0 text-xl font-bold">
