@@ -15,6 +15,7 @@ const STORE_KEY = "pinia/useDataStore";
  * useDataStore
  */
 export const useDataStore = defineStore(STORE_KEY, () => {
+  // Full Data
   const fullData = ref<IResponseData>();
   // Separated data
   const complements = computed(() => fullData.value?.complements);
@@ -22,6 +23,14 @@ export const useDataStore = defineStore(STORE_KEY, () => {
   const ingredients = computed(() => fullData.value?.ingredients);
   const pizzas = computed(() => fullData.value?.pizzas);
   const promos = computed(() => fullData.value?.promos);
+  // categories
+  const categories = computed(() => {
+    const cat: string[] = [];
+    for (const key in fullData.value) {
+      cat.push(key);
+    }
+    return cat;
+  });
   // Details Data
   const selected = ref<ISelectedDetails>();
   // Cart
@@ -84,6 +93,7 @@ export const useDataStore = defineStore(STORE_KEY, () => {
 
   return {
     fullData,
+    categories,
     // Separated data
     complements,
     drinks,

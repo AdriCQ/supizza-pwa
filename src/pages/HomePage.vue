@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import ElementSlider from "@/components/sliders/ElementSlider.vue";
+import OfferGroup from "@/components/groups/OfferGroup.vue";
+import HomeNav from "@/components/menu/HomeNav.vue";
+import SearchForm from "@/components/forms/SearchForm.vue";
 import { useDataStore } from "@/store";
 import { computed, onBeforeMount } from "vue";
 const $dataStore = useDataStore();
@@ -14,15 +16,13 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <div class="mt-2 space-y-2">
-    <div class="px-2">
-      <ElementSlider type="promos" link :elements="promos" v-if="promos" />
-    </div>
-    <div class="px-2">
-      <ElementSlider type="pizzas" link :elements="pizzas" v-if="pizzas" />
-    </div>
-    <div class="px-2">
-      <ElementSlider type="drinks" link :elements="drinks" v-if="drinks" />
-    </div>
+  <HomeNav />
+
+  <div class="mt-2 space-y-2 px-6">
+    <SearchForm />
+
+    <OfferGroup type="promos" link :elements="promos" v-if="promos" />
+    <OfferGroup type="pizzas" link :elements="pizzas" v-if="pizzas" />
+    <OfferGroup type="drinks" link :elements="drinks" v-if="drinks" />
   </div>
 </template>

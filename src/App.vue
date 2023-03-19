@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { computed, onBeforeMount } from "vue";
 import { useAppStore, useDataStore } from "@/store";
-import NavBottom from "@/components/menu/NavBottom.vue";
 import { useRoute } from "vue-router";
 import { ROUTE_NAME } from "./router";
 
@@ -28,8 +27,4 @@ onBeforeMount(async () => {
   <main class="min-h-screen" :class="{ 'mb-20': showNav }">
     <RouterView />
   </main>
-
-  <div class="fixed bottom-0 z-10 w-full p-4" v-if="showNav">
-    <NavBottom class="w-full" />
-  </div>
 </template>

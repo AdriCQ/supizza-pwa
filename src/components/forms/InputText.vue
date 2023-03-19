@@ -27,7 +27,7 @@ function updateValue(ev: Event) {
 
 <template>
   <div class="form-control">
-    <label :for="`#input-${uuid}`" class="label">
+    <label :for="`#input-${uuid}`" class="label" v-if="label">
       <span>{{ label }}</span>
     </label>
 
@@ -42,7 +42,7 @@ function updateValue(ev: Event) {
       :value="modelValue"
       :type="type"
       :placeholder="placeholder"
-      class="input-bordered input w-full max-w-xs bg-slate-50"
+      class="input w-full max-w-xs bg-slate-50"
       :required="required"
       @change="updateValue"
     />
