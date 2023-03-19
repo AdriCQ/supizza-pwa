@@ -20,7 +20,7 @@ function goBack() {
 
 <template>
   <div class="fixed top-0 z-10 w-full p-2">
-    <nav class="flex items-center px-4 py-2 text-primary">
+    <nav class="flex items-center px-4 py-2 text-slate-800">
       <!-- Back -->
       <div
         class="h-10 w-10 cursor-pointer rounded-full bg-white p-2 opacity-95 shadow-md"
@@ -29,7 +29,7 @@ function goBack() {
         <BaseIcon
           :icon="mdiArrowLeft"
           size="100%"
-          class-name="stroke-primary fill-primary"
+          class-name="stroke-slate-800 fill-slate-800"
         />
       </div>
 

@@ -24,7 +24,7 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-  <main class="min-h-screen" :class="{ 'mb-20': showNav }">
+  <main class="min-h-screen text-slate-800" :class="{ 'mb-20': showNav }">
     <RouterView />
   </main>
 </template>

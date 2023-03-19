@@ -2,11 +2,13 @@
 import NavTop from "@/components/menu/NavTop.vue";
 import PromoDetails from "@/components/forms/PromoDetails.vue";
 import PizzaDetails from "@/components/forms/PizzaDetails.vue";
+import MultipleSelector from "@/components/forms/selectors/MultipleSelector.vue";
 import { useDataStore } from "@/store";
-import { onBeforeMount, ref } from "vue";
+import { onBeforeMount, ref, computed } from "vue";
 import type { IPromo, IPizza, ICartOffer } from "@/types";
 import { useRoute, useRouter } from "vue-router";
 import { ROUTE_NAME } from "@/router";
+import { toCurrency } from "@/helpers";
 
 const $dataStore = useDataStore();
 const $route = useRoute();
@@ -18,6 +20,20 @@ const cartOffer = ref<ICartOffer>({
   offer: undefined,
   qty: 1,
   type: "complements",
+});
+const subtotal = computed(() => {
+  let ret = cartOffer.value.offer?.price ?? 0;
+  // handle additional price
+  if (cartOffer.value.additional) {
+    cartOffer.value.additional.forEach((additional) => {
+      if (additional.selected && additional.selected.length) {
+        additional.selected.forEach((sel) => {
+          ret += sel.price * sel.qty;
+        });
+      }
+    });
+  }
+  return ret * cartOffer.value.qty;
 });
 /**
  * addToCart
@@ -42,7 +58,9 @@ function handleCanComplete(complete: boolean) {
 function handleSetOffer(offer: ICartOffer) {
   cartOffer.value = offer;
 }
-
+/**
+ * onBeforeMount
+ */
 onBeforeMount(() => {
   // Load data from route
   if ($route.query.type && $route.query.id) {
@@ -87,16 +105,11 @@ onBeforeMount(() => {
 
     <!-- Content -->
     <div
-      class="min-h-[15rem] translate-y-96 space-y-4 rounded-t-3xl bg-white px-4 pb-24 pt-8"
+      class="min-h-[15rem] translate-y-96 space-y-4 rounded-t-3xl bg-white px-4 pb-36 pt-8"
     >
-      <div class="flex gap-2 text-primary">
-        <div class="flex-1">
-          <h1 class="text-2xl">{{ offer?.title }}</h1>
-        </div>
-
-        <div class="flex-none text-lg font-bold">
-          ${{ Number(offer?.price).toFixed(2) }}
-        </div>
+      <div class="text-center text-slate-700">
+        <h1 class="text-2xl">{{ offer?.title }}</h1>
+        <!-- <p v-if="(offer as IPromo).desc">{{ (offer as IPromo).desc }}</p> -->
       </div>
 
       <!-- Details -->
@@ -118,13 +131,21 @@ onBeforeMount(() => {
     </div>
     <!-- / Content -->
 
-    <div class="fixed bottom-0 w-full bg-white px-6 pb-4">
+    <div class="fixed bottom-0 w-full bg-white p-4">
+      <div class="bg-slate-200 py-4 px-10">
+        <div class="flex items-center">
+          <div class="flex-1">Cantidad</div>
+          <div class="flex-none cursor-pointer">
+            <MultipleSelector v-model="cartOffer.qty" can-add />
+          </div>
+        </div>
+      </div>
       <div
         class="btn-primary btn w-full"
         :class="{ 'btn-disabled': !canComplete }"
         @click="addToCart"
       >
-        Añadir
+        {{ toCurrency(subtotal) }}<span class="ml-2"> Añadir</span>
       </div>
     </div>
   </div>

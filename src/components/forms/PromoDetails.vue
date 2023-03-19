@@ -2,7 +2,7 @@
 import type { ICartOffer, ICartOfferAdditional, IPromo } from "@/types";
 import { ref, onBeforeMount } from "vue";
 import MultipleSelector from "./selectors/MultipleSelector.vue";
-import SimpleSelector from "@/components/forms/selectors/SimpleSelector.vue";
+import SimpleSelector from "./selectors/SimpleSelector.vue";
 
 interface IQty {
   additional: number;
@@ -31,7 +31,10 @@ const cartOffer = ref<ICartOffer>({
 });
 // Can Add
 const canAdd = ref<ICanAdd[]>([]);
-
+/**
+ * countItems
+ * @param additionalId
+ */
 function countItems(additionalId: number) {
   let counter = 0;
   qty.value.forEach((q) => {
@@ -158,7 +161,9 @@ function getItemData(additionalId: number, itemId: number) {
   }
   return undefined;
 }
-
+/**
+ * onBeforeMount
+ */
 onBeforeMount(() => {
   // Init qty
   $props.promo.additional.forEach((additional) => {
@@ -190,14 +195,15 @@ onBeforeMount(() => {
 
 <template>
   <div class="space-y-2">
-    <div class="">{{ promo.desc }}</div>
-    <div class="rounded-md bg-red-100 p-2">{{ promo.restrictions }}</div>
+    <div class="p-2 text-center">{{ promo.desc }}</div>
+    <!-- <div class="rounded-md bg-red-100 p-2">{{ promo.restrictions }}</div> -->
     <div
+      class="rounded-lg bg-slate-200 py-4 px-8"
       v-for="(additional, aKey) in promo.additional"
       :key="`promo-add-${additional.id}-${aKey}`"
     >
-      <div class="my-4 rounded-md bg-slate-200 p-2">{{ additional.title }}</div>
-      <div class="">{{ additional.desc }}</div>
+      <div class="text-lg font-semibold">{{ additional.title }}</div>
+      <div class="font-thin" v-if="additional.desc">{{ additional.desc }}</div>
       <div
         class="rounded-sm border p-2"
         v-for="(item, iKey) in additional.items"
@@ -218,11 +224,26 @@ onBeforeMount(() => {
               "
               v-if="additional.type === 'multiple'"
             />
-            <SimpleSelector
-              :model-value="getQty(additional.id, item.id)"
+            <!-- <SimpleSelector
+              :selected="getQty(additional.id, item.id)"
               can-select
               v-if="additional.type === 'check_box'"
-            />
+            /> -->
+            <div
+              v-if="additional.type === 'check_box'"
+              class="bg-red-500 p-4 text-3xl"
+            >
+              check_box
+            </div>
+            <!-- <SimpleSelector
+              class="my-4"
+              :price="ing.price"
+              :label="ing.name"
+              :selected="isSelected(ing.id)"
+              @update:selected="() => handleSelect(ing.id)"
+              v-for="(ing, iKey) in ingredients"
+              :key="`ingredient2-${iKey}-${ing.id}`"
+            /> -->
           </div>
         </div>
       </div>

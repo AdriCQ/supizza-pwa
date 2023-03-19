@@ -58,7 +58,9 @@ onBeforeMount(() => {
 
 <template>
   <div class="space-y-2">
-    <div class="rounded-sm bg-red-200 p-2">{{ pizza.restrictions }}</div>
+    <div class="rounded-md bg-slate-200 p-2 text-center">
+      {{ pizza.restrictions }}
+    </div>
 
     <!-- Additions -->
     <IngredientSelector

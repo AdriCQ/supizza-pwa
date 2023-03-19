@@ -6,6 +6,7 @@ import type {
   IIngredient,
 } from "@/types";
 import { useDataStore } from "@/store";
+import SimpleSelector from "./SimpleSelector.vue";
 
 const $emit = defineEmits<{
   (e: "set-additional", v: ICartOfferAdditional): void;
@@ -97,17 +98,20 @@ function prepareCartOffer() {
 </script>
 
 <template>
-  <div class="my-2">{{ additional.title }}</div>
-  <div class="flex flex-wrap gap-2">
-    <div
-      :class="`rounded-full p-2 ${
-        isSelected(ing.id) ? 'bg-primary' : 'bg-slate-100'
-      }`"
-      v-for="(ing, iKey) in ingredients"
-      :key="`ingredient-${iKey}-${ing.id}`"
-      @click="handleSelect(ing.id)"
-    >
-      {{ ing.name }}
+  <div class="rounded-lg bg-slate-200 py-4 px-8">
+    <div class="text-lg font-semibold">
+      {{ additional.title }}
+    </div>
+    <div class="mt-2">
+      <SimpleSelector
+        class="my-4"
+        :price="ing.price"
+        :label="ing.name"
+        :selected="isSelected(ing.id)"
+        @update:selected="() => handleSelect(ing.id)"
+        v-for="(ing, iKey) in ingredients"
+        :key="`ingredient2-${iKey}-${ing.id}`"
+      />
     </div>
   </div>
 </template>
