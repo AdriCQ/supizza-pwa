@@ -5,6 +5,7 @@ import NavBottom from "@/components/menu/NavBottom.vue";
 import SearchForm from "@/components/forms/SearchForm.vue";
 import { useDataStore } from "@/store";
 import { computed, onBeforeMount } from "vue";
+import { ROUTE_NAME } from "@/router";
 
 const $dataStore = useDataStore();
 
@@ -30,5 +31,9 @@ onBeforeMount(() => {
     <OfferGroup type="drinks" link :elements="drinks" v-if="drinks" />
   </div>
 
-  <NavBottom v-if="cart.offers.length" />
+  <NavBottom
+    label="Ver Carrito"
+    :next="ROUTE_NAME.CART"
+    v-if="cart.offers.length"
+  />
 </template>

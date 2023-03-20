@@ -7,6 +7,13 @@ import { computed } from "vue";
 import { toCurrency } from "@/helpers";
 import { mdiArrowRight, mdiCart } from "@mdi/js";
 
+interface IProps {
+  label: string;
+  next: ROUTE_NAME;
+}
+
+defineProps<IProps>();
+
 const $dataStore = useDataStore();
 const $router = useRouter();
 const cart = computed(() => $dataStore.cart);
@@ -23,7 +30,7 @@ const qty = computed(() => {
   <nav
     id="nav-bottom"
     class="sticky bottom-0 p-4"
-    @click="() => $router.push({ name: ROUTE_NAME.CART })"
+    @click="() => $router.push({ name: next })"
   >
     <div
       class="flex items-center gap-2 rounded-full border bg-primary p-4 shadow-xl"
@@ -44,7 +51,7 @@ const qty = computed(() => {
       </div>
       <div class="font-bold">Total {{ toCurrency(cart.price) }}</div>
       <div class="ml-2 h-6 border border-slate-700"></div>
-      <div class="font-bold">Ver Carrito</div>
+      <div class="font-bold">{{ label }}</div>
       <BaseIcon
         :icon="mdiArrowRight"
         size="1.5rem"

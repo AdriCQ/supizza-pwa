@@ -6,7 +6,7 @@ import { api } from "./axios";
  * @param api
  */
 const useService = (api: AxiosInstance) => ({
-  loadData: () => api.get<IResponseData>("/pizza.json"),
+  loadData: () => api.get<IResponseData>("/pizza.dev.json"),
 });
 /**
  * service
