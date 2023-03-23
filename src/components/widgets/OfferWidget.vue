@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { IPizza, IPromo, IDrink } from "@/types";
+import type { IPizza, IPromo, IDrink, IComplement } from "@/types";
 import { computed } from "vue";
 import { toCurrency } from "@/helpers";
 
@@ -7,12 +7,14 @@ const $props = defineProps<{
   drink?: IDrink;
   pizza?: IPizza;
   promo?: IPromo;
+  complement?: IComplement;
 }>();
 
 const offer = computed(() => {
   if ($props.drink) return $props.drink;
-  else if ($props.pizza) return $props.pizza;
-  else return $props.promo;
+  if ($props.pizza) return $props.pizza;
+  if ($props.promo) return $props.promo;
+  return undefined;
 });
 </script>
 
@@ -36,6 +38,30 @@ const offer = computed(() => {
         </p>
         <div class="absolute bottom-0 right-0 text-xl font-bold">
           {{ toCurrency(offer.price) }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card w-full p-2" v-if="complement">
+    <div class="grid grid-cols-5 gap-2">
+      <div class="col-span-2">
+        <img
+          :src="complement.img"
+          :alt="complement.name"
+          :title="complement.name"
+          class="w-full"
+        />
+      </div>
+      <div class="col-span-3 text-slate-700">
+        <h3 class="overflow-title text-lg font-bold">
+          {{ complement.name }}
+        </h3>
+        <p class="overflow-description">
+          {{ complement.weight }}
+        </p>
+        <div class="absolute bottom-0 right-0 text-xl font-bold">
+          {{ toCurrency(complement.price) }}
         </div>
       </div>
     </div>

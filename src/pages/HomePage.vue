@@ -9,6 +9,7 @@ import { ROUTE_NAME } from "@/router";
 
 const $dataStore = useDataStore();
 
+const complements = computed(() => $dataStore.complements);
 const drinks = computed(() => $dataStore.drinks);
 const pizzas = computed(() => $dataStore.pizzas);
 const promos = computed(() => $dataStore.promos);
@@ -26,9 +27,34 @@ onBeforeMount(() => {
   <div class="mt-2 space-y-2 px-6">
     <SearchForm />
 
-    <OfferGroup type="promos" link :elements="promos" v-if="promos" />
-    <OfferGroup type="pizzas" link :elements="pizzas" v-if="pizzas" />
-    <OfferGroup type="drinks" link :elements="drinks" v-if="drinks" />
+    <OfferGroup
+      id="promos-section"
+      type="promos"
+      link
+      :elements="promos"
+      v-if="promos"
+    />
+    <OfferGroup
+      id="pizzas-section"
+      type="pizzas"
+      link
+      :elements="pizzas"
+      v-if="pizzas"
+    />
+    <OfferGroup
+      id="drinks-section"
+      type="drinks"
+      link
+      :elements="drinks"
+      v-if="drinks"
+    />
+    <OfferGroup
+      id="complements-section"
+      type="complements"
+      link
+      :elements="complements"
+      v-if="complements"
+    />
   </div>
 
   <NavBottom

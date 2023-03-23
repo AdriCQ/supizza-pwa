@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type {
+  IComplement,
   IDrink,
   IPizza,
   IPromo,
@@ -60,13 +61,17 @@ function selectElement(sel: ISelectedDetails) {
       {{ title }}
     </h2>
     <div v-for="(value, key) in elements" :key="`element-${type}-${key}`">
-      <OfferWidget
+      <div
         class="p-2"
-        :pizza="type === 'pizzas' ? value as IPizza : undefined"
-        :drink="type === 'drinks' ? value as IDrink : undefined"
-        :promo="type === 'promos' ? value as IPromo : undefined"
         @click="()=>selectElement({ type, value: value as IPromo | IPizza })"
-      />
+      >
+        <OfferWidget
+          :pizza="type === 'pizzas' ? value as IPizza : undefined"
+          :drink="type === 'drinks' ? value as IDrink : undefined"
+          :promo="type === 'promos' ? value as IPromo : undefined"
+          :complement="type === 'complements' ? value as IComplement : undefined"
+        />
+      </div>
       <div class="hr my-4"></div>
     </div>
   </div>

@@ -5,7 +5,9 @@ import CategorySlider from "@/components/sliders/CategorySlider.vue";
 
 const dataStore = useDataStore();
 
-const categories = computed(() => dataStore.categories);
+const categories = computed(() =>
+  dataStore.categories.filter((c) => c !== "ingredients")
+);
 </script>
 
 <template>
