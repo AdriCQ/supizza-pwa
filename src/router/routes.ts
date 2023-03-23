@@ -22,6 +22,11 @@ export const routes: RouteRecordRaw[] = [
     name: ROUTE_NAME.CART,
     component: () => import("@/pages/CartPage.vue"),
   },
+  {
+    path: "/checkout",
+    name: ROUTE_NAME.CHECKOUT,
+    component: () => import("@/pages/CheckoutPage.vue"),
+  },
   // {
   // 	path: '/:catchAll(.*)*',
   // 	component: () => import('@/pages/ErrorNotFound.vue'),

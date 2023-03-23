@@ -43,6 +43,7 @@ function updateValue(ev: Event) {
       :type="type"
       :placeholder="placeholder"
       class="input w-full max-w-xs bg-slate-50"
+      :class="inputClass"
       :required="required"
       @change="updateValue"
     />

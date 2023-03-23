@@ -30,7 +30,10 @@ onBeforeMount(() => {
         />
         Carrito
       </h1>
-      <div class="mt-8 rounded-lg bg-slate-200 py-2 px-6">
+      <div
+        class="mt-8 rounded-lg bg-slate-200 py-2 px-6"
+        v-if="cart.offers.length"
+      >
         <div
           v-for="(cartoffer, key) in cart.offers"
           :key="`cart-${key}`"
@@ -48,7 +51,7 @@ onBeforeMount(() => {
 
   <NavBottom
     label="Entrega"
-    :next="ROUTE_NAME.CART"
+    :next="ROUTE_NAME.CHECKOUT"
     v-if="cart.offers.length"
   />
 </template>

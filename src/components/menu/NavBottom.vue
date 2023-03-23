@@ -33,7 +33,7 @@ const qty = computed(() => {
     @click="() => $router.push({ name: next })"
   >
     <div
-      class="flex items-center gap-2 rounded-full border bg-primary p-4 shadow-xl"
+      class="flex items-center justify-between gap-2 rounded-full border bg-primary p-4 shadow-xl"
     >
       <div class="relative">
         <BaseIcon
