@@ -50,15 +50,27 @@ async function onSubmit() {
         <div class="space-y-2 text-justify">
           <div class="flex items-center justify-between gap-2">
             <label>Envío a domicilio gratis después de $600.00</label>
-            <input type="radio" name="tipo_entrega" class="radio" />
+            <input
+              type="radio"
+              name="tipo_entrega"
+              class="radio-primary radio"
+            />
           </div>
           <div class="flex items-center justify-between gap-2">
             <label>Pasar a recoger</label>
-            <input type="radio" name="tipo_entrega" class="radio" />
+            <input
+              type="radio"
+              name="tipo_entrega"
+              class="radio-primary radio"
+            />
           </div>
           <div class="flex items-center justify-between gap-2">
             <label>Comer en Restaurante</label>
-            <input type="radio" name="tipo_entrega" class="radio" />
+            <input
+              type="radio"
+              name="tipo_entrega"
+              class="radio-primary radio"
+            />
           </div>
         </div>
       </div>
@@ -87,11 +99,19 @@ async function onSubmit() {
         <div class="space-y-2 text-justify">
           <div class="flex items-center justify-between gap-2">
             <label>Pago en Efectivo</label>
-            <input type="radio" name="metodo_pago" class="radio" />
+            <input
+              type="radio"
+              name="metodo_pago"
+              class="radio-primary radio"
+            />
           </div>
           <div class="flex items-center justify-between gap-2">
             <label>Pago con Tarjeta</label>
-            <input type="radio" name="metodo_pago" class="radio" />
+            <input
+              type="radio"
+              name="metodo_pago"
+              class="radio-primary radio"
+            />
           </div>
         </div>
       </div>

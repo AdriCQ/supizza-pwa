@@ -1,16 +1,47 @@
 <script setup lang="ts">
 import { useDataStore } from "@/store";
-import { computed, onBeforeMount } from "vue";
+import { computed, onBeforeMount, ref } from "vue";
 import OrderOffer from "@/components/widgets/OrderOffer.vue";
 import BaseIcon from "@/components/BaseIcon.vue";
 import { mdiCart } from "@mdi/js";
 import NavTop from "@/components/menu/NavTop.vue";
 import NavBottom from "@/components/menu/NavBottom.vue";
+import CustomModal from "@/components/menu/CustomModal.vue";
 import { ROUTE_NAME } from "@/router";
+import type { ICartOffer } from "@/types";
 
 const $dataStore = useDataStore();
 
 const cart = computed(() => $dataStore.cart);
+const modalOpen = ref(false);
+const selected = ref<ICartOffer>();
+/**
+ * onEdit
+ */
+function onEdit(v: ICartOffer) {
+  selected.value = v;
+}
+/**
+ * onDelete
+ * @param v
+ */
+function onDelete(v: ICartOffer) {
+  selected.value = v;
+  modalOpen.value = true;
+  console.log({ selected: selected.value });
+}
+
+function handleDelete() {
+  if (selected.value) $dataStore.removeFromCart(selected.value);
+  closeModal();
+}
+/**
+ * closeModal
+ */
+function closeModal() {
+  selected.value = undefined;
+  modalOpen.value = false;
+}
 
 onBeforeMount(() => {
   scrollTo({ top: 0, behavior: "smooth" });
@@ -39,7 +70,11 @@ onBeforeMount(() => {
           :key="`cart-${key}`"
           class="py-2"
         >
-          <OrderOffer :cart-offer="cartoffer" />
+          <OrderOffer
+            :cart-offer="cartoffer"
+            @delete="onDelete"
+            @edit="onEdit"
+          />
           <div
             class="mt-4 border border-slate-800"
             v-if="key < cart.offers.length - 1"
@@ -48,6 +83,17 @@ onBeforeMount(() => {
       </div>
     </div>
   </div>
+
+  <CustomModal v-model="modalOpen" name="delete-offer-modal">
+    <h4 class="text-xl font-bold">Eliminar del oferta</h4>
+    <p class="my-4">Está seguro que desea eliminar la oferta?</p>
+    <div class="modal-action">
+      <button @click="closeModal" class="btn-sm btn">No</button>
+      <button @click="handleDelete" class="btn-error btn-sm btn">
+        Eliminar
+      </button>
+    </div>
+  </CustomModal>
 
   <NavBottom
     label="Entrega"

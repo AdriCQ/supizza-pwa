@@ -9,6 +9,10 @@ interface IProps {
   cartOffer: ICartOffer;
 }
 const $props = defineProps<IProps>();
+const $emit = defineEmits<{
+  (e: "delete", v: ICartOffer): void;
+  (e: "edit", v: ICartOffer): void;
+}>();
 
 const title = computed(() => {
   switch ($props.cartOffer.type) {
@@ -60,14 +64,20 @@ const title = computed(() => {
     <!-- / Main Content -->
     <!-- Action Butons -->
     <div class="flex-none">
-      <button class="btn-sm btn block bg-slate-700">
+      <!-- <button
+        class="btn-sm btn block bg-slate-700"
+        @click="() => $emit('edit', cartOffer)"
+      >
         <BaseIcon
           :icon="mdiPencil"
           size="1.5rem"
           class="fill-white stroke-white"
         />
-      </button>
-      <button class="btn-sm btn mt-1 block border-error bg-white">
+      </button> -->
+      <button
+        class="btn-sm btn mt-1 block border-error bg-white"
+        @click="() => $emit('delete', cartOffer)"
+      >
         <BaseIcon :icon="mdiDelete" size="1.5rem" class="stroke-error" />
       </button>
     </div>

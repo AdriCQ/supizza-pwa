@@ -84,6 +84,23 @@ export const useDataStore = defineStore(STORE_KEY, () => {
     if (offer.offer) cart.value.price += offer.qty * offer.offer.price;
   }
   /**
+   * removeFromCart
+   * @param remove
+   */
+  function removeFromCart(remove: ICartOffer) {
+    const index = cart.value.offers.findIndex(
+      (o) => o.type === remove.type && o.offer?.id === remove.offer?.id
+    );
+    if (index >= 0) {
+      const cartOffer = cart.value.offers[index];
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      const price = cart.value.price - cartOffer.qty * cartOffer.offer?.price;
+      cart.value.offers.splice(index, 1);
+      cart.value.price = price;
+    }
+  }
+  /**
    * loadData
    */
   async function loadData() {
@@ -106,6 +123,7 @@ export const useDataStore = defineStore(STORE_KEY, () => {
     cart,
     // Methods
     addToCart,
+    removeFromCart,
     loadData,
   };
 });
