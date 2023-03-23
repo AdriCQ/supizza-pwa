@@ -46,12 +46,12 @@ const title = computed(() => {
  */
 function selectElement(sel: ISelectedDetails) {
   $dataStore.selected = sel;
-  if ($props.link && ($props.type === "pizzas" || $props.type === "promos")) {
-    $router.push({
-      name: ROUTE_NAME.OFFER_DETAILS,
-      query: { type: $props.type, id: sel.value.id },
-    });
-  }
+  // if ($props.link && ($props.type === "pizzas" || $props.type === "promos")) {
+  $router.push({
+    name: ROUTE_NAME.OFFER_DETAILS,
+    query: { type: $props.type, id: sel.value.id },
+  });
+  // }
 }
 </script>
 
