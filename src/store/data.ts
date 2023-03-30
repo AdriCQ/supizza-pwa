@@ -38,6 +38,8 @@ export const useDataStore = defineStore(STORE_KEY, () => {
     offers: [],
     price: 0,
   });
+  // Search
+  const search = ref<string>();
   /**
    * addToCart
    * @param offer
@@ -119,6 +121,8 @@ export const useDataStore = defineStore(STORE_KEY, () => {
     pizzas,
     // Details Data
     selected,
+    // Search
+    search,
     // Cart
     cart,
     // Methods

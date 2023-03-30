@@ -2,12 +2,14 @@ export interface ICart {
   offers: ICartOffer[];
   price: number;
 }
+export interface ISearch {
+  type: IResponseDataKey;
+  offer?: IComplement | IDrink | IPizza | IPromo;
+}
 /**
  * ICartOffer
  */
-export interface ICartOffer {
-  type: IResponseDataKey;
-  offer?: IComplement | IDrink | IPizza | IPromo;
+export interface ICartOffer extends ISearch {
   additional?: ICartOfferAdditional[];
   qty: number;
 }
@@ -92,7 +94,7 @@ export interface IDataItem {
  */
 export interface ISelectedDetails {
   type: IResponseDataKey;
-  value: IPizza | IPromo;
+  value: IComplement | IDrink | IPizza | IPromo;
 }
 /**
  * -----------------------------------------

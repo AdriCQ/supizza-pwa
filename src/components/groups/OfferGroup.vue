@@ -5,12 +5,8 @@ import type {
   IPizza,
   IPromo,
   IResponseDataKey,
-  ISelectedDetails,
 } from "@/types";
-import { useDataStore } from "@/store";
 import OfferWidget from "@/components/widgets/OfferWidget.vue";
-import { useRouter } from "vue-router";
-import { ROUTE_NAME } from "@/router";
 import { computed } from "vue";
 
 const $props = defineProps<{
@@ -18,8 +14,6 @@ const $props = defineProps<{
   elements: IDrink[] | IPizza[] | IPromo[];
   link?: boolean;
 }>();
-const $dataStore = useDataStore();
-const $router = useRouter();
 /**
  * title
  */
@@ -39,20 +33,6 @@ const title = computed(() => {
       return "";
   }
 });
-
-/**
- * selectElement
- * @param sel
- */
-function selectElement(sel: ISelectedDetails) {
-  $dataStore.selected = sel;
-  // if ($props.link && ($props.type === "pizzas" || $props.type === "promos")) {
-  $router.push({
-    name: ROUTE_NAME.OFFER_DETAILS,
-    query: { type: $props.type, id: sel.value.id },
-  });
-  // }
-}
 </script>
 
 <template>
@@ -61,11 +41,9 @@ function selectElement(sel: ISelectedDetails) {
       {{ title }}
     </h2>
     <div v-for="(value, key) in elements" :key="`element-${type}-${key}`">
-      <div
-        class="p-2"
-        @click="()=>selectElement({ type, value: value as IPromo | IPizza })"
-      >
+      <div class="p-2">
         <OfferWidget
+          :link="link"
           :pizza="type === 'pizzas' ? value as IPizza : undefined"
           :drink="type === 'drinks' ? value as IDrink : undefined"
           :promo="type === 'promos' ? value as IPromo : undefined"

@@ -1,25 +1,62 @@
 <script setup lang="ts">
-import type { IPizza, IPromo, IDrink, IComplement } from "@/types";
+import type {
+  IPizza,
+  IPromo,
+  IDrink,
+  IComplement,
+  IResponseDataKey,
+} from "@/types";
 import { computed } from "vue";
 import { toCurrency } from "@/helpers";
+import { useRouter } from "vue-router";
+import { useDataStore } from "@/store";
+import { ROUTE_NAME } from "@/router";
 
 const $props = defineProps<{
   drink?: IDrink;
   pizza?: IPizza;
   promo?: IPromo;
   complement?: IComplement;
+  link?: boolean;
 }>();
+const $router = useRouter();
+const $dataStore = useDataStore();
 
 const offer = computed(() => {
   if ($props.drink) return $props.drink;
   if ($props.pizza) return $props.pizza;
   if ($props.promo) return $props.promo;
+  if ($props.promo) return $props.complement;
   return undefined;
 });
+
+const type = computed<IResponseDataKey>(() => {
+  if ($props.drink) return "drinks";
+  if ($props.complement) return "complements";
+  if ($props.pizza) return "pizzas";
+  if ($props.promo) return "promos";
+  return "pizzas";
+});
+
+/**
+ * selectElement
+ */
+function selectElement() {
+  if ($props.link && offer.value) {
+    $dataStore.selected = {
+      type: type.value,
+      value: offer.value,
+    };
+    $router.push({
+      name: ROUTE_NAME.OFFER_DETAILS,
+      query: { type: type.value, id: offer.value.id },
+    });
+  }
+}
 </script>
 
 <template>
-  <div class="card w-full p-2" v-if="offer">
+  <div class="card w-full p-2" v-if="offer" @click="selectElement">
     <div class="grid grid-cols-5 gap-2">
       <div class="col-span-2">
         <img

@@ -3,7 +3,7 @@ import type { ICartOffer, IComplement, IDrink, IPizza, IPromo } from "@/types";
 import { computed } from "vue";
 import { toCurrency } from "@/helpers";
 import BaseIcon from "../BaseIcon.vue";
-import { mdiDelete, mdiPencil } from "@mdi/js";
+import { mdiDelete } from "@mdi/js";
 
 interface IProps {
   cartOffer: ICartOffer;
@@ -36,7 +36,7 @@ const title = computed(() => {
   <div class="flex gap-2">
     <!-- Main Content -->
     <div class="flex-1">
-      <div class="inline-block h-2 w-2 rounded-full bg-slate-800"></div>
+      <!-- <div class="inline-block h-2 w-2 rounded-full bg-slate-800"></div> -->
       <div class="ml-2 inline-block">
         <span class="mr-1" v-if="cartOffer.qty > 1"> x{{ cartOffer.qty }}</span>
         {{ title }}
