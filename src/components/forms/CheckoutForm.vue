@@ -1,7 +1,11 @@
 <script setup lang="ts">
+import { ROUTE_NAME } from "@/router";
 import type { IOrderCreate } from "@/types";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 import InputText from "./InputText.vue";
+
+const $router = useRouter();
 
 const form = ref<IOrderCreate>({
   Direccion: {
@@ -80,7 +84,12 @@ async function onSubmit() {
       <div class="card-body mt-4 rounded-md bg-slate-200">
         <h2 class="text-lg font-semibold">Dirección de entrega</h2>
 
-        <button class="btn-primary btn w-full">Compartir mi Ubicación</button>
+        <button
+          class="btn-primary btn w-full"
+          @click="() => $router.push({ name: ROUTE_NAME.MAP_SELECTOR })"
+        >
+          Compartir mi Ubicación
+        </button>
 
         <p>El servicio a domicilio es exclusivo para las siguientes colonias</p>
 

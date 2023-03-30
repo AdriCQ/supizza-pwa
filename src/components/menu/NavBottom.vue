@@ -33,13 +33,13 @@ const qty = computed(() => {
     @click="() => $router.push({ name: next })"
   >
     <div
-      class="flex items-center justify-between gap-2 rounded-full border bg-primary p-4 shadow-xl"
+      class="flex items-center justify-between gap-2 rounded-full border bg-primary p-4 text-white shadow-xl"
     >
       <div class="relative">
         <BaseIcon
           :icon="mdiCart"
           size="1.5rem"
-          class="fill-slate-800 stroke-slate-700"
+          class="fill-white stroke-white"
         />
         <div class="absolute -top-3 -right-1">
           <div
@@ -50,12 +50,12 @@ const qty = computed(() => {
         </div>
       </div>
       <div class="font-bold">Total {{ toCurrency(cart.price) }}</div>
-      <div class="ml-2 h-6 border border-slate-700"></div>
+      <div class="ml-2 h-6 border border-white"></div>
       <div class="font-bold">{{ label }}</div>
       <BaseIcon
         :icon="mdiArrowRight"
         size="1.5rem"
-        class="fill-slate-800 stroke-slate-700"
+        class="fill-white stroke-white"
       />
     </div>
   </nav>
