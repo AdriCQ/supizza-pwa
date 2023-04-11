@@ -6,7 +6,11 @@
       :key="`cat-${k}`"
       @click="() => goToCategory(cat)"
     >
-      <span class="uppercase"> {{ cat }}</span>
+      <span
+        class="rounded-lg bg-slate-100 p-2 uppercase text-primary shadow-md hover:bg-slate-300"
+      >
+        {{ cat }}</span
+      >
       <span class="mx-4 h-6 border border-slate-600"></span>
     </li>
   </ul>
