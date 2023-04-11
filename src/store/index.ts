@@ -5,3 +5,4 @@ export default piniaStore;
 
 export * from "./app";
 export * from "./data";
+export * from "./user";
