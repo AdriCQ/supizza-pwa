@@ -29,7 +29,7 @@ function goBack() {
         <BaseIcon
           :icon="mdiArrowLeft"
           size="100%"
-          class-name="stroke-slate-800 fill-slate-800"
+          class="fill-primary stroke-primary"
         />
       </div>
 

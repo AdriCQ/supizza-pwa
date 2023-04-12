@@ -2,7 +2,7 @@
 import type { ICartOffer, ICartOfferAdditional, IPromo } from "@/types";
 import { ref, onBeforeMount } from "vue";
 import MultipleSelector from "./selectors/MultipleSelector.vue";
-import SimpleSelector from "./selectors/SimpleSelector.vue";
+// import SimpleSelector from "./selectors/SimpleSelector.vue";
 
 interface IQty {
   additional: number;
@@ -184,11 +184,6 @@ onBeforeMount(() => {
     type: "promos",
     offer: $props.promo,
   };
-  console.log("init", {
-    canAdd: canAdd.value,
-    promo: $props.promo,
-    qty: qty.value,
-  });
   canCompleteOperation();
 });
 </script>

@@ -66,7 +66,7 @@ function selectElement() {
           class="w-full"
         />
       </div>
-      <div class="col-span-3 text-slate-700">
+      <div class="col-span-3 text-primary">
         <h3 class="overflow-title text-lg font-bold">
           {{ (offer as IPromo).title ?? (offer as IDrink).name }}
         </h3>
@@ -90,7 +90,7 @@ function selectElement() {
           class="w-full"
         />
       </div>
-      <div class="col-span-3 text-slate-700">
+      <div class="col-span-3 text-primary">
         <h3 class="overflow-title text-lg font-bold">
           {{ complement.name }}
         </h3>

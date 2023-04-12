@@ -15,7 +15,7 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-  <main class="min-h-screen text-slate-800">
+  <main class="min-h-screen bg-white text-slate-800">
     <RouterView />
   </main>
 </template>

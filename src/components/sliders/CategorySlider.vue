@@ -11,7 +11,7 @@
       >
         {{ cat }}</span
       >
-      <span class="mx-4 h-6 border border-slate-600"></span>
+      <span class="mx-4 h-6 border border-slate-300"></span>
     </li>
   </ul>
 </template>

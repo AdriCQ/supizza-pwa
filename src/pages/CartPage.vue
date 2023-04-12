@@ -28,7 +28,6 @@ function onEdit(v: ICartOffer) {
 function onDelete(v: ICartOffer) {
   selected.value = v;
   modalOpen.value = true;
-  console.log({ selected: selected.value });
 }
 
 function handleDelete() {

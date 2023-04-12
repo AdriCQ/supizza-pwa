@@ -26,7 +26,11 @@ function handleOnChange(e: Event) {
         for="#search-input"
         @click="() => $emit('search')"
       >
-        <BaseIcon :icon="mdiMagnify" size="1.5rem" />
+        <BaseIcon
+          :icon="mdiMagnify"
+          size="1.5rem"
+          class="fill-primary stroke-primary"
+        />
       </label>
       <div class="flex-1">
         <input
