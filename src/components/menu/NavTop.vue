@@ -19,8 +19,8 @@ function goBack() {
 </script>
 
 <template>
-  <div class="fixed top-0 z-10 w-full p-2">
-    <nav class="flex items-center px-4 py-2 text-slate-800">
+  <div class="fixed top-0 z-10 w-full p-2 text-primary">
+    <nav class="flex items-center px-4 py-2">
       <!-- Back -->
       <div
         class="h-10 w-10 cursor-pointer rounded-full bg-white p-2 opacity-95 shadow-md"

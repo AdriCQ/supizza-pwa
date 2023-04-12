@@ -12,7 +12,7 @@ const categories = computed(() =>
 
 <template>
   <header class="sticky top-0 z-10 bg-white p-2 shadow-xl">
-    <h1 class="text-center text-lg">Su-PIzza</h1>
+    <h1 class="select-none text-center text-lg">Su-PIzza</h1>
     <CategorySlider :categories="categories" />
   </header>
 </template>

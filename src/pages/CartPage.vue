@@ -73,6 +73,7 @@ onBeforeMount(() => {
             :cart-offer="cartoffer"
             @delete="onDelete"
             @edit="onEdit"
+            editable
           />
           <div
             class="mt-4 border border-slate-800"

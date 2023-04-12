@@ -27,6 +27,11 @@ export const routes: RouteRecordRaw[] = [
     name: ROUTE_NAME.CHECKOUT,
     component: () => import("@/pages/CheckoutPage.vue"),
   },
+  {
+    path: "/orders",
+    name: ROUTE_NAME.ORDERS,
+    component: () => import("@/pages/OrdersPage.vue"),
+  },
   // {
   // 	path: '/:catchAll(.*)*',
   // 	component: () => import('@/pages/ErrorNotFound.vue'),

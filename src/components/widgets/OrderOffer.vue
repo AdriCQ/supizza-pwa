@@ -7,6 +7,7 @@ import { mdiDelete } from "@mdi/js";
 
 interface IProps {
   cartOffer: ICartOffer;
+  editable?: boolean;
 }
 const $props = defineProps<IProps>();
 const $emit = defineEmits<{
@@ -63,7 +64,7 @@ const title = computed(() => {
     </div>
     <!-- / Main Content -->
     <!-- Action Butons -->
-    <div class="flex-none">
+    <div class="flex-none" v-if="editable">
       <!-- <button
         class="btn-sm btn block bg-slate-700"
         @click="() => $emit('edit', cartOffer)"
