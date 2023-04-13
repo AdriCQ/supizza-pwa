@@ -47,7 +47,7 @@ onBeforeMount(() => {
     type: "pizzas",
     additional: [
       {
-        id: 1,
+        id: "1",
         selected: [],
       },
     ],
@@ -60,6 +60,21 @@ onBeforeMount(() => {
   <div class="space-y-2">
     <div class="rounded-md bg-slate-200 p-2 text-center">
       {{ pizza.restrictions }}
+    </div>
+    <div
+      v-if="pizza.ingredients.length"
+      class="mt-2 rounded-md bg-slate-200 p-2 text-center"
+    >
+      <div class="text-lg font-semibold">Ingredientes Incluidos</div>
+      <div class="mt-2 flex flex-wrap justify-center gap-2">
+        <div
+          class="rounded-xl bg-slate-300 p-2"
+          v-for="(ingredient, iKey) in pizza.ingredients"
+          :key="`pizza-ingredient-${iKey}`"
+        >
+          {{ ingredient }}
+        </div>
+      </div>
     </div>
 
     <!-- Additions -->

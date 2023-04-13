@@ -67,7 +67,7 @@ onBeforeMount(() => {
   // Load data from route
   if ($route.query.type && $route.query.id) {
     const type = $route.query.type;
-    const id = Number($route.query.id);
+    const id = String($route.query.id);
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     cartOffer.value.type = type;
@@ -87,6 +87,8 @@ onBeforeMount(() => {
     cartOffer.value.type = $dataStore.selected.type;
   }
   cartOffer.value.offer = offer.value;
+
+  console.log({ offer: offer.value, cartOffer: cartOffer.value });
 
   // Scroll to top
   window.scrollTo({

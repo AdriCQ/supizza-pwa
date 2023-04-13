@@ -5,13 +5,13 @@ import MultipleSelector from "./selectors/MultipleSelector.vue";
 // import SimpleSelector from "./selectors/SimpleSelector.vue";
 
 interface IQty {
-  additional: number;
-  item: number;
+  additional: string;
+  item: string;
   qty: number;
 }
 
 interface ICanAdd {
-  additional: number;
+  additional: string;
   can: boolean;
 }
 
@@ -35,7 +35,7 @@ const canAdd = ref<ICanAdd[]>([]);
  * countItems
  * @param additionalId
  */
-function countItems(additionalId: number) {
+function countItems(additionalId: string) {
   let counter = 0;
   qty.value.forEach((q) => {
     if (q.additional === additionalId) {
@@ -85,7 +85,7 @@ function canCompleteOperation() {
  * @param additionalId
  * @param itemId
  */
-function getQty(additionalId: number, itemId: number) {
+function getQty(additionalId: string, itemId: string) {
   const value = qty.value.find(
     (q) => q.item === itemId && q.additional === additionalId
   );
@@ -97,7 +97,7 @@ function getQty(additionalId: number, itemId: number) {
  * @param itemKey
  * @param value
  */
-function setQty(additionalId: number, itemId: number, value: number) {
+function setQty(additionalId: string, itemId: string, value: number) {
   const index = qty.value.findIndex(
     (q) => q.item === itemId && q.additional === additionalId
   );
@@ -154,7 +154,7 @@ function setOfferCart() {
  * @param additionalId
  * @param itemId
  */
-function getItemData(additionalId: number, itemId: number) {
+function getItemData(additionalId: string, itemId: string) {
   const additional = $props.promo.additional.find((a) => a.id === additionalId);
   if (additional) {
     return additional.items.find((i) => i.id === itemId);

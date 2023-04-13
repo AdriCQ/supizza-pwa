@@ -12,7 +12,7 @@ const $emit = defineEmits<{ (e: "update:selected", v: boolean): void }>();
 <template>
   <div class="flex" @click="() => $emit('update:selected', !selected)">
     <div class="flex-1">{{ label }}</div>
-    <div class="ml-1 flex-none" v-if="price">
+    <div class="mx-1 flex-none" v-if="price">
       <div>{{ toCurrency(price) }}</div>
     </div>
     <div class="flex-none">

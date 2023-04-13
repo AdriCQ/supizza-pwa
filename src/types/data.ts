@@ -15,7 +15,7 @@ export interface ICartOffer extends ISearch {
 }
 
 export interface ICartOfferAdditional {
-  id: number;
+  id: string;
   selected: IDataItem[];
 }
 /**
@@ -29,14 +29,14 @@ export interface IComplement extends IDrink {
  * IDrink
  */
 export interface IDrink extends IDataItem {
-  id: number;
+  id: string;
   img: string;
 }
 /**
  * IIngredient
  */
 export interface IIngredient extends IDataItem {
-  id: number;
+  id: string;
   selected?: boolean;
 }
 /**
@@ -49,7 +49,7 @@ export interface IPizza extends Omit<IPromo, "desc"> {
  * IPromo
  */
 export interface IPromo {
-  id: number;
+  id: string;
   title: string;
   img: string;
   price: number;
@@ -68,7 +68,7 @@ export interface IPromo {
  * IDataAdditional
  */
 export interface IDataAdditional {
-  id: number;
+  id: string;
   title: string;
   desc: string;
   optional: boolean;
@@ -86,7 +86,7 @@ export interface IDataItem {
   desc: string;
   price: number;
   qty: number;
-  id: number;
+  id: string;
 }
 
 /**

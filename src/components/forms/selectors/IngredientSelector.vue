@@ -19,12 +19,12 @@ const { ingredients } = useDataStore();
 // Object constructor to parent emit
 const offerAdditional = ref<ICartOfferAdditional>();
 // list selected ingredients keys
-const selected = ref<number[]>([]);
+const selected = ref<string[]>([]);
 /**
  * handleSelect
  * @param ingredient
  */
-function handleSelect(ingredient: number) {
+function handleSelect(ingredient: string) {
   const max = $props.additional.max ?? 0;
   const min = $props.additional.min ?? 0;
   // Prevent add more than required
@@ -43,14 +43,14 @@ function handleSelect(ingredient: number) {
  * @param ingredient
  * @return boolean
  */
-function isSelected(ingredient: number): boolean {
+function isSelected(ingredient: string): boolean {
   return selected.value.findIndex((s) => s === ingredient) >= 0;
 }
 /**
  * setSelected
  * @param ingredient
  */
-function setSelected(ingredient: number, s: boolean) {
+function setSelected(ingredient: string, s: boolean) {
   // Add
   if (s && !isSelected(ingredient)) {
     selected.value.push(ingredient);
@@ -65,7 +65,7 @@ function setSelected(ingredient: number, s: boolean) {
  * toggleSelect
  * @param ingredient
  */
-function toggleSelect(ingredient: number) {
+function toggleSelect(ingredient: string) {
   if (isSelected(ingredient)) {
     const index = selected.value.findIndex((s) => s === ingredient);
     selected.value.splice(index, 1);
@@ -78,7 +78,7 @@ function toggleSelect(ingredient: number) {
  */
 function prepareCartOffer() {
   offerAdditional.value = {
-    id: 1,
+    id: "1",
     selected: [],
   };
   selected.value.forEach((sId) => {
@@ -99,7 +99,7 @@ function prepareCartOffer() {
 
 <template>
   <div class="rounded-lg bg-slate-200 py-4 px-8">
-    <div class="text-lg font-semibold">
+    <div class="text-lg font-semibold" v-if="additional.title">
       {{ additional.title }}
     </div>
     <div class="mt-2">

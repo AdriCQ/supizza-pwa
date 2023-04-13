@@ -56,7 +56,11 @@ function selectElement() {
 </script>
 
 <template>
-  <div class="card w-full p-2" v-if="offer" @click="selectElement">
+  <div
+    class="card w-full p-2 text-slate-800"
+    v-if="offer"
+    @click="selectElement"
+  >
     <div class="grid grid-cols-5 gap-2">
       <div class="col-span-2">
         <img
@@ -66,7 +70,7 @@ function selectElement() {
           class="w-full"
         />
       </div>
-      <div class="col-span-3 text-primary">
+      <div class="col-span-3">
         <h3 class="overflow-title text-lg font-bold">
           {{ (offer as IPromo).title ?? (offer as IDrink).name }}
         </h3>
@@ -90,7 +94,7 @@ function selectElement() {
           class="w-full"
         />
       </div>
-      <div class="col-span-3 text-primary">
+      <div class="col-span-3">
         <h3 class="overflow-title text-lg font-bold">
           {{ complement.name }}
         </h3>
