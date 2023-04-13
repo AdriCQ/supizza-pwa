@@ -223,11 +223,11 @@
       "img": "https://cfiles.link/image/su_pizza/pizzas_5faf2bfeaee23c7bef3bc635_1605318634.png/720x720",
       "price": 0,
       "ingredients": ["Jamon", "Piña", "Cereza", "Extra Queso"],
-      "restrictions": "Valor fijo",
+      "restrictions": "",
       "additional": [
         {
           "id": "1",
-          "title": "Personaliza los ingredientes de tu pizza",
+          "title": "Ingredientes Extra",
           "desc": "",
           "optional": true,
           "type": "check_box",
@@ -243,11 +243,11 @@
       "img": "https://cfiles.link/image/su_pizza/pizzas_5faf2cb2aee23c7bef3bc636_1605318570.png/720x720",
       "price": 0,
       "ingredients": ["Extra pepperoni", "Extra Queso"],
-      "restrictions": "Valor fijo",
+      "restrictions": "",
       "additional": [
         {
           "id": "1",
-          "title": "Personaliza los ingredientes de tu pizza",
+          "title": "Ingredientes Extra",
           "desc": "",
           "optional": true,
           "type": "check_box",
@@ -263,11 +263,11 @@
       "img": "https://cfiles.link/image/su_pizza/pizzas_5faf3bf3aee23c7bef3bc657_1605319667.png/720x720",
       "price": 0,
       "ingredients": ["Champiñon ", "Piña", "Pimiento", "Cebolla"],
-      "restrictions": "Valor fijo",
+      "restrictions": "",
       "additional": [
         {
           "id": "1",
-          "title": "Personaliza los ingredientes de tu pizza",
+          "title": "Ingredientes Extra",
           "desc": "",
           "optional": true,
           "type": "check_box",
@@ -283,11 +283,11 @@
       "img": "https://cfiles.link/image/su_pizza/pizzas_5faf3c99aee23c7bef3bc658_1605319833.png/720x720",
       "price": 0,
       "ingredients": ["Frijol", "Chorizo", "Cebolla", "Jalapeño"],
-      "restrictions": "Valor fijo",
+      "restrictions": "",
       "additional": [
         {
           "id": "1",
-          "title": "Personaliza los ingredientes de tu pizza",
+          "title": "Ingredientes Extra",
           "desc": "",
           "optional": true,
           "type": "check_box",
@@ -303,11 +303,11 @@
       "img": "https://cfiles.link/image/su_pizza/pizzas_5faf3d2daee23c7bef3bc659_1605319982.png/720x720",
       "price": 0,
       "ingredients": ["Jamon", "Salchicha", "Salami", "Pimiento"],
-      "restrictions": "Valor fijo",
+      "restrictions": "",
       "additional": [
         {
           "id": "1",
-          "title": "Personaliza los ingredientes de tu pizza",
+          "title": "Ingredientes Extra",
           "desc": "",
           "optional": true,
           "type": "check_box",
@@ -323,11 +323,11 @@
       "img": "https://cfiles.link/image/su_pizza/pizzas_5faf3e01aee23c7bef3bc65a_1605320193.png/720x720",
       "price": 0,
       "ingredients": ["Carne Molida", "Salami", "Tocino", "Queso Amarillo"],
-      "restrictions": "Valor fijo",
+      "restrictions": "",
       "additional": [
         {
           "id": "1",
-          "title": "Personaliza los ingredientes de tu pizza",
+          "title": "Ingredientes Extra",
           "desc": "",
           "optional": true,
           "type": "check_box",
@@ -343,11 +343,11 @@
       "img": "https://cfiles.link/image/su_pizza/pizzas_5faf3e8caee23c7bef3bc65b_1605320332.png/720x720",
       "price": 0,
       "ingredients": ["Carne Molida", "Tocino", "Jalapeño", "Chorizo"],
-      "restrictions": "Valor fijo",
+      "restrictions": "",
       "additional": [
         {
           "id": "1",
-          "title": "Personaliza los ingredientes de tu pizza",
+          "title": "Ingredientes Extra",
           "desc": "",
           "optional": true,
           "type": "check_box",
@@ -363,11 +363,11 @@
       "img": "https://cfiles.link/image/su_pizza/pizzas_5faf3f08aee23c7bef3bc65c_1605320456.png/720x720",
       "price": 0,
       "ingredients": ["Camaron ", "Atun", "Pimiento", "Cebolla"],
-      "restrictions": "Valor fijo",
+      "restrictions": "",
       "additional": [
         {
           "id": "1",
-          "title": "Personaliza los ingredientes de tu pizza",
+          "title": "Ingredientes Extra",
           "desc": "",
           "optional": true,
           "type": "check_box",
@@ -383,11 +383,11 @@
       "img": "https://cfiles.link/image/su_pizza/pizzas_5faf3faaaee23c7bef3bc65d_1605320618.png/720x720",
       "price": 0,
       "ingredients": ["Pastor", "Chipotle", "Jalapeño", "Chorizo"],
-      "restrictions": "Valor fijo",
+      "restrictions": "",
       "additional": [
         {
           "id": "1",
-          "title": "Personaliza los ingredientes de tu pizza",
+          "title": "Ingredientes Extra",
           "desc": "",
           "optional": true,
           "type": "check_box",
@@ -403,11 +403,11 @@
       "img": "https://cfiles.link/image/su_pizza/pizzas_5faf407baee23c7bef3bc65e_1605320828.png/720x720",
       "price": 0,
       "ingredients": ["Pepperoni", "Pimiento", "Carne Molida", "Tocino"],
-      "restrictions": "Valor fijo",
+      "restrictions": "",
       "additional": [
         {
           "id": "1",
-          "title": "Personaliza los ingredientes de tu pizza",
+          "title": "Ingredientes Extra",
           "desc": "",
           "optional": true,
           "type": "check_box",
@@ -423,11 +423,11 @@
       "img": "https://cfiles.link/image/su_pizza/pizzas_5faf40d3aee23c7bef3bc65f_1605320916.png/720x720",
       "price": 0,
       "ingredients": ["Atun", "Elote", "Pimiento", "Cebolla"],
-      "restrictions": "Valor fijo",
+      "restrictions": "",
       "additional": [
         {
           "id": "1",
-          "title": "Personaliza los ingredientes de tu pizza",
+          "title": "Ingredientes Extra",
           "desc": "",
           "optional": true,
           "type": "check_box",
@@ -443,11 +443,11 @@
       "img": "https://cfiles.link/image/su_pizza/pizzas_5faf412aaee23c7bef3bc660_1605321002.png/720x720",
       "price": 0,
       "ingredients": ["Chorizo", "Tocino", "Pimiento", "Elote"],
-      "restrictions": "Valor fijo",
+      "restrictions": "",
       "additional": [
         {
           "id": "1",
-          "title": "Personaliza los ingredientes de tu pizza",
+          "title": "Ingredientes Extra",
           "desc": "",
           "optional": true,
           "type": "check_box",
@@ -463,11 +463,11 @@
       "img": "https://cfiles.link/image/su_pizza/pizzas_5faf417eaee23c7bef3bc661_1605321086.png/720x720",
       "price": 0,
       "ingredients": ["Champiñon ", "Chorizo", "Jalapeño", "Tocino"],
-      "restrictions": "Valor fijo",
+      "restrictions": "",
       "additional": [
         {
           "id": "1",
-          "title": "Personaliza los ingredientes de tu pizza",
+          "title": "Ingredientes Extra",
           "desc": "",
           "optional": true,
           "type": "check_box",
@@ -483,11 +483,11 @@
       "img": "https://cfiles.link/image/su_pizza/pizzas_5faf41e6aee23c7bef3bc662_1605321190.png/720x720",
       "price": 0,
       "ingredients": ["Jamon", "Tocino", "Chorizo", "Queso Amarillo"],
-      "restrictions": "Valor fijo",
+      "restrictions": "",
       "additional": [
         {
           "id": "1",
-          "title": "Personaliza los ingredientes de tu pizza",
+          "title": "Ingredientes Extra",
           "desc": "",
           "optional": true,
           "type": "check_box",
@@ -503,11 +503,11 @@
       "img": "https://cfiles.link/image/su_pizza/pizzas_5faf4244aee23c7bef3bc663_1605321284.png/720x720",
       "price": 0,
       "ingredients": ["Queso Amarillo", "Oaxaca  ", "Mozarella", "Gouda"],
-      "restrictions": "Valor fijo",
+      "restrictions": "",
       "additional": [
         {
           "id": "1",
-          "title": "Personaliza los ingredientes de tu pizza",
+          "title": "Ingredientes Extra",
           "desc": "",
           "optional": true,
           "type": "check_box",
@@ -523,11 +523,11 @@
       "img": "https://cfiles.link/image/su_pizza/pizzas_5faf42a9aee23c7bef3bc664_1605321385.png/720x720",
       "price": 0,
       "ingredients": ["Champiñon ", "Tocino", "Salami", "Pepperoni"],
-      "restrictions": "Valor fijo",
+      "restrictions": "",
       "additional": [
         {
           "id": "1",
-          "title": "Personaliza los ingredientes de tu pizza",
+          "title": "Ingredientes Extra",
           "desc": "",
           "optional": true,
           "type": "check_box",
@@ -543,11 +543,11 @@
       "img": "https://cfiles.link/image/su_pizza/pizzas_5faf42faaee23c7bef3bc665_1605321466.png/720x720",
       "price": 0,
       "ingredients": ["Pastor", "Piña", "Cebolla", "Tocino"],
-      "restrictions": "Valor fijo",
+      "restrictions": "",
       "additional": [
         {
           "id": "1",
-          "title": "Personaliza los ingredientes de tu pizza",
+          "title": "Ingredientes Extra",
           "desc": "",
           "optional": true,
           "type": "check_box",
@@ -563,11 +563,11 @@
       "img": "https://cfiles.link/image/su_pizza/pizzas_5faf4348aee23c7bef3bc666_1605321545.png/720x720",
       "price": 0,
       "ingredients": ["Jamon", "Salchicha", "Salami", "Pimiento"],
-      "restrictions": "Valor fijo",
+      "restrictions": "",
       "additional": [
         {
           "id": "1",
-          "title": "Personaliza los ingredientes de tu pizza",
+          "title": "Ingredientes Extra",
           "desc": "",
           "optional": true,
           "type": "check_box",
@@ -583,11 +583,11 @@
       "img": "https://cfiles.link/image/su_pizza/pizzas_5faf4400aee23c7bef3bc667_1605321729.png/720x720",
       "price": 0,
       "ingredients": ["Extra Queso", "Gouda", "Mozarella", "Oaxaca  "],
-      "restrictions": "Valor fijo",
+      "restrictions": "",
       "additional": [
         {
           "id": "1",
-          "title": "Personaliza los ingredientes de tu pizza",
+          "title": "Ingredientes Extra",
           "desc": "",
           "optional": true,
           "type": "check_box",
@@ -603,11 +603,11 @@
       "img": "https://cfiles.link/image/su_pizza/pizzas_5faf44bcaee23c7bef3bc668_1605321916.png/720x720",
       "price": 0,
       "ingredients": ["Jamon", "Piña", "Jalapeño", "Tocino"],
-      "restrictions": "Valor fijo",
+      "restrictions": "",
       "additional": [
         {
           "id": "1",
-          "title": "Personaliza los ingredientes de tu pizza",
+          "title": "Ingredientes Extra",
           "desc": "",
           "optional": true,
           "type": "check_box",
@@ -623,11 +623,11 @@
       "img": "https://cfiles.link/image/su_pizza/pizzas_5faf4550aee23c7bef3bc669_1605322064.png/720x720",
       "price": 0,
       "ingredients": ["Pollo", "Jamon", "Tocino", "Queso Amarillo"],
-      "restrictions": "Valor fijo",
+      "restrictions": "",
       "additional": [
         {
           "id": "1",
-          "title": "Personaliza los ingredientes de tu pizza",
+          "title": "Ingredientes Extra",
           "desc": "",
           "optional": true,
           "type": "check_box",

@@ -58,15 +58,18 @@ onBeforeMount(() => {
 
 <template>
   <div class="space-y-2">
-    <div class="rounded-md bg-slate-200 p-2 text-center">
+    <div
+      class="rounded-md bg-slate-200 p-2 text-center"
+      v-if="pizza.restrictions"
+    >
       {{ pizza.restrictions }}
     </div>
     <div
       v-if="pizza.ingredients.length"
-      class="mt-2 rounded-md bg-slate-200 p-2 text-center"
+      class="mt-2 rounded-md bg-slate-200 px-2 py-4 text-center"
     >
       <div class="text-lg font-semibold">Ingredientes Incluidos</div>
-      <div class="mt-2 flex flex-wrap justify-center gap-2">
+      <div class="mt-4 flex flex-wrap justify-center gap-2">
         <div
           class="rounded-xl bg-slate-300 p-2"
           v-for="(ingredient, iKey) in pizza.ingredients"

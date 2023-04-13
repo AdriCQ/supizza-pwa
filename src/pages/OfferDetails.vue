@@ -88,8 +88,6 @@ onBeforeMount(() => {
   }
   cartOffer.value.offer = offer.value;
 
-  console.log({ offer: offer.value, cartOffer: cartOffer.value });
-
   // Scroll to top
   window.scrollTo({
     top: 0,

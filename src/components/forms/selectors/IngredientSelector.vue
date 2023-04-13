@@ -99,7 +99,7 @@ function prepareCartOffer() {
 
 <template>
   <div class="rounded-lg bg-slate-200 py-4 px-8">
-    <div class="text-lg font-semibold" v-if="additional.title">
+    <div class="text-center text-lg font-semibold" v-if="additional.title">
       {{ additional.title }}
     </div>
     <div class="mt-2">

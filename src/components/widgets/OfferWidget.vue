@@ -26,7 +26,7 @@ const offer = computed(() => {
   if ($props.drink) return $props.drink;
   if ($props.pizza) return $props.pizza;
   if ($props.promo) return $props.promo;
-  if ($props.promo) return $props.complement;
+  if ($props.complement) return $props.complement;
   return undefined;
 });
 
@@ -52,57 +52,60 @@ function selectElement() {
       query: { type: type.value, id: offer.value.id },
     });
   }
+
+  console.log({
+    type: type.value,
+    value: offer.value,
+  });
 }
 </script>
 
 <template>
-  <div
-    class="card w-full p-2 text-slate-800"
-    v-if="offer"
-    @click="selectElement"
-  >
-    <div class="grid grid-cols-5 gap-2">
-      <div class="col-span-2">
-        <img
-          :src="offer.img"
-          :alt="(offer as IPromo).title??(offer as IDrink).name"
-          :title="(offer as IPromo).title??(offer as IDrink).name"
-          class="w-full"
-        />
-      </div>
-      <div class="col-span-3">
-        <h3 class="overflow-title text-lg font-bold">
-          {{ (offer as IPromo).title ?? (offer as IDrink).name }}
-        </h3>
-        <p class="overflow-description">
-          {{ (offer as IPromo).desc }}
-        </p>
-        <div class="absolute bottom-0 right-0 text-xl font-bold">
-          {{ toCurrency(offer.price) }}
+  <div v-if="offer" @click="selectElement">
+    <div class="card w-full p-2" v-if="complement">
+      <div class="grid grid-cols-5 gap-2">
+        <div class="col-span-2">
+          <img
+            :src="complement.img"
+            :alt="complement.name"
+            :title="complement.name"
+            class="w-full"
+          />
+        </div>
+        <div class="col-span-3">
+          <h3 class="overflow-title text-lg font-bold">
+            {{ complement.name }}
+          </h3>
+          <p class="overflow-description">
+            {{ complement.weight }}
+          </p>
+          <div class="absolute bottom-0 right-0 text-xl font-bold">
+            {{ toCurrency(complement.price) }}
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="card w-full p-2" v-if="complement">
-    <div class="grid grid-cols-5 gap-2">
-      <div class="col-span-2">
-        <img
-          :src="complement.img"
-          :alt="complement.name"
-          :title="complement.name"
-          class="w-full"
-        />
-      </div>
-      <div class="col-span-3">
-        <h3 class="overflow-title text-lg font-bold">
-          {{ complement.name }}
-        </h3>
-        <p class="overflow-description">
-          {{ complement.weight }}
-        </p>
-        <div class="absolute bottom-0 right-0 text-xl font-bold">
-          {{ toCurrency(complement.price) }}
+    <div class="card w-full p-2 text-slate-800" v-else>
+      <div class="grid grid-cols-5 gap-2">
+        <div class="col-span-2">
+          <img
+            :src="offer.img"
+            :alt="(offer as IPromo).title??(offer as IDrink).name"
+            :title="(offer as IPromo).title??(offer as IDrink).name"
+            class="w-full"
+          />
+        </div>
+        <div class="col-span-3">
+          <h3 class="overflow-title text-lg font-bold">
+            {{ (offer as IPromo).title ?? (offer as IDrink).name }}
+          </h3>
+          <p class="overflow-description">
+            {{ (offer as IPromo).desc }}
+          </p>
+          <div class="absolute bottom-0 right-0 text-xl font-bold">
+            {{ toCurrency(offer.price) }}
+          </div>
         </div>
       </div>
     </div>
