@@ -47,6 +47,7 @@ export const useDataStore = defineStore(STORE_KEY, () => {
   function addToCart(offer: ICartOffer) {
     // Check if exists
     let exists = false;
+    console.log({ additionals: offer.additional });
 
     cart.value.offers.filter((cartOffer, key, _cart) => {
       if (cartOffer.offer) {
@@ -83,7 +84,23 @@ export const useDataStore = defineStore(STORE_KEY, () => {
 
     // If doesnt exists
     if (!exists) cart.value.offers.push(offer);
-    if (offer.offer) cart.value.price += offer.qty * offer.offer.price;
+    // if (offer.offer) cart.value.price += addPrice;
+    // Add offer price
+    let addPrice = 0;
+    if (offer.offer) {
+      addPrice += offer.offer.price;
+    }
+    if (offer.additional && offer.additional.length) {
+      offer.additional.forEach((additional) => {
+        additional.selected.forEach((selected) => {
+          addPrice += selected.price;
+        });
+      });
+    }
+    // Multiply for qty
+    addPrice *= offer.qty;
+    // Add to cart price
+    cart.value.price += addPrice;
   }
   /**
    * removeFromCart
