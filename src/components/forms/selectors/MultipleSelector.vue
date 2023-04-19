@@ -32,7 +32,10 @@ function reduce() {
       <span> {{ modelValue }} </span>
     </div>
 
-    <div class="flex-none rounded bg-slate-700 p-1">
+    <div
+      class="flex-none rounded p-1"
+      :class="[canAdd ? 'bg-slate-700' : 'bg-slate-400']"
+    >
       <BaseIcon
         @click="add"
         :icon="mdiPlus"
