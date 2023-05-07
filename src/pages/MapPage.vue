@@ -2,13 +2,13 @@
 import MapWidget from "@/components/widgets/MapWidget.vue";
 import { latLng, LatLng } from "leaflet";
 import { ref, onBeforeMount, watch } from "vue";
-import type { IAddressCreate } from "@/types";
+import type { AddressCreate } from "@/types";
 import InputText from "@/components/forms/InputText.vue";
 import { useMap } from "@/helpers";
 
 const { currentPosition } = useMap();
 
-const form = ref<IAddressCreate>({
+const form = ref<AddressCreate>({
   address: "",
   exNum: 0,
   inNum: 0,

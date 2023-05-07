@@ -2,11 +2,11 @@
 import NavTop from "@/components/menu/NavTop.vue";
 import OrderOffer from "@/components/widgets/OrderOffer.vue";
 import { useDataStore } from "@/store";
-import { ICartOffer } from "@/types";
+import { CartOffer } from "@/types";
 
 const $cart = useDataStore();
 
-const cartOffer: ICartOffer = {
+const cartOffer: CartOffer = {
   qty: 5,
   type: "pizzas",
   offer: $cart.pizzas?.at(0),

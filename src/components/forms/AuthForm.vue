@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import InputText from "./InputText.vue";
-import type { IAuth } from "@/types";
+import type { Auth } from "@/types";
 
 const step = ref(0);
 
-const form = ref<IAuth>({
+const form = ref<Auth>({
   confirmation: "",
   phone: "",
 });

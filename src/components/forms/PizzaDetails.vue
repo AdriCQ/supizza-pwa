@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import type { ICartOffer, ICartOfferAdditional, IPizza } from "@/types";
+import type { CartOffer, CartOfferAdditional, Pizza } from "@/types";
 import { ref, onBeforeMount } from "vue";
 import IngredientSelector from "@/components/forms/selectors/IngredientSelector.vue";
 
 const $emit = defineEmits<{
   (e: "can-complete", v: boolean): void;
-  (e: "set-offer", v: ICartOffer): void;
+  (e: "set-offer", v: CartOffer): void;
 }>();
-const $props = defineProps<{ pizza: IPizza }>();
+const $props = defineProps<{ pizza: Pizza }>();
 
-const cartOffer = ref<ICartOffer>({
+const cartOffer = ref<CartOffer>({
   qty: 1,
   type: "pizzas",
 });
@@ -31,7 +31,7 @@ function handleOnReady(additionalIndex: number, ready: boolean) {
  */
 function handleSetAdditional(
   additionalIndex: number,
-  value: ICartOfferAdditional
+  value: CartOfferAdditional
 ) {
   if (cartOffer.value && cartOffer.value.additional) {
     cartOffer.value.additional[additionalIndex] = value;

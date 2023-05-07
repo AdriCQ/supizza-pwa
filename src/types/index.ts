@@ -1,9 +1,9 @@
-export interface INotification {
+export interface Notification {
   content: string;
   type: "info" | "positive" | "negative";
 }
 
-export interface IMapGeolocation {
+export interface MapGeolocation {
   address: {
     city?: string;
     country?: string;

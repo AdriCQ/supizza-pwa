@@ -1,11 +1,5 @@
 <script setup lang="ts">
-import type {
-  IPizza,
-  IPromo,
-  IDrink,
-  IComplement,
-  IResponseDataKey,
-} from "@/types";
+import type { Pizza, Promo, Drink, Complement, ResponseDataKey } from "@/types";
 import { computed } from "vue";
 import { toCurrency } from "@/helpers";
 import { useRouter } from "vue-router";
@@ -13,10 +7,10 @@ import { useDataStore } from "@/store";
 import { ROUTE_NAME } from "@/router";
 
 const $props = defineProps<{
-  drink?: IDrink;
-  pizza?: IPizza;
-  promo?: IPromo;
-  complement?: IComplement;
+  drink?: Drink;
+  pizza?: Pizza;
+  promo?: Promo;
+  complement?: Complement;
   link?: boolean;
 }>();
 const $router = useRouter();
@@ -30,7 +24,7 @@ const offer = computed(() => {
   return undefined;
 });
 
-const type = computed<IResponseDataKey>(() => {
+const type = computed<ResponseDataKey>(() => {
   if ($props.drink) return "drinks";
   if ($props.complement) return "complements";
   if ($props.pizza) return "pizzas";
@@ -91,17 +85,17 @@ function selectElement() {
         <div class="col-span-2">
           <img
             :src="offer.img"
-            :alt="(offer as IPromo).title??(offer as IDrink).name"
-            :title="(offer as IPromo).title??(offer as IDrink).name"
+            :alt="(offer as Promo).title??(offer as Drink).name"
+            :title="(offer as Promo).title??(offer as Drink).name"
             class="w-full"
           />
         </div>
         <div class="col-span-3">
           <h3 class="overflow-title text-lg font-bold">
-            {{ (offer as IPromo).title ?? (offer as IDrink).name }}
+            {{ (offer as Promo).title ?? (offer as Drink).name }}
           </h3>
           <p class="overflow-description">
-            {{ (offer as IPromo).desc }}
+            {{ (offer as Promo).desc }}
           </p>
           <div class="absolute bottom-0 right-0 text-xl font-bold">
             {{ toCurrency(offer.price) }}

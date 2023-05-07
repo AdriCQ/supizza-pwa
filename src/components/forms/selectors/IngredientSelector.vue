@@ -1,23 +1,19 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import type {
-  ICartOfferAdditional,
-  IDataAdditional,
-  IIngredient,
-} from "@/types";
+import type { CartOfferAdditional, DataAdditional, Ingredient } from "@/types";
 import { useDataStore } from "@/store";
 import SimpleSelector from "./SimpleSelector.vue";
 
 const $emit = defineEmits<{
-  (e: "set-additional", v: ICartOfferAdditional): void;
+  (e: "set-additional", v: CartOfferAdditional): void;
   (e: "ready", v: boolean): void;
 }>();
-const $props = defineProps<{ additional: IDataAdditional }>();
+const $props = defineProps<{ additional: DataAdditional }>();
 
 // Available ingredients
 const { ingredients } = useDataStore();
 // Object constructor to parent emit
-const offerAdditional = ref<ICartOfferAdditional>();
+const offerAdditional = ref<CartOfferAdditional>();
 // list selected ingredients keys
 const selected = ref<string[]>([]);
 /**
@@ -81,9 +77,9 @@ function prepareCartOffer() {
     id: "1",
     selected: [],
   };
-  selected.value.forEach((sId) => {
-    if (ingredients && ingredients.findIndex((i) => i.id === sId) >= 0) {
-      const ingredient = ingredients.find((i) => i.id === sId) as IIngredient;
+  selected.value.forEach((sd) => {
+    if (ingredients && ingredients.findIndex((i) => i.id === sd) >= 0) {
+      const ingredient = ingredients.find((i) => i.id === sd) as Ingredient;
       if (offerAdditional.value)
         offerAdditional.value.selected.push({
           desc: ingredient.desc,

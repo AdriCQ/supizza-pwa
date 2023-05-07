@@ -1,17 +1,11 @@
 <script setup lang="ts">
-import type {
-  IComplement,
-  IDrink,
-  IPizza,
-  IPromo,
-  IResponseDataKey,
-} from "@/types";
+import type { Complement, Drink, Pizza, Promo, ResponseDataKey } from "@/types";
 import OfferWidget from "@/components/widgets/OfferWidget.vue";
 import { computed } from "vue";
 
 const $props = defineProps<{
-  type: IResponseDataKey;
-  elements: IDrink[] | IPizza[] | IPromo[];
+  type: ResponseDataKey;
+  elements: Drink[] | Pizza[] | Promo[];
   link?: boolean;
 }>();
 /**
@@ -24,7 +18,7 @@ const title = computed(() => {
     case "drinks":
       return "Bebidas";
     case "ingredients":
-      return "Ingredientes";
+      return "ngredientes";
     case "pizzas":
       return "Pizzas";
     case "promos":
@@ -44,10 +38,10 @@ const title = computed(() => {
       <div class="p-2">
         <OfferWidget
           :link="link"
-          :pizza="type === 'pizzas' ? value as IPizza : undefined"
-          :drink="type === 'drinks' ? value as IDrink : undefined"
-          :promo="type === 'promos' ? value as IPromo : undefined"
-          :complement="type === 'complements' ? value as IComplement : undefined"
+          :pizza="type === 'pizzas' ? value as Pizza : undefined"
+          :drink="type === 'drinks' ? value as Drink : undefined"
+          :promo="type === 'promos' ? value as Promo : undefined"
+          :complement="type === 'complements' ? value as Complement : undefined"
         />
       </div>
       <div class="hr my-4"></div>

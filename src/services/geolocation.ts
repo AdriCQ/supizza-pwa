@@ -1,4 +1,4 @@
-import type { IMapGeolocation } from "@/types";
+import type { MapGeolocation } from "@/types";
 import { Capacitor } from "@capacitor/core";
 import { Geolocation } from "@capacitor/geolocation";
 import { latLng, LatLng } from "leaflet";
@@ -30,7 +30,7 @@ export function useMap() {
    * @returns
    */
   async function addressFromCoordinates(params: { lat: number; lon: number }) {
-    return api.get<IMapGeolocation>(
+    return api.get<MapGeolocation>(
       "https://nominatim.openstreetmap.org/reverse",
       {
         params: {

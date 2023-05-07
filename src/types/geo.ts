@@ -1,4 +1,4 @@
-export interface IAddressCreate {
+export interface AddressCreate {
   lat: number;
   lng: number;
   address: string;

@@ -1,4 +1,4 @@
-import { type IResponseData } from "@/types";
+import { type ResponseData } from "@/types";
 import type { AxiosInstance } from "axios";
 import { api } from "./axios";
 /**
@@ -6,7 +6,7 @@ import { api } from "./axios";
  * @param api
  */
 const useService = (api: AxiosInstance) => ({
-  loadData: () => api.get<IResponseData>("/data.json"),
+  loadData: () => api.get<ResponseData>("/data.json"),
 });
 /**
  * service

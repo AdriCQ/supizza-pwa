@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type {
-  IDrink,
-  IPizza,
-  IPromo,
-  IResponseDataKey,
-  ISelectedDetails,
+  Drink,
+  Pizza,
+  Promo,
+  ResponseDataKey,
+  SelectedDetails,
 } from "@/types";
 import { useDataStore } from "@/store";
 import OfferWidget from "@/components/widgets/OfferWidget.vue";
@@ -13,8 +13,8 @@ import { ROUTE_NAME } from "@/router";
 import { computed } from "vue";
 
 const $props = defineProps<{
-  type: IResponseDataKey;
-  elements: IDrink[] | IPizza[] | IPromo[];
+  type: ResponseDataKey;
+  elements: Drink[] | Pizza[] | Promo[];
   link?: boolean;
 }>();
 const $dataStore = useDataStore();
@@ -29,7 +29,7 @@ const title = computed(() => {
     case "drinks":
       return "Bebidas";
     case "ingredients":
-      return "Ingredientes";
+      return "ngredientes";
     case "pizzas":
       return "Pizzas";
     case "promos":
@@ -43,7 +43,7 @@ const title = computed(() => {
  * selectElement
  * @param sel
  */
-function selectElement(sel: ISelectedDetails) {
+function selectElement(sel: SelectedDetails) {
   $dataStore.selected = sel;
   if ($props.link && ($props.type === "pizzas" || $props.type === "promos")) {
     $router.push({
@@ -65,10 +65,10 @@ function selectElement(sel: ISelectedDetails) {
       :key="`element-${type}-${key}`"
     >
       <OfferWidget
-        :pizza="type === 'pizzas' ? value as IPizza : undefined"
-        :drink="type === 'drinks' ? value as IDrink : undefined"
-        :promo="type === 'promos' ? value as IPromo : undefined"
-        @click="selectElement({ type, value: value as IPromo | IPizza })"
+        :pizza="type === 'pizzas' ? value as Pizza : undefined"
+        :drink="type === 'drinks' ? value as Drink : undefined"
+        :promo="type === 'promos' ? value as Promo : undefined"
+        @click="selectElement({ type, value: value as Promo | Pizza })"
       />
     </div>
   </div>

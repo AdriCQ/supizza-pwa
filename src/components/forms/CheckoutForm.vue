@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { ROUTE_NAME } from "@/router";
-import type { IOrderCreate } from "@/types";
+import type { OrderCreate } from "@/types";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import InputText from "./InputText.vue";
 
 const $router = useRouter();
 
-const form = ref<IOrderCreate>({
+const form = ref<OrderCreate>({
   Direccion: {
     direccion: "",
     lat: 0,

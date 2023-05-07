@@ -1,9 +1,4 @@
-import type {
-  ICart,
-  ICartOffer,
-  ISelectedDetails,
-  IResponseData,
-} from "@/types";
+import type { Cart, CartOffer, SelectedDetails, ResponseData } from "@/types";
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 import { $service } from "@/services";
@@ -16,7 +11,7 @@ const STORE_KEY = "pinia/useDataStore";
  */
 export const useDataStore = defineStore(STORE_KEY, () => {
   // Full Data
-  const fullData = ref<IResponseData>();
+  const fullData = ref<ResponseData>();
   // Separated data
   const complements = computed(() => fullData.value?.complements);
   const drinks = computed(() => fullData.value?.drinks);
@@ -32,9 +27,9 @@ export const useDataStore = defineStore(STORE_KEY, () => {
     return cat;
   });
   // Details Data
-  const selected = ref<ISelectedDetails>();
+  const selected = ref<SelectedDetails>();
   // Cart
-  const cart = ref<ICart>({
+  const cart = ref<Cart>({
     offers: [],
     price: 0,
   });
@@ -44,16 +39,16 @@ export const useDataStore = defineStore(STORE_KEY, () => {
    * addToCart
    * @param offer
    */
-  function addToCart(offer: ICartOffer) {
+  function addToCart(offer: CartOffer) {
     // Check if exists
     let exists = false;
     console.log({ additionals: offer.additional });
 
     cart.value.offers.filter((cartOffer, key, _cart) => {
       if (cartOffer.offer) {
-        // If offer is complement or drink check only id
+        // f offer is complement or drink check only id
         if (offer.type === "complements" || offer.type === "drinks") {
-          // If exists add qty
+          // f exists add qty
           if (
             cartOffer.type === offer.type &&
             cartOffer.offer.id === offer.offer?.id
@@ -62,12 +57,12 @@ export const useDataStore = defineStore(STORE_KEY, () => {
             exists = true;
           }
         }
-        // If is promo or pizza
+        // f is promo or pizza
         else if (
           cartOffer.type === offer.type &&
           cartOffer.offer.id === offer.offer?.id
         ) {
-          // If has same additional add qty
+          // f has same additional add qty
           if (
             JSON.stringify(cartOffer.additional) ===
             JSON.stringify(offer.additional)
@@ -82,7 +77,7 @@ export const useDataStore = defineStore(STORE_KEY, () => {
       }
     });
 
-    // If doesnt exists
+    // f doesnt exists
     if (!exists) cart.value.offers.push(offer);
     // if (offer.offer) cart.value.price += addPrice;
     // Add offer price
@@ -106,7 +101,7 @@ export const useDataStore = defineStore(STORE_KEY, () => {
    * removeFromCart
    * @param remove
    */
-  function removeFromCart(remove: ICartOffer) {
+  function removeFromCart(remove: CartOffer) {
     const index = cart.value.offers.findIndex(
       (o) => o.type === remove.type && o.offer?.id === remove.offer?.id
     );

@@ -1,4 +1,4 @@
-import type { INotification } from "@/types";
+import type { Notification } from "@/types";
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
@@ -7,12 +7,12 @@ const STORE_KEY = "pinia/useAppStore";
  * useAppStore
  */
 export const useAppStore = defineStore(STORE_KEY, () => {
-  const notifications = ref<INotification[]>([]);
+  const notifications = ref<Notification[]>([]);
   /**
    * notify
    * @param n
    */
-  function notify(n: INotification) {
+  function notify(n: Notification) {
     notifications.value.push(n);
     setTimeout(() => {
       notifications.value.pop();

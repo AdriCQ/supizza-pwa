@@ -8,24 +8,24 @@ import NavTop from "@/components/menu/NavTop.vue";
 import NavBottom from "@/components/menu/NavBottom.vue";
 import CustomModal from "@/components/menu/CustomModal.vue";
 import { ROUTE_NAME } from "@/router";
-import type { ICartOffer } from "@/types";
+import type { CartOffer } from "@/types";
 
 const $dataStore = useDataStore();
 
 const cart = computed(() => $dataStore.cart);
 const modalOpen = ref(false);
-const selected = ref<ICartOffer>();
+const selected = ref<CartOffer>();
 /**
  * onEdit
  */
-function onEdit(v: ICartOffer) {
+function onEdit(v: CartOffer) {
   selected.value = v;
 }
 /**
  * onDelete
  * @param v
  */
-function onDelete(v: ICartOffer) {
+function onDelete(v: CartOffer) {
   selected.value = v;
   modalOpen.value = true;
 }

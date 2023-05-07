@@ -1,18 +1,18 @@
-import { ICartOffer } from "./data";
+import { CartOffer } from "./data";
 
-export type IPago = "Tarjeta" | "Efectivo";
-export type ITipoEntrega = "Entregar en la puerta" | "Encontrarse afuera";
+export type Pago = "Tarjeta" | "Efectivo";
+export type TipoEntrega = "Entregar en la puerta" | "Encontrarse afuera";
 
-export interface IDireccion {
+export interface Direccion {
   lat: number;
   lng: number;
   direccion: string;
 }
 
-export interface IOrderCreate {
+export interface OrderCreate {
   Nombre: string;
   Telefono: string;
-  Productos: ICartOffer[];
-  TipoEntrega: ITipoEntrega;
-  Direccion: IDireccion;
+  Productos: CartOffer[];
+  TipoEntrega: TipoEntrega;
+  Direccion: Direccion;
 }

@@ -5,20 +5,20 @@ import PizzaDetails from "@/components/forms/PizzaDetails.vue";
 import MultipleSelector from "@/components/forms/selectors/MultipleSelector.vue";
 import { useDataStore } from "@/store";
 import { onBeforeMount, ref, computed } from "vue";
-import type { IPromo, IPizza, ICartOffer, IComplement, IDrink } from "@/types";
+import type { Promo, Pizza, CartOffer, Complement, Drink } from "@/types";
 import { useRoute, useRouter } from "vue-router";
 import { ROUTE_NAME } from "@/router";
 import { toCurrency } from "@/helpers";
 
-type IOffer = IComplement | IDrink | IPizza | IPromo;
+type Offer = Complement | Drink | Pizza | Promo;
 
 const $dataStore = useDataStore();
 const $route = useRoute();
 const $router = useRouter();
 
 const canComplete = ref(false);
-const offer = ref<IOffer>();
-const cartOffer = ref<ICartOffer>({
+const offer = ref<Offer>();
+const cartOffer = ref<CartOffer>({
   offer: undefined,
   qty: 1,
   type: "complements",
@@ -57,7 +57,7 @@ function handleCanComplete(complete: boolean) {
  * handleSetOffer
  * @param offer
  */
-function handleSetOffer(offer: ICartOffer) {
+function handleSetOffer(offer: CartOffer) {
   cartOffer.value = offer;
 }
 /**
@@ -79,7 +79,7 @@ onBeforeMount(() => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const resp = $dataStore[cartOffer.value.type].find(
-      (v: IOffer) => v.id === id
+      (v: Offer) => v.id === id
     );
     offer.value = resp;
   } else if ($dataStore.selected) {
@@ -100,17 +100,17 @@ onBeforeMount(() => {
   <NavTop back="back" />
 
   <div class="relative" v-if="offer">
-    <!-- Top Image -->
+    <!-- Top mage -->
     <div class="fixed h-96 w-full bg-slate-500">
       <img
         v-if="offer?.img"
         :src="offer.img"
-        :alt="(offer as IPizza).title ? (offer as IPizza).title : (offer as IComplement).name"
-        :title="(offer as IPizza).title ? (offer as IPizza).title : (offer as IComplement).name"
+        :alt="(offer as Pizza).title ? (offer as Pizza).title : (offer as Complement).name"
+        :title="(offer as Pizza).title ? (offer as Pizza).title : (offer as Complement).name"
         class="w-full"
       />
     </div>
-    <!-- / Top Image -->
+    <!-- / Top mage -->
 
     <!-- Content -->
     <div
@@ -119,25 +119,25 @@ onBeforeMount(() => {
       <div class="text-center text-slate-700">
         <h1 class="text-2xl">
           {{
-            (offer as IPizza).title
-              ? (offer as IPizza).title
-              : (offer as IComplement).name
+            (offer as Pizza).title
+              ? (offer as Pizza).title
+              : (offer as Complement).name
           }}
         </h1>
-        <p v-if="(offer as IPromo).desc">{{ (offer as IPromo).desc }}</p>
+        <p v-if="(offer as Promo).desc">{{ (offer as Promo).desc }}</p>
       </div>
 
       <!-- Details -->
       <div class="mt-2">
         <PromoDetails
           v-if="cartOffer.type === 'promos'"
-          :promo="(offer as IPromo)"
+          :promo="(offer as Promo)"
           @can-complete="handleCanComplete"
           @set-offer="handleSetOffer"
         />
         <PizzaDetails
           v-if="cartOffer.type === 'pizzas'"
-          :pizza="(offer as IPizza)"
+          :pizza="(offer as Pizza)"
           @can-complete="handleCanComplete"
           @set-offer="handleSetOffer"
         />

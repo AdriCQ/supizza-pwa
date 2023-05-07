@@ -1,32 +1,32 @@
 <script setup lang="ts">
-import type { ICartOffer, IComplement, IDrink, IPizza, IPromo } from "@/types";
+import type { CartOffer, Complement, Drink, Pizza, Promo } from "@/types";
 import { computed } from "vue";
 import { toCurrency } from "@/helpers";
 import BaseIcon from "../BaseIcon.vue";
 import { mdiDelete } from "@mdi/js";
 
-interface IProps {
-  cartOffer: ICartOffer;
+interface Props {
+  cartOffer: CartOffer;
   editable?: boolean;
 }
-const $props = defineProps<IProps>();
+const $props = defineProps<Props>();
 const $emit = defineEmits<{
-  (e: "delete", v: ICartOffer): void;
-  (e: "edit", v: ICartOffer): void;
+  (e: "delete", v: CartOffer): void;
+  (e: "edit", v: CartOffer): void;
 }>();
 
 const title = computed(() => {
   switch ($props.cartOffer.type) {
     case "complements":
-      return ($props.cartOffer.offer as IComplement).name;
+      return ($props.cartOffer.offer as Complement).name;
     case "drinks":
-      return ($props.cartOffer.offer as IDrink).name;
+      return ($props.cartOffer.offer as Drink).name;
     case "ingredients":
       return "";
     case "pizzas":
-      return ($props.cartOffer.offer as IPizza).title;
+      return ($props.cartOffer.offer as Pizza).title;
     case "promos":
-      return ($props.cartOffer.offer as IPromo).title;
+      return ($props.cartOffer.offer as Promo).title;
     default:
       return "";
   }

@@ -1,36 +1,36 @@
 <script setup lang="ts">
-import type { ICartOffer, ICartOfferAdditional, IPromo } from "@/types";
+import type { CartOffer, CartOfferAdditional, Promo } from "@/types";
 import { ref, onBeforeMount } from "vue";
 import MultipleSelector from "./selectors/MultipleSelector.vue";
 // import SimpleSelector from "./selectors/SimpleSelector.vue";
 
-interface IQty {
+interface Qty {
   additional: string;
   item: string;
   qty: number;
 }
 
-interface ICanAdd {
+interface CanAdd {
   additional: string;
   can: boolean;
 }
 
 const $props = defineProps<{
-  promo: IPromo;
+  promo: Promo;
 }>();
 const $emit = defineEmits<{
   (e: "can-complete", v: boolean): void;
-  (e: "set-offer", v: ICartOffer): void;
+  (e: "set-offer", v: CartOffer): void;
 }>();
 
 // Qty
-const qty = ref<IQty[]>([]);
-const cartOffer = ref<ICartOffer>({
+const qty = ref<Qty[]>([]);
+const cartOffer = ref<CartOffer>({
   qty: 1,
   type: "promos",
 });
 // Can Add
-const canAdd = ref<ICanAdd[]>([]);
+const canAdd = ref<CanAdd[]>([]);
 /**
  * countItems
  * @param additionalId
@@ -114,7 +114,7 @@ function setQty(additionalId: string, itemId: string, value: number) {
  * @param qty
  */
 function setOfferCart() {
-  const additional: ICartOfferAdditional[] = [];
+  const additional: CartOfferAdditional[] = [];
   qty.value.forEach((q) => {
     const existsIndex = additional.findIndex((a) => a.id === q.additional);
     // get item data

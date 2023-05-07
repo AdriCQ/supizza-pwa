@@ -6,7 +6,7 @@ import SearchForm from "@/components/forms/SearchForm.vue";
 import { useDataStore } from "@/store";
 import { computed, onBeforeMount, ref } from "vue";
 import { ROUTE_NAME } from "@/router";
-import type { ISearch, IDrink, IPizza, IPromo, IComplement } from "@/types";
+import type { Search, Drink, Pizza, Promo, Complement } from "@/types";
 import OfferWidget from "@/components/widgets/OfferWidget.vue";
 
 const $dataStore = useDataStore();
@@ -19,7 +19,7 @@ const promos = computed(() => $dataStore.promos);
 const search = ref<string>("");
 
 const cart = computed(() => $dataStore.cart);
-const searchElements = ref<ISearch[]>();
+const searchElements = ref<Search[]>();
 /**
  * handleSearch
  */
@@ -102,10 +102,10 @@ onBeforeMount(() => {
         v-for="(el, key) in searchElements"
         :key="`search-${el.type}-${key}`"
         link
-        :drink="el.type === 'drinks' ? el.offer as IDrink : undefined"
-        :complement="el.type === 'complements' ? el.offer as IComplement : undefined"
-        :pizza="el.type === 'pizzas' ? el.offer as IPizza : undefined"
-        :promo="el.type === 'promos' ? el.offer as IPromo : undefined"
+        :drink="el.type === 'drinks' ? el.offer as Drink : undefined"
+        :complement="el.type === 'complements' ? el.offer as Complement : undefined"
+        :pizza="el.type === 'pizzas' ? el.offer as Pizza : undefined"
+        :promo="el.type === 'promos' ? el.offer as Promo : undefined"
     /></template>
 
     <template v-else>

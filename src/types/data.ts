@@ -1,61 +1,61 @@
-export interface ICart {
-  offers: ICartOffer[];
+export interface Cart {
+  offers: CartOffer[];
   price: number;
 }
-export interface ISearch {
-  type: IResponseDataKey;
-  offer?: IComplement | IDrink | IPizza | IPromo;
+export interface Search {
+  type: ResponseDataKey;
+  offer?: Complement | Drink | Pizza | Promo;
 }
 /**
- * ICartOffer
+ * CartOffer
  */
-export interface ICartOffer extends ISearch {
-  additional?: ICartOfferAdditional[];
+export interface CartOffer extends Search {
+  additional?: CartOfferAdditional[];
   qty: number;
 }
 
-export interface ICartOfferAdditional {
+export interface CartOfferAdditional {
   id: string;
-  selected: IDataItem[];
+  selected: Datatem[];
 }
 /**
- * IComplement
+ * Complement
  */
-export interface IComplement extends IDrink {
+export interface Complement extends Drink {
   weight: string;
 }
 
 /**
- * IDrink
+ * Drink
  */
-export interface IDrink extends IDataItem {
+export interface Drink extends Datatem {
   id: string;
   img: string;
 }
 /**
- * IIngredient
+ * ngredient
  */
-export interface IIngredient extends IDataItem {
+export interface Ingredient extends Datatem {
   id: string;
   selected?: boolean;
 }
 /**
- * IPizza
+ * Pizza
  */
-export interface IPizza extends Omit<IPromo, "desc"> {
+export interface Pizza extends Omit<Promo, "desc"> {
   ingredients: string[];
 }
 /**
- * IPromo
+ * Promo
  */
-export interface IPromo {
+export interface Promo {
   id: string;
   title: string;
   img: string;
   price: number;
   desc: string;
   restrictions: string;
-  additional: IDataAdditional[];
+  additional: DataAdditional[];
 }
 
 /**
@@ -65,9 +65,9 @@ export interface IPromo {
  */
 
 /**
- * IDataAdditional
+ * DataAdditional
  */
-export interface IDataAdditional {
+export interface DataAdditional {
   id: string;
   title: string;
   desc: string;
@@ -75,13 +75,13 @@ export interface IDataAdditional {
   type: "multiple" | "check_box";
   min: number;
   max: number;
-  items: IDataItem[];
+  items: Datatem[];
 }
 
 /**
- * IDataItem
+ * Datatem
  */
-export interface IDataItem {
+export interface Datatem {
   name: string;
   desc: string;
   price: number;
@@ -90,11 +90,11 @@ export interface IDataItem {
 }
 
 /**
- * ISelectedDetails
+ * SelectedDetails
  */
-export interface ISelectedDetails {
-  type: IResponseDataKey;
-  value: IComplement | IDrink | IPizza | IPromo;
+export interface SelectedDetails {
+  type: ResponseDataKey;
+  value: Complement | Drink | Pizza | Promo;
 }
 /**
  * -----------------------------------------
@@ -102,16 +102,16 @@ export interface ISelectedDetails {
  * -----------------------------------------
  */
 /**
- * IResponseData
+ * ResponseData
  */
-export interface IResponseData {
-  complements: IComplement[];
-  drinks: IDrink[];
-  ingredients: IIngredient[];
-  pizzas: IPizza[];
-  promos: IPromo[];
+export interface ResponseData {
+  complements: Complement[];
+  drinks: Drink[];
+  ingredients: Ingredient[];
+  pizzas: Pizza[];
+  promos: Promo[];
 }
 /**
- * IResponseDataKey
+ * ResponseDataKey
  */
-export type IResponseDataKey = keyof IResponseData;
+export type ResponseDataKey = keyof ResponseData;

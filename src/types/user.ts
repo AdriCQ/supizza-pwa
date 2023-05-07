@@ -1,9 +1,9 @@
-export interface IUser {
+export interface User {
   id: string;
   phone: string;
 }
 
-export interface IAuth {
+export interface Auth {
   phone: string;
   confirmation: string;
 }
