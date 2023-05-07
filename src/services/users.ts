@@ -1,19 +1,11 @@
-import { UserCreate, UserVerify } from "@/types";
-import { api } from "./axios";
+import { UserLogin, UserCreate, AuthResponse } from "@/types";
+import { AxiosInstance } from "axios";
 
-const userServices = () => ({
-  /**
-   * create
-   * @param UserCreate params
-   * @returns AxiosPromise
-   */
-  create: (params: UserCreate) => api.post("/api", params),
-  /**
-   * verify
-   * @param UserVerify params
-   * @returns AxiosPromise
-   */
-  verify: (params: UserVerify) => api.post("/api", params),
+const userServices = (api: AxiosInstance) => ({
+  login: (params: UserLogin) =>
+    api.post<AuthResponse>("/login_cliente", params),
+  register: (params: UserCreate) =>
+    api.post<AuthResponse>("/registro_app", params),
 });
 
 export { userServices };

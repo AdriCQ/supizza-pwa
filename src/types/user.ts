@@ -1,25 +1,30 @@
 export interface User {
   id: string;
-  phone: string;
+  telefono: string;
+  nombres: string;
+  apellidos: string;
 }
 
-export interface Auth {
-  phone: string;
-  confirmation: string;
+export interface UserLogin {
+  telefono: string;
 }
 
 /**
  * UserCreate
  */
-export interface UserCreate {
-  telefono: string;
-  nombres: string;
-  apellidos: string;
-}
+export type UserCreate = Omit<User, "id">;
 
 /**
  * UserVerify
  */
 export interface UserVerify {
   telefono: string;
+}
+
+/**
+ * AuthResponse
+ */
+export interface AuthResponse {
+  Token: string;
+  Usuario: User;
 }

@@ -1,7 +1,6 @@
 import type { Cart, CartOffer, SelectedDetails, ResponseData } from "@/types";
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
-import { $service } from "@/services";
 /**
  * STORE_KEY
  */
@@ -11,7 +10,13 @@ const STORE_KEY = "pinia/useDataStore";
  */
 export const useDataStore = defineStore(STORE_KEY, () => {
   // Full Data
-  const fullData = ref<ResponseData>();
+  const fullData = ref<ResponseData>({
+    complements: [],
+    drinks: [],
+    ingredients: [],
+    pizzas: [],
+    promos: [],
+  });
   // Separated data
   const complements = computed(() => fullData.value?.complements);
   const drinks = computed(() => fullData.value?.drinks);
@@ -114,13 +119,6 @@ export const useDataStore = defineStore(STORE_KEY, () => {
       cart.value.price = price;
     }
   }
-  /**
-   * loadData
-   */
-  async function loadData() {
-    const resp = await $service.loadData();
-    fullData.value = resp.data;
-  }
 
   return {
     fullData,
@@ -140,6 +138,5 @@ export const useDataStore = defineStore(STORE_KEY, () => {
     // Methods
     addToCart,
     removeFromCart,
-    loadData,
   };
 });

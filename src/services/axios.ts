@@ -2,7 +2,7 @@ import { useUserStore } from "@/store";
 import axios, { AxiosRequestHeaders } from "axios";
 
 const api = axios.create({
-  // baseURL: 'https://n8n.terio.xyz/',
+  baseURL: "https://supizza-back.prbs.li/",
   timeout: 30000,
 });
 

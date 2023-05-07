@@ -1,16 +1,13 @@
 import { type ResponseData } from "@/types";
-import type { AxiosInstance } from "axios";
 import { api } from "./axios";
+import { userServices } from "./users";
+import { offerServices } from "./offers";
 /**
  * useService
  * @param api
  */
-const useService = (api: AxiosInstance) => ({
+export const useService = () => ({
   loadData: () => api.get<ResponseData>("/data.json"),
+  offers: offerServices(api),
+  user: userServices(api),
 });
-/**
- * service
- */
-const $service = useService(api);
-
-export { $service, useService };
