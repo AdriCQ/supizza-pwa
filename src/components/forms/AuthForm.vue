@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import InputText from "./InputText.vue";
-import type { Auth } from "@/types";
+import type { UserCreate } from "@/types";
 
 const step = ref(0);
 
-const form = ref<Auth>({
-  confirmation: "",
-  phone: "",
+const form = ref<UserCreate>({
+  apellidos: "",
+  nombres: "",
+  telefono: "",
 });
 /**
  * handleSubmits
@@ -23,12 +24,12 @@ async function handleSubmit() {
     <div class="card-body">
       <InputText
         v-if="step === 0"
-        v-model="form.phone"
+        v-model="form.telefono"
         label="Teléfono"
         type="tel"
       /><InputText
         v-if="step === 1"
-        v-model="form.confirmation"
+        v-model="form.apellidos"
         label="Confirme"
         type="text"
       />
