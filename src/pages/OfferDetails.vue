@@ -4,7 +4,7 @@ import PromoDetails from "@/components/forms/PromoDetails.vue";
 import PizzaDetails from "@/components/forms/PizzaDetails.vue";
 import MultipleSelector from "@/components/forms/selectors/MultipleSelector.vue";
 import { useDataStore } from "@/store";
-import { onBeforeMount, ref, computed } from "vue";
+import { onBeforeMount, ref, computed, watch } from "vue";
 import type { Promo, Pizza, CartOffer, Complement, Drink } from "@/types";
 import { useRoute, useRouter } from "vue-router";
 import { ROUTE_NAME } from "@/router";
@@ -16,6 +16,7 @@ const $dataStore = useDataStore();
 const $route = useRoute();
 const $router = useRouter();
 
+const fullData = computed(() => $dataStore.fullData);
 const canComplete = ref(false);
 const offer = ref<Offer>();
 const cartOffer = ref<CartOffer>({
@@ -36,6 +37,14 @@ const subtotal = computed(() => {
     });
   }
   return ret * cartOffer.value.qty;
+});
+
+watch(fullData.value, (value, oldValue) => {
+  console.log({
+    value,
+    oldValue,
+  });
+  initData();
 });
 /**
  * addToCart
@@ -60,10 +69,8 @@ function handleCanComplete(complete: boolean) {
 function handleSetOffer(offer: CartOffer) {
   cartOffer.value = offer;
 }
-/**
- * onBeforeMount
- */
-onBeforeMount(() => {
+
+function initData() {
   // Load data from route
   if ($route.query.type && $route.query.id) {
     const type = $route.query.type;
@@ -87,7 +94,12 @@ onBeforeMount(() => {
     cartOffer.value.type = $dataStore.selected.type;
   }
   cartOffer.value.offer = offer.value;
-
+}
+/**
+ * onBeforeMount
+ */
+onBeforeMount(() => {
+  initData();
   // Scroll to top
   window.scrollTo({
     top: 0,
