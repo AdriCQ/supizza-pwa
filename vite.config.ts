@@ -12,6 +12,40 @@ export default defineConfig({
     viteCompression(),
     VitePWA({
       registerType: "autoUpdate",
+      injectRegister: "auto",
+      includeAssets: ["img/*.png", "img/*.svg", "icons/*.svg"],
+      workbox: {
+        globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
+        cleanupOutdatedCaches: false,
+        sourcemap: true,
+      },
+      devOptions: {
+        enabled: false,
+      },
+      manifest: {
+        name: "SuPizza",
+        short_name: "SuPizza",
+        description: "Pedidos de Pizza a domicilio",
+        theme_color: "#ffffff",
+        icons: [
+          {
+            src: "pwa/192x192.png",
+            sizes: "192x192",
+            type: "image/png",
+          },
+          {
+            src: "pwa/512x512.png",
+            sizes: "512x512",
+            type: "image/png",
+          },
+          {
+            src: "pwa/512x512.png",
+            sizes: "512x512",
+            type: "image/png",
+            purpose: "any maskable",
+          },
+        ],
+      },
     }),
   ],
   // ts-paths
