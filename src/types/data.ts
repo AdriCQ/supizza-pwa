@@ -15,8 +15,8 @@ export interface CartOffer extends Search {
 }
 
 export interface CartOfferAdditional {
-  id: string;
-  selected: Datatem[];
+  id: number | string;
+  selected: DataItem[];
 }
 /**
  * Complement
@@ -28,14 +28,14 @@ export interface Complement extends Drink {
 /**
  * Drink
  */
-export interface Drink extends Datatem {
+export interface Drink extends DataItem {
   id: string;
   img: string;
 }
 /**
  * ngredient
  */
-export interface Ingredient extends Datatem {
+export interface Ingredient extends DataItem {
   id: string;
   selected?: boolean;
 }
@@ -72,16 +72,16 @@ export interface DataAdditional {
   title: string;
   desc: string;
   optional: boolean;
-  type: "multiple" | "check_box";
+  type: "multiple" | "check_box" | "radio";
   min: number;
   max: number;
-  items: Datatem[];
+  items: DataItem[];
 }
 
 /**
- * Datatem
+ * DataItem
  */
-export interface Datatem {
+export interface DataItem {
   name: string;
   desc: string;
   price: number;

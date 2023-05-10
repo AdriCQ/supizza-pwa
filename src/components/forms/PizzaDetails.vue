@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import type { CartOffer, CartOfferAdditional, Pizza } from "@/types";
+import type { CartOffer, CartOfferAdditional, DataItem, Pizza } from "@/types";
 import { ref, onBeforeMount } from "vue";
 import IngredientSelector from "@/components/forms/selectors/IngredientSelector.vue";
+import MultipleSelector from "@/components/forms/selectors/MultipleSelector.vue";
+import SimpleSelector from "@/components/forms/selectors/SimpleSelector.vue";
 
 const $emit = defineEmits<{
   (e: "can-complete", v: boolean): void;
@@ -13,6 +15,7 @@ const cartOffer = ref<CartOffer>({
   qty: 1,
   type: "pizzas",
 });
+
 /**
  * handleOnReady
  * @param additionalIndex
@@ -38,10 +41,37 @@ function handleSetAdditional(
     $emit("set-offer", cartOffer.value);
   }
 }
+
+function isSelected(
+  additionalId: number | string,
+  selectedId: string
+): boolean {
+  if (cartOffer.value.additional) {
+    const additinalIndex = cartOffer.value.additional.findIndex(
+      (a) => a.id == additionalId
+    );
+    if (additinalIndex >= 0) {
+      const additional = cartOffer.value.additional[additinalIndex];
+      return additional.selected.findIndex((s) => s.id === selectedId) >= 0;
+    }
+  }
+  return false;
+}
 /**
  * onBeforeMount
  */
 onBeforeMount(() => {
+  const additionals: DataItem[] = [];
+
+  $props.pizza.additional.forEach((additional) => {
+    additionals.push({
+      desc: additional.desc,
+      id: additional.id,
+      name: additional.title,
+      qty: 0,
+      price: 0,
+    });
+  });
   cartOffer.value = {
     qty: 1,
     type: "pizzas",
@@ -86,6 +116,29 @@ onBeforeMount(() => {
       @ready="(ready) => handleOnReady(0, ready)"
       @set-additional="(a) => handleSetAdditional(0, a)"
     />
+
+    <div
+      v-for="(additional, additionalKey) in pizza.additional.slice(
+        1,
+        pizza.additional.length
+      )"
+      :key="`addtitional-${additionalKey}`"
+      class="rounded-md bg-slate-200 p-2 text-center"
+    >
+      <div v-if="additional.type === 'radio'">
+        <div class="text-lg font-semibold">
+          {{ additional.desc }}
+        </div>
+
+        <SimpleSelector
+          v-for="(item, itemKey) in additional.items"
+          :key="`addtitional-${additionalKey}-item${itemKey}`"
+          :label="item.name"
+          :price="item.price"
+          :selected="isSelected(additional.id, item.id)"
+        />
+      </div>
+    </div>
     <!-- / Additions -->
   </div>
 </template>
