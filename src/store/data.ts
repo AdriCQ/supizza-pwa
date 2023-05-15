@@ -1,3 +1,4 @@
+import { useStorage } from "@/helpers";
 import type { Cart, CartOffer, SelectedDetails, ResponseData } from "@/types";
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
@@ -5,6 +6,7 @@ import { computed, ref } from "vue";
  * STORE_KEY
  */
 const STORE_KEY = "pinia/useDataStore";
+const storage = useStorage<Storage>(STORE_KEY);
 /**
  * useDataStore
  */
@@ -101,6 +103,8 @@ export const useDataStore = defineStore(STORE_KEY, () => {
     addPrice *= offer.qty;
     // Add to cart price
     cart.value.price += addPrice;
+
+    save();
   }
   /**
    * removeFromCart
@@ -118,6 +122,25 @@ export const useDataStore = defineStore(STORE_KEY, () => {
       cart.value.offers.splice(index, 1);
       cart.value.price = price;
     }
+
+    save();
+  }
+
+  /**
+   * -----------------------------------------
+   *	Helpers
+   * -----------------------------------------
+   */
+
+  function save() {
+    storage.set({
+      cart: cart.value,
+    });
+  }
+
+  function load() {
+    const data = storage.get();
+    if (data?.cart) cart.value = data?.cart;
   }
 
   return {
@@ -138,5 +161,12 @@ export const useDataStore = defineStore(STORE_KEY, () => {
     // Methods
     addToCart,
     removeFromCart,
+    // Helpers
+    load,
+    save,
   };
 });
+
+interface Storage {
+  cart: Cart;
+}

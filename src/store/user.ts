@@ -51,7 +51,12 @@ export const useUserStore = defineStore(STORE_KEY, () => {
   function save() {
     storage.set({
       token: auth_token.value,
-      user: user.value,
+      user: {
+        apellidos: user.value?.apellidos as string,
+        _id: user.value?._id as string,
+        nombres: user.value?.nombres as string,
+        telefono: user.value?.telefono as string,
+      },
     });
   }
 

@@ -39,6 +39,7 @@ onBeforeMount(async () => {
     $app.error("Ha ocurrido un error");
     console.log({ load: error });
   });
+  $dataStore.load();
   $user.load();
 });
 </script>
