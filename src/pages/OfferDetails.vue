@@ -17,7 +17,7 @@ const $route = useRoute();
 const $router = useRouter();
 
 const fullData = computed(() => $dataStore.fullData);
-const canComplete = ref(false);
+const canComplete = ref(true);
 const offer = ref<Offer>();
 const cartOffer = ref<CartOffer>({
   offer: undefined,

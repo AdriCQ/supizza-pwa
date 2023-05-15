@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import NavTop from "@/components/menu/NavTop.vue";
-import OrderOffer from "@/components/widgets/OrderOffer.vue";
+import { onBeforeMount } from "vue";
 import { useDataStore } from "@/store";
 import { CartOffer, OrderCreate } from "@/types";
-import { onBeforeMount } from "vue";
+// Components
+import NavTop from "@/components/menu/NavTop.vue";
+import OrderOffer from "@/components/widgets/OrderOffer.vue";
 
 const $cart = useDataStore();
 
