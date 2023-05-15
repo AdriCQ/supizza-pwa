@@ -1,10 +1,17 @@
 <script setup lang="ts">
+import { computed } from "vue";
+import { mdiCart } from "@mdi/js";
+import { ROUTE_NAME } from "@/router";
+import { useUserStore } from "@/store";
+// Components
 import BaseIcon from "@/components/BaseIcon.vue";
 import CheckoutForm from "@/components/forms/CheckoutForm.vue";
 import NavBottom from "@/components/menu/NavBottom.vue";
 import NavTop from "@/components/menu/NavTop.vue";
-import { ROUTE_NAME } from "@/router";
-import { mdiCart } from "@mdi/js";
+
+const $user = useUserStore();
+
+const user = computed(() => $user.user);
 </script>
 
 <template>
@@ -16,12 +23,12 @@ import { mdiCart } from "@mdi/js";
         size="2rem"
         class="inline-block stroke-slate-800"
       />
-      Carrito
+      Ordenar
     </h1>
   </div>
   <div class="p-2">
     <CheckoutForm />
   </div>
 
-  <NavBottom label="Continuar" :next="ROUTE_NAME.HOME" />
+  <NavBottom label="Continuar" :next="ROUTE_NAME.HOME" v-if="user" />
 </template>

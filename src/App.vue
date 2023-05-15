@@ -1,9 +1,10 @@
 <script lang="ts" setup>
 import { onBeforeMount } from "vue";
-import { useAppStore, useDataStore } from "@/store";
+import { useAppStore, useDataStore, useUserStore } from "@/store";
 import { useService } from "@/services";
 
 const $app = useAppStore();
+const $user = useUserStore();
 const { offers } = useService();
 const $dataStore = useDataStore();
 
@@ -38,6 +39,7 @@ onBeforeMount(async () => {
     $app.error("Ha ocurrido un error");
     console.log({ load: error });
   });
+  $user.load();
 });
 </script>
 
