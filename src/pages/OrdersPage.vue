@@ -2,7 +2,8 @@
 import NavTop from "@/components/menu/NavTop.vue";
 import OrderOffer from "@/components/widgets/OrderOffer.vue";
 import { useDataStore } from "@/store";
-import { CartOffer } from "@/types";
+import { CartOffer, OrderCreate } from "@/types";
+import { onBeforeMount } from "vue";
 
 const $cart = useDataStore();
 
@@ -11,6 +12,24 @@ const cartOffer: CartOffer = {
   type: "pizzas",
   offer: $cart.pizzas?.at(0),
 };
+
+onBeforeMount(() => {
+  const order: OrderCreate = {
+    Direccion: {
+      direccion: "",
+      lat: 0,
+      lng: 0,
+    },
+    Nombre: "Nombre Cliente",
+    Pago: "Efectivo",
+    Productos: $cart.cart.offers,
+    Telefono: "53535353",
+    TipoEntrega: "Encontrarse afuera",
+  };
+  console.log({
+    order,
+  });
+});
 </script>
 
 <template>

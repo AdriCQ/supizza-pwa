@@ -31,3 +31,11 @@ export function toCurrency(val: number) {
 
   return formatter.format(val);
 }
+
+/**
+ * defaultImage
+ * @returns
+ */
+export function setDefaultImage(event: Event) {
+  (event.target as HTMLImageElement).src = "/pwa/256x256.png";
+}

@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { ROUTE_NAME } from "@/router";
 import type { OrderCreate } from "@/types";
-import { ref } from "vue";
+import { onBeforeMount, ref } from "vue";
 import { useRouter } from "vue-router";
 import InputText from "./InputText.vue";
+import { useDataStore } from "@/store";
 
+const $cart = useDataStore();
 const $router = useRouter();
 
 const form = ref<OrderCreate>({
@@ -17,6 +19,7 @@ const form = ref<OrderCreate>({
   Productos: [],
   Telefono: "",
   TipoEntrega: "Encontrarse afuera",
+  Pago: "Efectivo",
 });
 /**
  * onSubmit
@@ -24,6 +27,24 @@ const form = ref<OrderCreate>({
 async function onSubmit() {
   console.log("onSubmit");
 }
+
+onBeforeMount(() => {
+  const order: OrderCreate = {
+    Direccion: {
+      direccion: "",
+      lat: 0,
+      lng: 0,
+    },
+    Nombre: "Nombre Cliente",
+    Pago: "Efectivo",
+    Productos: $cart.cart.offers,
+    Telefono: "53535353",
+    TipoEntrega: "Encontrarse afuera",
+  };
+  console.log({
+    order,
+  });
+});
 </script>
 
 <template>

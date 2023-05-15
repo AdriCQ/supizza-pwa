@@ -13,6 +13,7 @@ export interface OrderCreate {
   Nombre: string;
   Telefono: string;
   Productos: CartOffer[];
-  TipoEntrega: TipoEntrega;
+  TipoEntrega: "Entregar en la puerta" | "Encontrarse afuera";
+  Pago: "Tarjeta" | "Efectivo";
   Direccion: Direccion;
 }

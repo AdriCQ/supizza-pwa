@@ -1,15 +1,15 @@
 <script setup lang="ts">
+import { onBeforeMount, ref, computed, watch } from "vue";
+import type { Promo, Pizza, CartOffer, Complement, Drink } from "@/types";
+import { useRoute, useRouter } from "vue-router";
+import { ROUTE_NAME } from "@/router";
+import { setDefaultImage, toCurrency } from "@/helpers";
+// Components
 import NavTop from "@/components/menu/NavTop.vue";
 import PromoDetails from "@/components/forms/PromoDetails.vue";
 import PizzaDetails from "@/components/forms/PizzaDetails.vue";
 import MultipleSelector from "@/components/forms/selectors/MultipleSelector.vue";
 import { useDataStore } from "@/store";
-import { onBeforeMount, ref, computed, watch } from "vue";
-import type { Promo, Pizza, CartOffer, Complement, Drink } from "@/types";
-import { useRoute, useRouter } from "vue-router";
-import { ROUTE_NAME } from "@/router";
-import { toCurrency } from "@/helpers";
-
 type Offer = Complement | Drink | Pizza | Promo;
 
 const $dataStore = useDataStore();
@@ -117,6 +117,7 @@ onBeforeMount(() => {
       <img
         v-if="offer?.img"
         :src="offer.img"
+        @error="setDefaultImage"
         :alt="(offer as Pizza).title ? (offer as Pizza).title : (offer as Complement).name"
         :title="(offer as Pizza).title ? (offer as Pizza).title : (offer as Complement).name"
         class="w-full"

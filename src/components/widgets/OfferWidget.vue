@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Pizza, Promo, Drink, Complement, ResponseDataKey } from "@/types";
 import { computed } from "vue";
-import { toCurrency } from "@/helpers";
+import { toCurrency, setDefaultImage } from "@/helpers";
 import { useRouter } from "vue-router";
 import { useDataStore } from "@/store";
 import { ROUTE_NAME } from "@/router";
@@ -64,6 +64,7 @@ function selectElement() {
             :alt="complement.name"
             :title="complement.name"
             class="w-full"
+            @error="setDefaultImage"
           />
         </div>
         <div class="col-span-3">
@@ -87,6 +88,7 @@ function selectElement() {
             :src="offer.img"
             :alt="(offer as Promo).title??(offer as Drink).name"
             :title="(offer as Promo).title??(offer as Drink).name"
+            @error="setDefaultImage"
             class="w-full"
           />
         </div>
@@ -97,7 +99,10 @@ function selectElement() {
           <p class="overflow-description">
             {{ (offer as Promo).desc }}
           </p>
-          <div class="absolute bottom-0 right-0 text-xl font-bold">
+          <div
+            class="absolute bottom-0 right-0 text-xl font-bold"
+            v-if="offer.price > 0"
+          >
             {{ toCurrency(offer.price) }}
           </div>
         </div>

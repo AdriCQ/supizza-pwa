@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { useDataStore } from "@/store";
 import { computed } from "vue";
+import { useDataStore } from "@/store";
+import { setDefaultImage } from "@/helpers";
 import CategorySlider from "@/components/sliders/CategorySlider.vue";
 
 const dataStore = useDataStore();
@@ -14,7 +15,12 @@ const categories = computed(() =>
   <header class="sticky top-0 z-10 bg-white p-2 shadow-xl">
     <div class="flex justify-center gap-2">
       <div class="w-16">
-        <img src="/logo/logo.png" alt="Supizza Logo" title="Supizza" />
+        <img
+          src="/logo/logo.png"
+          @error="setDefaultImage"
+          alt="Supizza Logo"
+          title="Supizza"
+        />
       </div>
       <h1 class="select-none text-center text-2xl font-semibold">Su-Pizza</h1>
     </div>
