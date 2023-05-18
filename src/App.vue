@@ -21,7 +21,16 @@ async function listIngredients() {
 }
 
 async function listPizzas() {
-  $dataStore.fullData.pizzas = (await offers.listPizza()).data;
+  const resp = (await offers.listPizza()).data;
+  // Corregir precio inicial
+  $dataStore.fullData.pizzas = resp.map((pizza) => {
+    let price = 0;
+    pizza.ingredients.forEach((ingredient) => (price += ingredient.price));
+    return {
+      ...pizza,
+      price,
+    };
+  });
 }
 
 async function listPromos() {
