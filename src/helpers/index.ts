@@ -1,2 +1,2 @@
-export * from "../services/geolocation";
+export * from "./const";
 export * from "./mix";

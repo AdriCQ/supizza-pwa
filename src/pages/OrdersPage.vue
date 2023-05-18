@@ -27,9 +27,6 @@ onBeforeMount(() => {
     Telefono: "53535353",
     TipoEntrega: "Encontrarse afuera",
   };
-  console.log({
-    order,
-  });
 });
 </script>
 

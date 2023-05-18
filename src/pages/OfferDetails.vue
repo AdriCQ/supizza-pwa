@@ -39,11 +39,7 @@ const subtotal = computed(() => {
   return ret * cartOffer.value.qty;
 });
 
-watch(fullData.value, (value, oldValue) => {
-  console.log({
-    value,
-    oldValue,
-  });
+watch(fullData.value, () => {
   initData();
 });
 /**

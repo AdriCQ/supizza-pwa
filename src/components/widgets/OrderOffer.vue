@@ -53,7 +53,7 @@ const title = computed(() => {
         >
           -
           <div class="flex-1">
-            <span class="mx-1">x{{ sel.qty }}</span>
+            <span class="mx-1" v-if="sel.qty > 0">x{{ sel.qty }}</span>
             <span class="mx-1">{{ sel.name }}</span>
           </div>
           <div class="flex-none" v-if="sel.price">

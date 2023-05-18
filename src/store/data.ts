@@ -49,7 +49,6 @@ export const useDataStore = defineStore(STORE_KEY, () => {
   function addToCart(offer: CartOffer) {
     // Check if exists
     let exists = false;
-    console.log({ additionals: offer.additional });
 
     cart.value.offers.filter((cartOffer, key, _cart) => {
       if (cartOffer.offer) {
@@ -115,12 +114,8 @@ export const useDataStore = defineStore(STORE_KEY, () => {
       (o) => o.type === remove.type && o.offer?.id === remove.offer?.id
     );
     if (index >= 0) {
-      const cartOffer = cart.value.offers[index];
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      const price = cart.value.price - cartOffer.qty * cartOffer.offer?.price;
       cart.value.offers.splice(index, 1);
-      cart.value.price = price;
+      calculatePrice();
     }
 
     save();
@@ -141,6 +136,25 @@ export const useDataStore = defineStore(STORE_KEY, () => {
   function load() {
     const data = storage.get();
     if (data?.cart) cart.value = data?.cart;
+  }
+
+  function calculatePrice() {
+    let totalPrice = 0;
+    cart.value.offers.forEach((offer) => {
+      let offerPrice = offer.offer?.price as number;
+      let offerAdditional = 0;
+      offer.additional?.forEach((additional) => {
+        additional.selected.forEach((sel) => {
+          offerAdditional += sel.price * sel.qty;
+        });
+      });
+
+      offerPrice += offerAdditional;
+
+      totalPrice += offerPrice * offer.qty;
+    });
+
+    cart.value.price = totalPrice;
   }
 
   return {

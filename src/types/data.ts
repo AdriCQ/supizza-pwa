@@ -43,7 +43,8 @@ export interface Ingredient extends DataItem {
  * Pizza
  */
 export interface Pizza extends Omit<Promo, "desc"> {
-  ingredients: string[];
+  ingredients: NamePrice[];
+  sizes: NamePrice[];
 }
 /**
  * Promo
@@ -95,6 +96,14 @@ export interface DataItem {
 export interface SelectedDetails {
   type: ResponseDataKey;
   value: Complement | Drink | Pizza | Promo;
+}
+
+/**
+ * NamePrice (ingredients, sizes)
+ */
+export interface NamePrice {
+  name: string;
+  price: number;
 }
 /**
  * -----------------------------------------

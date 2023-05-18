@@ -1,9 +1,17 @@
 <script setup lang="ts">
-import type { CartOffer, CartOfferAdditional, DataItem, Pizza } from "@/types";
-import { ref, onBeforeMount } from "vue";
+import { ref, onBeforeMount, computed } from "vue";
+import type {
+  CartOffer,
+  CartOfferAdditional,
+  DataItem,
+  NamePrice,
+  Pizza,
+} from "@/types";
+import { DEFAULT_ADDITIONAL } from "@/helpers";
 import IngredientSelector from "@/components/forms/selectors/IngredientSelector.vue";
-import MultipleSelector from "@/components/forms/selectors/MultipleSelector.vue";
+// import MultipleSelector from "@/components/forms/selectors/MultipleSelector.vue";
 import SimpleSelector from "@/components/forms/selectors/SimpleSelector.vue";
+import PizzaSizeSelector from "./selectors/PizzaSizeSelector.vue";
 
 const $emit = defineEmits<{
   (e: "can-complete", v: boolean): void;
@@ -14,6 +22,14 @@ const $props = defineProps<{ pizza: Pizza }>();
 const cartOffer = ref<CartOffer>({
   qty: 1,
   type: "pizzas",
+});
+
+const includedIngredientsPrice = computed(() => {
+  let ingredientPrice = 0;
+  $props.pizza.ingredients.forEach(
+    (ingredient) => (ingredientPrice += ingredient.price)
+  );
+  return ingredientPrice;
 });
 
 /**
@@ -42,6 +58,34 @@ function handleSetAdditional(
   }
 }
 
+/**
+ * handleOnSetSize
+ * @param size
+ */
+function handleOnSetSize(size: NamePrice) {
+  if (cartOffer.value.offer && cartOffer.value.additional) {
+    cartOffer.value.additional[0] = {
+      id: "additionalID",
+      selected: [
+        {
+          desc: "Tamaño",
+          id: "sizeId",
+          name: size.name,
+          price: 0,
+          qty: 0,
+        },
+      ],
+    };
+    cartOffer.value.offer.price = size.price + includedIngredientsPrice.value;
+  }
+}
+
+/**
+ * isSelected
+ * @param additionalId
+ * @param selectedId
+ * @returns boolean
+ */
 function isSelected(
   additionalId: number | string,
   selectedId: string
@@ -61,39 +105,44 @@ function isSelected(
  * onBeforeMount
  */
 onBeforeMount(() => {
-  const additionals: DataItem[] = [];
+  const initialPrice = $props.pizza.sizes[0].price;
 
-  $props.pizza.additional.forEach((additional) => {
-    additionals.push({
-      desc: additional.desc,
-      id: additional.id,
-      name: additional.title,
-      qty: 0,
-      price: 0,
-    });
-  });
+  const defaultSize = $props.pizza.sizes[0];
+
   cartOffer.value = {
     qty: 1,
     type: "pizzas",
     additional: [
       {
-        id: "1",
-        selected: [],
+        id: "size",
+        selected: [
+          {
+            desc: defaultSize.name,
+            name: defaultSize.name,
+            id: defaultSize.name,
+            price: defaultSize.price,
+            qty: 0,
+          },
+        ],
       },
     ],
-    offer: $props.pizza,
+    offer: { ...$props.pizza, price: initialPrice },
   };
+
+  $emit("set-offer", cartOffer.value);
+
+  handleOnSetSize(defaultSize);
 });
 </script>
 
 <template>
   <div class="space-y-2">
-    <div
+    <!-- <div
       class="rounded-md bg-slate-200 p-2 text-center"
       v-if="pizza.restrictions"
     >
       {{ pizza.restrictions }}
-    </div>
+    </div> -->
     <div
       v-if="pizza.ingredients.length"
       class="mt-2 rounded-md bg-slate-200 px-2 py-4 text-center"
@@ -105,21 +154,29 @@ onBeforeMount(() => {
           v-for="(ingredient, iKey) in pizza.ingredients"
           :key="`pizza-ingredient-${iKey}`"
         >
-          {{ ingredient }}
+          {{ ingredient.name }}
         </div>
       </div>
     </div>
 
+    <PizzaSizeSelector
+      :sizes="pizza.sizes"
+      :included-ingredients-price="includedIngredientsPrice"
+      @set-size="handleOnSetSize"
+    />
+
     <!-- Additions -->
     <IngredientSelector
-      :additional="pizza.additional[0]"
-      @ready="(ready) => handleOnReady(0, ready)"
-      @set-additional="(a) => handleSetAdditional(0, a)"
+      :additional="pizza.additional[DEFAULT_ADDITIONAL.INGREDIENT]"
+      @ready="(ready) => handleOnReady(DEFAULT_ADDITIONAL.INGREDIENT, ready)"
+      @set-additional="
+        (a) => handleSetAdditional(DEFAULT_ADDITIONAL.INGREDIENT, a)
+      "
     />
 
     <div
       v-for="(additional, additionalKey) in pizza.additional.slice(
-        1,
+        2,
         pizza.additional.length
       )"
       :key="`addtitional-${additionalKey}`"

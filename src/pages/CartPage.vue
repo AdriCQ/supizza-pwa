@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import { useDataStore } from "@/store";
 import { computed, onBeforeMount, ref } from "vue";
+import { mdiCart } from "@mdi/js";
+import { ROUTE_NAME } from "@/router";
+import type { CartOffer } from "@/types";
+import { useDataStore } from "@/store";
+// Components
 import OrderOffer from "@/components/widgets/OrderOffer.vue";
 import BaseIcon from "@/components/BaseIcon.vue";
-import { mdiCart } from "@mdi/js";
 import NavTop from "@/components/menu/NavTop.vue";
 import NavBottom from "@/components/menu/NavBottom.vue";
 import CustomModal from "@/components/menu/CustomModal.vue";
-import { ROUTE_NAME } from "@/router";
-import type { CartOffer } from "@/types";
 
 const $dataStore = useDataStore();
 

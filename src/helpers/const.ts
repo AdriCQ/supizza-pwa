@@ -1,0 +1,4 @@
+export enum DEFAULT_ADDITIONAL {
+  INGREDIENT = 1,
+  SIZE = 0,
+}

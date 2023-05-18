@@ -32,6 +32,13 @@ const type = computed<ResponseDataKey>(() => {
   return "pizzas";
 });
 
+const price = computed<number>(() => {
+  if (offer.value && type.value === "pizzas") {
+    return offer.value.price + (offer.value as Pizza).sizes[0].price;
+  }
+  return offer.value ? offer.value.price : 0;
+});
+
 /**
  * selectElement
  */
@@ -46,11 +53,6 @@ function selectElement() {
       query: { type: type.value, id: offer.value.id },
     });
   }
-
-  console.log({
-    type: type.value,
-    value: offer.value,
-  });
 }
 </script>
 
@@ -101,9 +103,9 @@ function selectElement() {
           </p>
           <div
             class="absolute bottom-0 right-0 text-xl font-bold"
-            v-if="offer.price > 0"
+            v-if="price > 0"
           >
-            {{ toCurrency(offer.price) }}
+            {{ toCurrency(price) }}
           </div>
         </div>
       </div>

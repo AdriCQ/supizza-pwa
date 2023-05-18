@@ -7,7 +7,10 @@ const $emit = defineEmits<{
   (e: "set-size", v: NamePrice): void;
   (e: "ready", v: boolean): void;
 }>();
-const $props = defineProps<{ sizes: NamePrice[] }>();
+const $props = defineProps<{
+  sizes: NamePrice[];
+  includedIngredientsPrice: number;
+}>();
 
 const selected = ref<NamePrice>();
 
@@ -36,7 +39,7 @@ function handleSelect(sizeKey: number) {
     <div class="mt-2">
       <SimpleSelector
         class="my-4"
-        :price="size.price"
+        :price="0"
         :label="size.name"
         :selected="isSelected(iKey)"
         @update:selected="() => handleSelect(iKey)"

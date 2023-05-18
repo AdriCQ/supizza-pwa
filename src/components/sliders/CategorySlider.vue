@@ -46,7 +46,7 @@ function getCatName(cat: string): string {
  */
 function goToCategory(cat: string) {
   const element = document.querySelector(`#${cat}-section`);
-  if (element) element.scrollIntoView({ behavior: "smooth", block: "end" });
+  if (element) element.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 </script>
 
