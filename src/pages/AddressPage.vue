@@ -7,7 +7,7 @@ import type { Address } from "@/types";
 // Components
 import BaseIcon from "@/components/BaseIcon.vue";
 import NavBottom from "@/components/menu/NavBottom.vue";
-import NavTop from "@/components/menu/NavTop.vue";
+// import NavTop from "@/components/menu/NavTop.vue";
 import AddressWidget from "@/components/widgets/AddressWidget.vue";
 
 const $dataStore = useDataStore();
@@ -44,7 +44,7 @@ for (let i = 0; i < 10; i++) {
 </script>
 
 <template>
-  <NavTop back="back" />
+  <!-- <NavTop back="back" /> -->
   <div class="min-h-screen p-4">
     <h1 class="text-center text-2xl font-semibold">
       <BaseIcon
