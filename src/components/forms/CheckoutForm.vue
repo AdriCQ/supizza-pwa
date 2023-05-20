@@ -96,14 +96,15 @@ onBeforeMount(() => {
           <h2 class="text-lg font-semibold">Tipo de Entrega</h2>
           <div class="space-y-2 text-justify">
             <div class="flex items-center justify-between gap-2">
-              <label>Envío a domicilio gratis después de $600.00</label>
+              <label>Envío a domicilio gratis</label>
               <input
                 type="radio"
                 name="tipo_entrega"
                 class="radio-primary radio"
+                :checked="true"
               />
             </div>
-            <div class="flex items-center justify-between gap-2">
+            <!-- <div class="flex items-center justify-between gap-2">
               <label>Pasar a recoger</label>
               <input
                 type="radio"
@@ -118,7 +119,7 @@ onBeforeMount(() => {
                 name="tipo_entrega"
                 class="radio-primary radio"
               />
-            </div>
+            </div> -->
           </div>
         </div>
         <!-- / Tipo Entrega -->
@@ -126,13 +127,20 @@ onBeforeMount(() => {
         <!-- Dirección de entrega -->
         <div class="card-body mt-4 rounded-md bg-slate-200">
           <h2 class="text-lg font-semibold">Dirección de entrega</h2>
-
-          <button
-            class="btn-primary btn w-full"
-            @click="() => $router.push({ name: ROUTE_NAME.MAP_SELECTOR })"
+          <select class="select w-full max-w-xs">
+            <option v-for="i in 10" :key="i">Direccion {{ i }}</option>
+          </select>
+          <p
+            class="cursor-pointer text-sm text-primary"
+            @click="
+              () =>
+                $router.push({
+                  name: ROUTE_NAME.ADDRESS,
+                })
+            "
           >
-            Compartir mi Ubicación
-          </button>
+            Administrar mis direcciones
+          </p>
         </div>
         <!-- / Dirección de entrega -->
 

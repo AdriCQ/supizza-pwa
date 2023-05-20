@@ -32,6 +32,11 @@ export const routes: RouteRecordRaw[] = [
     name: ROUTE_NAME.ORDERS,
     component: () => import("@/pages/OrdersPage.vue"),
   },
+  {
+    path: "/address",
+    name: ROUTE_NAME.ADDRESS,
+    component: () => import("@/pages/AddressPage.vue"),
+  },
   // {
   // 	path: '/:catchAll(.*)*',
   // 	component: () => import('@/pages/ErrorNotFound.vue'),

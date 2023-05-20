@@ -12,7 +12,7 @@ export interface UserLogin {
 /**
  * UserCreate
  */
-export type UserCreate = Omit<User, "id">;
+export type UserCreate = Omit<User, "_id">;
 
 /**
  * UserVerify
