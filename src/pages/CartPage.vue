@@ -49,7 +49,7 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <NavTop back="back" />
+  <NavTop :back="{ name: ROUTE_NAME.HOME }" />
 
   <div class="min-h-screen py-2 px-4">
     <div class="mt-2">

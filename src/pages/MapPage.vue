@@ -4,9 +4,9 @@ import { latLng, LatLng } from "leaflet";
 import { ref, onBeforeMount, watch } from "vue";
 import type { AddressCreate } from "@/types";
 import InputText from "@/components/forms/InputText.vue";
-import { useMap } from "@/helpers";
+// import { useMap } from "@/helpers";
 
-const { currentPosition } = useMap();
+// const { currentPosition } = useMap();
 
 const form = ref<AddressCreate>({
   address: "",
@@ -51,7 +51,7 @@ async function onSubmit() {
  * getLocation
  */
 async function getLocation() {
-  const resp = await currentPosition();
+  // const resp = await currentPosition();
 }
 
 onBeforeMount(async () => {

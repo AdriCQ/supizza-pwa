@@ -15,7 +15,7 @@ const user = computed(() => $user.user);
 </script>
 
 <template>
-  <NavTop back="back" />
+  <NavTop :back="{ name: ROUTE_NAME.CART }" />
   <div class="mt-2 p-2">
     <h1 class="text-center text-3xl font-semibold">
       <BaseIcon
