@@ -62,6 +62,14 @@ async function listPizzas() {
   });
 }
 
+/**
+ * loadUserData
+ */
+async function loadUserData() {
+  $user.load();
+  await $user.getAddress();
+}
+
 async function listPromos() {
   const loadedPromos = (await offers.listPromo()).data;
   const setPromos: Promo[] = [];
@@ -98,6 +106,7 @@ async function listPromos() {
 
 onBeforeMount(async () => {
   await Promise.all([
+    loadUserData(),
     listComplements(),
     listDrink(),
     listIngredients(),
@@ -108,7 +117,6 @@ onBeforeMount(async () => {
   });
   await listPromos();
   $dataStore.load();
-  $user.load();
 });
 </script>
 
