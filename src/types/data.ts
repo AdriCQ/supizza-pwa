@@ -76,6 +76,10 @@ export type AdditionalType =
   | "Pizza-Chica"
   | "Pizza-Extra Grande"
   | "Pizza-Grande";
+
+/**
+ * DataAdditional
+ */
 export interface DataAdditional {
   id: string | number;
   additional_type: AdditionalType;

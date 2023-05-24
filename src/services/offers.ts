@@ -1,5 +1,5 @@
 import type { Complement, Drink, Ingredient, Pizza, Promo } from "@/types";
-import { AxiosInstance } from "axios";
+import type { AxiosInstance } from "axios";
 
 export const offerServices = (api: AxiosInstance) => ({
   listComplement: () => api.get<Complement[]>("/api/complementosApp"),

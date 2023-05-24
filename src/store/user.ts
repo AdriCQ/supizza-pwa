@@ -1,10 +1,11 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { useStorage } from "@/helpers";
-import { useService } from "@/services";
-import type { UserLogin, UserCreate, User } from "@/types";
+import { useMap, useService } from "@/services";
+import type { UserLogin, UserCreate, User, Address } from "@/types";
 
 const $service = useService();
+const { getClientAddress } = useMap();
 
 const STORE_KEY = "pinia/useUserStore";
 
@@ -22,6 +23,8 @@ export const useUserStore = defineStore(STORE_KEY, () => {
   const auth_token = ref<string>();
 
   const user = ref<User>();
+
+  const address = ref<Address[]>([]);
 
   /**
    * login
@@ -43,6 +46,16 @@ export const useUserStore = defineStore(STORE_KEY, () => {
     auth_token.value = Token;
     user.value = Usuario;
     save();
+  }
+
+  /**
+   * getAddress
+   */
+  async function getAddress() {
+    if (user.value && user.value._id) {
+      const resp = await getClientAddress(user.value._id);
+      address.value = resp.data;
+    }
   }
 
   /**
@@ -71,9 +84,11 @@ export const useUserStore = defineStore(STORE_KEY, () => {
 
   return {
     // Data
+    address,
     auth_token,
     user,
     // Methods
+    getAddress,
     login,
     register,
     save,

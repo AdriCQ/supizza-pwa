@@ -1,4 +1,4 @@
-import { CartOffer } from "./data";
+import type { CartOffer } from "./data";
 
 export type Pago = "Tarjeta" | "Efectivo";
 export type TipoEntrega = "Entregar en la puerta" | "Encontrarse afuera";
@@ -10,10 +10,10 @@ export interface Direccion {
 }
 
 export interface OrderCreate {
-  Nombre: string;
-  Telefono: string;
-  Productos: CartOffer[];
-  TipoEntrega: "Entregar en la puerta" | "Encontrarse afuera";
-  Pago: "Tarjeta" | "Efectivo";
-  Direccion: Direccion;
+  addressId: string;
+  clientId: string;
+  paymentType: "Tarjeta" | "Efectivo";
+  orderOffers: CartOffer[];
+  deliveryType: "Entregar en la puerta" | "Encontrarse afuera";
+  totalPrice: number;
 }

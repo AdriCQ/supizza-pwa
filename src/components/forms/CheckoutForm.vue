@@ -2,25 +2,34 @@
 import { computed, onBeforeMount, ref } from "vue";
 import { useRouter } from "vue-router";
 import { ROUTE_NAME } from "@/router";
-import type { OrderCreate } from "@/types";
-import InputText from "./InputText.vue";
+import type { Address, OrderCreate } from "@/types";
 import { useDataStore, useUserStore } from "@/store";
+import { toCurrency } from "@/helpers";
+import InputText from "./InputText.vue";
+import { useService } from "@/services";
 
 const $cart = useDataStore();
 const $router = useRouter();
+const $service = useService();
 const $user = useUserStore();
 
+const addressArray = computed<Address[]>(() => $user.address);
+
 const form = ref<OrderCreate>({
-  Direccion: {
-    direccion: "",
-    lat: 0,
-    lng: 0,
-  },
+  addressId: "",
+  clientId: "",
+  deliveryType: "Encontrarse afuera",
+  orderOffers: [],
+  paymentType: "Efectivo",
+  totalPrice: 0,
+});
+
+const userForm = ref<{
+  Telefono: string;
+  Nombre: string;
+}>({
   Nombre: "",
-  Productos: [],
   Telefono: "",
-  TipoEntrega: "Encontrarse afuera",
-  Pago: "Efectivo",
 });
 
 const user = computed(() => $user.user);
@@ -28,7 +37,20 @@ const user = computed(() => $user.user);
  * onSubmit
  */
 async function onSubmit() {
-  console.log("onSubmit");
+  if ($user.user) {
+    form.value.clientId = $user.user._id;
+    form.value.orderOffers = $cart.cart.offers;
+    form.value.totalPrice = $cart.cart.price;
+    console.log({
+      form: form.value,
+    });
+    try {
+      const resp = await $service.orders.createOrder(form.value);
+      console.log({ order: resp.data });
+    } catch (error) {
+      console.log({ orderError: error });
+    }
+  }
 }
 
 /**
@@ -37,16 +59,17 @@ async function onSubmit() {
 async function authUser() {
   try {
     await $user.login({
-      telefono: form.value.Telefono,
+      telefono: userForm.value.Telefono,
     });
   } catch (error) {
     console.log({ loginError: error });
     try {
       await $user.register({
-        apellidos: form.value.Telefono,
-        nombres: form.value.Nombre,
-        telefono: form.value.Telefono,
+        apellidos: userForm.value.Telefono,
+        nombres: userForm.value.Nombre,
+        telefono: userForm.value.Telefono,
       });
+      await $user.getAddress();
     } catch (error) {
       console.log({ registerError: error });
     }
@@ -54,10 +77,9 @@ async function authUser() {
 }
 
 onBeforeMount(() => {
-  $user.load();
   if ($user.user) {
-    form.value.Nombre = $user.user.nombres;
-    form.value.Telefono = $user.user.telefono;
+    userForm.value.Nombre = $user.user.nombres;
+    userForm.value.Telefono = $user.user.telefono;
   }
 });
 </script>
@@ -71,13 +93,13 @@ onBeforeMount(() => {
           {{ user ? "Datos Personales" : "Cree su usuario" }}
         </h2>
         <InputText
-          v-model="form.Nombre"
+          v-model="userForm.Nombre"
           label="Nombre"
           requried
           type="text"
           placeholder="Pedro Navajas"
         /><InputText
-          v-model="form.Telefono"
+          v-model="userForm.Telefono"
           label="Numero de Celular"
           requried
           type="tel"
@@ -127,8 +149,14 @@ onBeforeMount(() => {
         <!-- Dirección de entrega -->
         <div class="card-body mt-4 rounded-md bg-slate-200">
           <h2 class="text-lg font-semibold">Dirección de entrega</h2>
-          <select class="select w-full max-w-xs">
-            <option v-for="i in 10" :key="i">Direccion {{ i }}</option>
+          <select class="select w-full max-w-xs" v-model="form.addressId">
+            <option
+              v-for="(address, addressKey) in addressArray"
+              :key="`address-${addressKey}-${address._id}`"
+              :value="address._id"
+            >
+              {{ address.nombre }}
+            </option>
           </select>
           <p
             class="cursor-pointer text-sm text-primary"
@@ -154,6 +182,8 @@ onBeforeMount(() => {
                 type="radio"
                 name="metodo_pago"
                 class="radio-primary radio"
+                :checked="form.paymentType === 'Efectivo'"
+                @click="() => (form.paymentType = 'Efectivo')"
               />
             </div>
             <div class="flex items-center justify-between gap-2">
@@ -162,12 +192,20 @@ onBeforeMount(() => {
                 type="radio"
                 name="metodo_pago"
                 class="radio-primary radio"
+                :checked="form.paymentType === 'Tarjeta'"
+                @click="() => (form.paymentType = 'Tarjeta')"
               />
             </div>
           </div>
         </div>
         <!-- /Tipo de Pago -->
       </template>
+    </div>
+
+    <div class="p-2">
+      <button type="submit" class="btn-primary btn w-full">
+        {{ toCurrency($cart.cart.price) }} | Completar
+      </button>
     </div>
   </form>
 </template>

@@ -1,17 +1,19 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { onBeforeMount } from "vue";
 import { mdiCart } from "@mdi/js";
 import { ROUTE_NAME } from "@/router";
 import { useUserStore } from "@/store";
 // Components
 import BaseIcon from "@/components/BaseIcon.vue";
 import CheckoutForm from "@/components/forms/CheckoutForm.vue";
-import NavBottom from "@/components/menu/NavBottom.vue";
 import NavTop from "@/components/menu/NavTop.vue";
 
 const $user = useUserStore();
 
-const user = computed(() => $user.user);
+onBeforeMount(async () => {
+  $user.load();
+  await $user.getAddress();
+});
 </script>
 
 <template>
@@ -30,5 +32,5 @@ const user = computed(() => $user.user);
     <CheckoutForm />
   </div>
 
-  <NavBottom label="Continuar" :next="ROUTE_NAME.HOME" v-if="user" />
+  <!-- <NavBottom label="Continuar" :next="ROUTE_NAME.HOME" v-if="user" /> -->
 </template>
