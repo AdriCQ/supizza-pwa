@@ -45,6 +45,9 @@ function closeModal() {
 
 onBeforeMount(() => {
   scrollTo({ top: 0, behavior: "smooth" });
+  console.log({
+    cart: cart.value,
+  });
 });
 </script>
 

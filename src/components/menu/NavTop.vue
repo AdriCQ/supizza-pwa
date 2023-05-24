@@ -4,7 +4,7 @@ import { RouteLocationRaw, useRouter } from "vue-router";
 import BaseIcon from "../BaseIcon.vue";
 
 interface Props {
-  back?: RouteLocationRaw | "back";
+  back?: RouteLocationRaw;
   title?: string;
 }
 const $props = defineProps<Props>();
@@ -12,8 +12,7 @@ const $router = useRouter();
 
 function goBack() {
   if ($props.back) {
-    if ($props.back === "back") void $router.back();
-    else void $router.push($props.back);
+    $router.push($props.back);
   }
 }
 </script>

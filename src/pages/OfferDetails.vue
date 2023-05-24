@@ -90,6 +90,9 @@ function initData() {
     cartOffer.value.type = $dataStore.selected.type;
   }
   cartOffer.value.offer = offer.value;
+  console.log({
+    offer: offer.value,
+  });
 }
 /**
  * onBeforeMount
@@ -105,7 +108,7 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <NavTop back="back" />
+  <NavTop :back="{ name: ROUTE_NAME.HOME }" />
 
   <div class="relative" v-if="offer">
     <!-- Top mage -->

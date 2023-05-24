@@ -68,8 +68,17 @@ export interface Promo {
 /**
  * DataAdditional
  */
+
+export type AdditionalType =
+  | "Complementos"
+  | "Bebidas"
+  | "Valor fijo"
+  | "Pizza-Chica"
+  | "Pizza-Extra Grande"
+  | "Pizza-Grande";
 export interface DataAdditional {
-  id: string;
+  id: string | number;
+  additional_type: AdditionalType;
   title: string;
   desc: string;
   optional: boolean;
