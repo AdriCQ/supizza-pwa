@@ -2,19 +2,20 @@
 import { computed, onMounted } from "vue";
 import { mdiMap } from "@mdi/js";
 import { ROUTE_NAME } from "@/router";
-import { useDataStore } from "@/store";
+import { useDataStore, useUserStore } from "@/store";
 import type { Address } from "@/types";
 // Components
 import BaseIcon from "@/components/BaseIcon.vue";
 import NavBottom from "@/components/menu/NavBottom.vue";
-// import NavTop from "@/components/menu/NavTop.vue";
+import NavTop from "@/components/menu/NavTop.vue";
 import AddressWidget from "@/components/widgets/AddressWidget.vue";
 
 const $dataStore = useDataStore();
+const $user = useUserStore();
+
+const addressArray = computed<Address[]>(() => $user.address);
 
 const cartOffers = computed(() => $dataStore.cart.offers);
-
-const addressArray: Address[] = [];
 
 /**
  * -----------------------------------------
@@ -28,23 +29,10 @@ onMounted(() => {
     behavior: "smooth",
   });
 });
-
-for (let i = 0; i < 10; i++) {
-  addressArray.push({
-    calle: `Calle ${i}`,
-    cliente: `cliente ${i}`,
-    colonia: `colonia ${i}`,
-    coordenadas: [i, i],
-    nombre: `nombre ${i}`,
-    numero_ext: `ext_${i}`,
-    numero_int: `int_${i}`,
-    referencia: `ref_${i}`,
-  });
-}
 </script>
 
 <template>
-  <!-- <NavTop back="back" /> -->
+  <NavTop :back="{ name: ROUTE_NAME.CHECKOUT }" />
   <div class="min-h-screen p-4">
     <h1 class="text-center text-2xl font-semibold">
       <BaseIcon

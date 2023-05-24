@@ -1,4 +1,4 @@
-import type { MapGeolocation } from "@/types";
+import type { Address, AddressCreate, MapGeolocation } from "@/types";
 import { Capacitor } from "@capacitor/core";
 import { Geolocation } from "@capacitor/geolocation";
 import { latLng, LatLng } from "leaflet";
@@ -41,8 +41,29 @@ export function useMap() {
     );
   }
 
+  /**
+   * getClientAddress
+   * @param clientId
+   * @returns
+   */
+  async function getClientAddress(clientId: string) {
+    return api.get<Address[]>(`/api/direcciones/${clientId}/cliente`);
+  }
+
+  /**
+   * createClientAddress
+   * @param param
+   * @returns
+   */
+  async function createClientAddress(param: AddressCreate) {
+    return api.post<Address>("/api/direcciones", param);
+  }
+
   return {
     addressFromCoordinates,
     currentPosition,
+    // Address
+    createClientAddress,
+    getClientAddress,
   };
 }
