@@ -35,7 +35,7 @@ const canAdd = ref<CanAdd[]>([]);
  * countItems
  * @param additionalId
  */
-function countItems(additionalId: string) {
+function countItems(additionalId: number | string) {
   let counter = 0;
   qty.value.forEach((q) => {
     if (q.additional === additionalId) {
@@ -169,11 +169,11 @@ onBeforeMount(() => {
   $props.promo.additional.forEach((additional) => {
     if (!qty.value) qty.value = [];
     // init can add
-    canAdd.value.push({ additional: additional.id, can: true });
+    canAdd.value.push({ additional: additional.id as string, can: true });
     // init qty
     additional.items.forEach((item) => {
       qty.value.push({
-        additional: additional.id,
+        additional: additional.id as string,
         item: item.id,
         qty: 0,
       });
@@ -210,8 +210,8 @@ onBeforeMount(() => {
           </div>
           <div class="flex-none cursor-pointer">
             <MultipleSelector
-              :model-value="getQty(additional.id, item.id)"
-              @update:model-value="(v) => setQty(additional.id, item.id, v)"
+              :model-value="getQty(additional.id as string, item.id)"
+              @update:model-value="(v) => setQty(additional.id as string, item.id, v)"
               :can-add="
                 canAdd.find((c) => c.additional === additional.id)
                   ? canAdd.find((c) => c.additional === additional.id)?.can
