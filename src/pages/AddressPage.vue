@@ -1,25 +1,46 @@
 <script setup lang="ts">
-import { computed, onMounted } from "vue";
+import { computed, defineAsyncComponent, onMounted, ref } from "vue";
 import { mdiMap } from "@mdi/js";
 import { ROUTE_NAME } from "@/router";
 import { useDataStore, useUserStore } from "@/store";
 import type { Address } from "@/types";
 // Components
-import BaseIcon from "@/components/BaseIcon.vue";
-import NavBottom from "@/components/menu/NavBottom.vue";
-import NavTop from "@/components/menu/NavTop.vue";
-import AddressWidget from "@/components/widgets/AddressWidget.vue";
+const BaseIcon = defineAsyncComponent(
+  () => import("@/components/BaseIcon.vue")
+);
+const AddressForm = defineAsyncComponent(
+  () => import("@/components/forms/AddressForm.vue")
+);
+const AddressWidget = defineAsyncComponent(
+  () => import("@/components/widgets/AddressWidget.vue")
+);
+const NavBottom = defineAsyncComponent(
+  () => import("@/components/menu/NavBottom.vue")
+);
+const NavTop = defineAsyncComponent(
+  () => import("@/components/menu/NavTop.vue")
+);
 
 const $dataStore = useDataStore();
 const $user = useUserStore();
 
 const addressArray = computed<Address[]>(() => $user.address);
-
 const cartOffers = computed(() => $dataStore.cart.offers);
+const showForm = ref(false);
 
 /**
  * -----------------------------------------
- *	Lifexycle
+ *	methods
+ * -----------------------------------------
+ */
+
+function onAddressCreated(newAddress: Address) {
+  showForm.value = false;
+}
+
+/**
+ * -----------------------------------------
+ *	Lifecycle
  * -----------------------------------------
  */
 
@@ -43,8 +64,14 @@ onMounted(() => {
       Direcciones
     </h1>
 
-    <div class="mt-4">
-      <button class="btn-primary btn w-full">Nueva</button>
+    <div class="mt-4" v-if="showForm">
+      <AddressForm @done="onAddressCreated" />
+    </div>
+
+    <div class="mt-4" v-else>
+      <button class="btn-primary btn w-full" @click="() => (showForm = true)">
+        Nueva
+      </button>
       <AddressWidget
         class="my-2"
         v-for="(address, key) in addressArray"
@@ -57,6 +84,6 @@ onMounted(() => {
   <NavBottom
     label="Entrega"
     :next="ROUTE_NAME.CHECKOUT"
-    v-if="cartOffers.length"
+    v-if="cartOffers.length && !showForm"
   />
 </template>

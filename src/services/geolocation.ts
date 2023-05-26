@@ -59,11 +59,21 @@ export function useMap() {
     return api.post<Address>("/api/direcciones", param);
   }
 
+  /**
+   * removeClientAddress
+   * @param addressId
+   * @returns
+   */
+  async function removeClientAddress(addressId: string) {
+    return api.delete(`/api/direcciones/${addressId}`);
+  }
+
   return {
     addressFromCoordinates,
     currentPosition,
     // Address
     createClientAddress,
     getClientAddress,
+    removeClientAddress,
   };
 }

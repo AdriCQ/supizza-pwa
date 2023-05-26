@@ -9,11 +9,14 @@ import InputText from "@/components/forms/InputText.vue";
 // const { currentPosition } = useMap();
 
 const form = ref<AddressCreate>({
-  address: "",
-  exNum: 0,
-  inNum: 0,
-  lat: 0,
-  lng: 0,
+  calle: "",
+  cliente: "",
+  colonia: "",
+  coordenadas: [],
+  nombre: "",
+  numero_ext: "",
+  numero_int: "",
+  referencia: "",
 });
 
 const mapZoom = ref(12);
@@ -80,19 +83,19 @@ onBeforeMount(async () => {
           <form @submit.prevent="onSubmit" class="space-y-1">
             <div class="flex gap-1">
               <InputText
-                v-model="form.address"
+                v-model="form.calle"
                 label="Direccion"
                 placeholder="Direccion de entrega"
                 class="w-full grow"
               />
               <InputText
-                v-model="form.exNum"
+                v-model="form.numero_ext"
                 label="Num"
                 class="w-20 flex-none"
               />
             </div>
             <InputText
-              v-model="form.address"
+              v-model="form.referencia"
               label="Referencia"
               placeholder="Referencia"
               subtitle="Agrega datos de ayuda que le permitan a nuestro repartidor entregar tu pedido"
