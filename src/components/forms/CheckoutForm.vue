@@ -58,21 +58,28 @@ async function onSubmit() {
  */
 async function authUser() {
   try {
-    await $user.login({
+    // Register first
+    await $user.register({
+      apellidos: userForm.value.Telefono,
+      nombres: userForm.value.Nombre,
       telefono: userForm.value.Telefono,
     });
-  } catch (error) {
-    console.log({ loginError: error });
+  } catch (registerError) {
+    // If user already registered then login
+    console.log({
+      registerError,
+    });
     try {
-      await $user.register({
-        apellidos: userForm.value.Telefono,
-        nombres: userForm.value.Nombre,
+      await $user.login({
         telefono: userForm.value.Telefono,
       });
-      await $user.getAddress();
-    } catch (error) {
-      console.log({ registerError: error });
+    } catch (loginError) {
+      console.log({ loginError });
     }
+  }
+
+  if ($user.user) {
+    await $user.getAddress();
   }
 }
 
@@ -202,7 +209,7 @@ onBeforeMount(() => {
       </template>
     </div>
 
-    <div class="p-2">
+    <div class="p-2" v-if="user">
       <button type="submit" class="btn-primary btn w-full">
         {{ toCurrency($cart.cart.price) }} | Completar
       </button>

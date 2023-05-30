@@ -49,7 +49,7 @@ function onSetMapMarker(marker: LatLng) {
   form.value.coordenadas = [marker.lat, marker.lng];
   setTimeout(() => {
     showMap.value = false;
-  }, 3000);
+  }, 1000);
 }
 
 /**
