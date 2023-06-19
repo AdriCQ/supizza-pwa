@@ -1,14 +1,11 @@
 <script setup lang="ts">
-import { computed } from "vue";
-import { useDataStore } from "@/store";
+import { defineAsyncComponent } from "vue";
 import { setDefaultImage } from "@/helpers";
-import CategorySlider from "@/components/sliders/CategorySlider.vue";
-
-const dataStore = useDataStore();
-
-const categories = computed(() =>
-  dataStore.categories.filter((c) => c !== "ingredients")
+const CategorySlider = defineAsyncComponent(
+  () => import("@/components/sliders/CategorySlider.vue")
 );
+
+const categories: string[] = ["Promos", "Pizzas", "Complementos", "Bebidas"];
 </script>
 
 <template>

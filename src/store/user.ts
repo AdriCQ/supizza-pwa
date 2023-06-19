@@ -24,7 +24,7 @@ export const useUserStore = defineStore(STORE_KEY, () => {
 
   const user = ref<User>();
 
-  const address = ref<Address[]>([]);
+  const addressList = ref<Address[]>([]);
 
   /**
    * login
@@ -54,7 +54,7 @@ export const useUserStore = defineStore(STORE_KEY, () => {
   async function getAddress() {
     if (user.value && user.value._id) {
       const resp = await getClientAddress(user.value._id);
-      address.value = resp.data;
+      addressList.value = resp.data;
     }
   }
 
@@ -84,7 +84,7 @@ export const useUserStore = defineStore(STORE_KEY, () => {
 
   return {
     // Data
-    address,
+    addressList,
     auth_token,
     user,
     // Methods

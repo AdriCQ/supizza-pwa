@@ -1,4 +1,4 @@
-import { type ResponseData } from "@/types";
+// import { type ResponseData } from "@/types";
 import { api } from "./axios";
 import { userServices } from "./users";
 import { offerServices } from "./offers";
@@ -8,7 +8,7 @@ import { orderServices } from "./orders";
  * @param api
  */
 export const useService = () => ({
-  loadData: () => api.get<ResponseData>("/data.json"),
+  // loadData: () => api.get<ResponseData>("/data.json"),
   offers: offerServices(api),
   orders: orderServices(api),
   user: userServices(api),

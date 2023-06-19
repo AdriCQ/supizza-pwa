@@ -1,0 +1,24 @@
+
+
+.overflow-title {
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+/* 
+$font-size: 15px;
+$line-height: 1.4;
+$lines: 3; 
+*/
+.overflow-description {
+  display: block;
+  display: -webkit-box;
+  height: 63px;
+  font-size: 15px;
+  line-height: 1.4;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

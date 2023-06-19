@@ -10,11 +10,11 @@ export interface AddressCreate {
 }
 
 export interface Address {
+  _id: string;
   coordenadas: {
     coordinates: number[];
     type: "Point";
   };
-  _id: string;
   saveFrom: string;
   cliente: string;
   referencia: string;
@@ -23,7 +23,20 @@ export interface Address {
   colonia: string;
   nombre: string;
   numero_int: string;
-  created_at: string;
-  updatedAt: string;
-  __v: number;
+}
+
+export interface MapGeolocation {
+  address: {
+    city?: string;
+    country?: string;
+    country_code?: string;
+    county?: string;
+    postcode?: string;
+    road?: string;
+    state?: string;
+    street?: string;
+  };
+  display_name: string;
+  lat: string;
+  lon: string;
 }

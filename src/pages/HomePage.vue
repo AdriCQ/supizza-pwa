@@ -1,90 +1,46 @@
 <script setup lang="ts">
-import OfferGroup from "@/components/groups/OfferGroup.vue";
-import HomeNav from "@/components/menu/HomeNav.vue";
-import NavBottom from "@/components/menu/NavBottom.vue";
-import SearchForm from "@/components/forms/SearchForm.vue";
-import { useDataStore } from "@/store";
-import { computed, onBeforeMount, ref } from "vue";
+import {
+  computed,
+  defineAsyncComponent,
+  defineComponent,
+  onBeforeMount,
+  ref,
+} from "vue";
 import { ROUTE_NAME } from "@/router";
-import type { Search, Drink, Pizza, Promo, Complement } from "@/types";
-import OfferWidget from "@/components/widgets/OfferWidget.vue";
+import { useDataStore } from "@/store";
+// Components
+const HomeNav = defineAsyncComponent(
+  () => import("@/components/menu/HomeNav.vue")
+);
+const NavBottom = defineComponent(
+  () => import("@/components/menu/NavBottom.vue")
+);
+const ComplementWidget = defineAsyncComponent(
+  () => import("@/components/widgets/ComplementWidget.vue")
+);
+const DrinkWidget = defineAsyncComponent(
+  () => import("@/components/widgets/DrinkWidget.vue")
+);
+const PizzaWidget = defineAsyncComponent(
+  () => import("@/components/widgets/PizzaWidget.vue")
+);
+const PromoWidget = defineAsyncComponent(
+  () => import("@/components/widgets/PromoWidget.vue")
+);
+const SearchForm = defineAsyncComponent(
+  () => import("@/components/forms/SearchForm.vue")
+);
 
-const $dataStore = useDataStore();
+const $store = useDataStore();
 
-const complements = computed(() => $dataStore.complements);
-const drinks = computed(() => $dataStore.drinks);
-const pizzas = computed(() => $dataStore.pizzas);
-const promos = computed(() => $dataStore.promos);
+const complements = computed(() => $store.complements);
+const drinks = computed(() => $store.drinks);
+const pizzas = computed(() => $store.pizzas);
+const promos = computed(() => $store.promos);
 
 const search = ref<string>("");
 
-const cart = computed(() => $dataStore.cart);
-const searchElements = ref<Search[]>();
-/**
- * handleSearch
- */
-function handleSearch() {
-  if (search.value) {
-    searchElements.value = [];
-    // Search complements
-    complements.value?.forEach((c) => {
-      if (
-        c.name.toLocaleLowerCase().includes(search.value.toLocaleLowerCase()) ||
-        (c.desc &&
-          c.desc.toLocaleLowerCase().includes(search.value.toLocaleLowerCase()))
-      ) {
-        searchElements.value?.push({
-          type: "complements",
-          offer: c,
-        });
-      }
-    });
-
-    // Search drinks
-    drinks.value?.forEach((c) => {
-      if (
-        c.name.toLocaleLowerCase().includes(search.value.toLocaleLowerCase()) ||
-        (c.desc &&
-          c.desc.toLocaleLowerCase().includes(search.value.toLocaleLowerCase()))
-      ) {
-        searchElements.value?.push({
-          type: "drinks",
-          offer: c,
-        });
-      }
-    });
-
-    // Search Promos
-    promos.value?.forEach((c) => {
-      if (
-        c.title
-          .toLocaleLowerCase()
-          .includes(search.value.toLocaleLowerCase()) ||
-        (c.desc &&
-          c.desc.toLocaleLowerCase().includes(search.value.toLocaleLowerCase()))
-      ) {
-        searchElements.value?.push({
-          type: "promos",
-          offer: c,
-        });
-      }
-    });
-
-    // Search Pizza
-    pizzas.value?.forEach((c) => {
-      if (
-        c.title.toLocaleLowerCase().includes(search.value.toLocaleLowerCase())
-      ) {
-        searchElements.value?.push({
-          type: "pizzas",
-          offer: c,
-        });
-      }
-    });
-  } else {
-    searchElements.value = undefined;
-  }
-}
+const cart = computed(() => $store.cart);
 
 onBeforeMount(() => {
   scrollTo({ top: 0, behavior: "smooth" });
@@ -95,54 +51,67 @@ onBeforeMount(() => {
   <HomeNav />
 
   <div class="mt-2 space-y-2 px-6">
-    <SearchForm v-model="search" @search="handleSearch" />
+    <SearchForm v-model="search" />
+    <!-- Promos -->
+    <section id="Promos-section" v-if="promos.length">
+      <h2 class="border border-x-0 border-t-0 border-b-slate-500 py-4 text-2xl">
+        Promociones
+      </h2>
+      <div
+        v-for="(promo, promoKey) in promos"
+        :key="`promo-${promoKey}-${promo._id}`"
+      >
+        <PromoWidget :data="promo" />
+        <div class="my-4 border border-slate-300"></div>
+      </div>
+    </section>
+    <!-- / Promos -->
 
-    <template v-if="searchElements && searchElements?.length">
-      <OfferWidget
-        v-for="(el, key) in searchElements"
-        :key="`search-${el.type}-${key}`"
-        link
-        :drink="el.type === 'drinks' ? el.offer as Drink : undefined"
-        :complement="el.type === 'complements' ? el.offer as Complement : undefined"
-        :pizza="el.type === 'pizzas' ? el.offer as Pizza : undefined"
-        :promo="el.type === 'promos' ? el.offer as Promo : undefined"
-    /></template>
+    <!-- Pizzas -->
+    <section id="Pizzas-section" v-if="pizzas.length">
+      <h2 class="border border-x-0 border-t-0 border-b-slate-500 py-4 text-2xl">
+        Pizzas
+      </h2>
+      <div
+        v-for="(pizza, pizzaKey) in pizzas"
+        :key="`pizza-${pizzaKey}-${pizza._id}`"
+      >
+        <PizzaWidget :data="pizza" />
+        <div class="my-4 border border-slate-300"></div>
+      </div>
+    </section>
+    <!-- / Pizzas -->
 
-    <template v-else>
-      <OfferGroup
-        id="promos-section"
-        type="promos"
-        link
-        :elements="promos"
-        v-if="promos"
-      />
-      <OfferGroup
-        id="pizzas-section"
-        type="pizzas"
-        link
-        :elements="pizzas"
-        v-if="pizzas"
-      />
-      <OfferGroup
-        id="drinks-section"
-        type="drinks"
-        link
-        :elements="drinks"
-        v-if="drinks"
-      />
-      <OfferGroup
-        id="complements-section"
-        type="complements"
-        link
-        :elements="complements"
-        v-if="complements"
-      />
-    </template>
+    <!-- Complementos -->
+    <section id="Complementos-section" v-if="complements.length">
+      <h2 class="border border-x-0 border-t-0 border-b-slate-500 py-4 text-2xl">
+        Complementos
+      </h2>
+      <div
+        v-for="(complement, complementKey) in complements"
+        :key="`complement-${complementKey}-${complement._id}`"
+      >
+        <ComplementWidget :data="complement" />
+        <div class="my-4 border border-slate-300"></div>
+      </div>
+    </section>
+    <!-- / Complementos -->
+
+    <!-- Bebidas -->
+    <section id="Bebidas-section" v-if="drinks.length">
+      <h2 class="border border-x-0 border-t-0 border-b-slate-500 py-4 text-2xl">
+        Bebidas
+      </h2>
+      <div
+        v-for="(drink, drinkKey) in drinks"
+        :key="`drink-${drinkKey}-${drink._id}`"
+      >
+        <DrinkWidget :data="drink" />
+        <div class="my-4 border border-slate-300"></div>
+      </div>
+    </section>
+    <!-- / Complementos -->
   </div>
 
-  <NavBottom
-    label="Ver Carrito"
-    :next="ROUTE_NAME.CART"
-    v-if="cart.offers.length"
-  />
+  <NavBottom label="Ver Carrito" :next="ROUTE_NAME.CART" v-if="cart.length" />
 </template>

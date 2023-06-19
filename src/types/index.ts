@@ -19,7 +19,7 @@ export interface MapGeolocation {
   lon: string;
 }
 
-export * from "./data";
+export * from "./dataTypes";
 export * from "./geo";
 export * from "./order";
 export * from "./user";
