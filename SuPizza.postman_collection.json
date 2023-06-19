@@ -1,0 +1,1907 @@
+{
+	"info": {
+		"_postman_id": "8aef0601-c980-40fb-aaf7-dd4b71ad7c00",
+		"name": "SuPizza",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25493418",
+		"_collection_link": "https://clvrt1.postman.co/workspace/Team-Workspace-Clvrt~f4e96098-36e1-4e5d-8c15-462ec30a1d0a/collection/25526179-8aef0601-c980-40fb-aaf7-dd4b71ad7c00?action=share&creator=25493418&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Direcciones",
+			"item": [
+				{
+					"name": "direccionesCreateOne",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"calle\": \"10 De Septiembre\",\n    \"cliente\": \"63771a51d0c848539222b67e\",\n    \"colonia\": \"INFONAVIT El Pípila\",\n    \"coordenadas\": [19.706483956141298, -101.19121799696843],\n    \"nombre\": \"TEST\",\n    \"numero_ext\": \"1234\",\n    \"numero_int\": \"2134\",\n    \"referencia\": \"TEST\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/direcciones",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"direcciones"
+							]
+						},
+						"description": "Recibe los datos de una direccion y la registra para un usuario en especifico"
+					},
+					"response": []
+				},
+				{
+					"name": "direccionesFindByCliente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/direcciones/{{clienteId}}/cliente",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"direcciones",
+								"{{clienteId}}",
+								"cliente"
+							]
+						},
+						"description": "Obtiene el listados de direcciones de un usuario en especifico"
+					},
+					"response": []
+				},
+				{
+					"name": "direccionesDeleteOne",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/direcciones/{{direccionId}}",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"direcciones",
+								"{{direccionId}}"
+							]
+						},
+						"description": "Elimina una direccion segun su id"
+					},
+					"response": []
+				},
+				{
+					"name": "direccionesUpdateOne",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"calle\": \"10 De Septiembre\",\n    \"cliente\": \"63771a51d0c848539222b67e\",\n    \"colonia\": \"INFONAVIT El Pípila\",\n    \"coordenadas\": [19.706483956141298, -101.19121799696843],\n    \"nombre\": \"TEST\",\n    \"numero_ext\": \"1234\",\n    \"numero_int\": \"2134\",\n    \"referencia\": \"TEST\",\n    \"saveFrom\": \"web\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/direcciones/{{direccionId}}",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"direcciones",
+								"{{direccionId}}"
+							]
+						},
+						"description": "actualiza la informacion de una direccion"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Clientes",
+			"item": [
+				{
+					"name": "clientesReadAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/clientes",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"clientes"
+							]
+						},
+						"description": "Obtiene el listado de clientes registrados en el sistema"
+					},
+					"response": []
+				},
+				{
+					"name": "clientesCreateOne",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apellidos\": \"APELLIDO\",\n    \"mail\": \"CORREO@CLIENTE.COM\",\n    \"nombres\": \"CLIENTE\",\n    \"password\": null,\n    \"status\": null,\n    \"telefono\": \"8948837378\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/clientes",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"clientes"
+							]
+						},
+						"description": "Crea un nuevo cliente en el sistema"
+					},
+					"response": []
+				},
+				{
+					"name": "clientesDeleteOne",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/clientes/{{clienteId}}",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"clientes",
+								"{{clienteId}}"
+							]
+						},
+						"description": "Elimina un cliente del sistema"
+					},
+					"response": []
+				},
+				{
+					"name": "clientesUpdateOne",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apellidos\": \"APELLIDO\",\n    \"mail\": \"CORREO@CLIENTE.COM\",\n    \"nombres\": \"CLIENTE\",\n    \"password\": null,\n    \"status\": null,\n    \"telefono\": \"8948837378\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/clientes/{{clienteId}}",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"clientes",
+								"{{clienteId}}"
+							]
+						},
+						"description": "Actualiza la informacion de un cliente"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Complementos",
+			"item": [
+				{
+					"name": "complementosReadAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/complementos",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"complementos"
+							]
+						},
+						"description": "Obtiene listado de todos los complementos"
+					},
+					"response": []
+				},
+				{
+					"name": "complementosCreateOne",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"descripcion\": \"descripcion\",\n    \"nombre\": \"nombre\",\n    \"peso\": \"200\",\n    \"precio\": \"500\",\n    \"urlImg\": \"data:image/png;base64\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/complementos",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"complementos"
+							]
+						},
+						"description": "Crea un complemento"
+					},
+					"response": []
+				},
+				{
+					"name": "complementosUpdateteOne",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"descripcion\": \"descripcion\",\n    \"nombre\": \"nombre\",\n    \"peso\": \"200\",\n    \"precio\": \"500\",\n    \"urlImg\": \"data:image/png;base64\",\n    \"_id\": \"5fa862bdbdf04e0b18a1b71f\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/complementos/{{complementoId}}",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"complementos",
+								"{{complementoId}}"
+							]
+						},
+						"description": "Actualiza un complemento"
+					},
+					"response": []
+				},
+				{
+					"name": "complementosDeleteOne",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/complementos/{{complementoId}}",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"complementos",
+								"{{complementoId}}"
+							]
+						},
+						"description": "Elimina un complemento"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sizes",
+			"item": [
+				{
+					"name": "sizesReadAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/sizes",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"sizes"
+							]
+						},
+						"description": "Obtiene listado de todos los tamaños"
+					},
+					"response": []
+				},
+				{
+					"name": "sizesCreateOne",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"nombre\",\n    \"tamano\": \"50\",\n    \"rebanadas\": \"200\",\n    \"precio\": \"500\",\n    \"urlImg\": \"data:image/png;base64\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/sizes",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"sizes"
+							]
+						},
+						"description": "Crea un tamaño"
+					},
+					"response": []
+				},
+				{
+					"name": "sizesUpdateteOne",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"nombre\",\n    \"tamano\": \"50\",\n    \"rebanadas\": \"200\",\n    \"precio\": \"500\",\n    \"urlImg\": \"data:image/png;base64\",\n    \"_id\": \"5fa862bdbdf04e0b18a1b71f\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/sizes/{{sizeId}}",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"sizes",
+								"{{sizeId}}"
+							]
+						},
+						"description": "Actualiza un tamaño"
+					},
+					"response": []
+				},
+				{
+					"name": "sizesDeleteOne",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/sizes/{{sizeId}}",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"sizes",
+								"{{sizeId}}"
+							]
+						},
+						"description": "Elimina un tamaño"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pizzas",
+			"item": [
+				{
+					"name": "pizzasReadAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/pizzas",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"pizzas"
+							]
+						},
+						"description": "Obtiene listado de todas las pizzas"
+					},
+					"response": [
+						{
+							"name": "pizzasReadAll",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/pizzas",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"pizzas"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "5529"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1599-9G8G3lgUWlgds5bKpTNThkH+BYw\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Apr 2023 22:21:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"5faf4550aee23c7bef3bc669\",\n        \"title\": \"Cordon Bleu\",\n        \"img\": \"https://cfiles.link/image/su_pizza/pizzas_5faf4550aee23c7bef3bc669_1605322064.png/720x720\",\n        \"price\": 0,\n        \"ingredients\": [\n            \"Pollo\",\n            \"Jamon\",\n            \"Tocino\",\n            \"Queso Amarillo\"\n        ],\n        \"restrictions\": \"Valor fijo\",\n        \"additional\": []\n    },\n    {\n        \"id\": \"5faf44bcaee23c7bef3bc668\",\n        \"title\": \"Hawaiana VIP\",\n        \"img\": \"https://cfiles.link/image/su_pizza/pizzas_5faf44bcaee23c7bef3bc668_1605321916.png/720x720\",\n        \"price\": 0,\n        \"ingredients\": [\n            \"Jamon\",\n            \"Piña\",\n            \"Jalapeño\",\n            \"Tocino\"\n        ],\n        \"restrictions\": \"Valor fijo\",\n        \"additional\": []\n    },\n    {\n        \"id\": \"5faf4400aee23c7bef3bc667\",\n        \"title\": \"Al Gusto\",\n        \"img\": \"https://cfiles.link/image/su_pizza/pizzas_5faf4400aee23c7bef3bc667_1605321729.png/720x720\",\n        \"price\": 0,\n        \"ingredients\": [\n            \"Extra Queso\",\n            \"Gouda\",\n            \"Mozarella\",\n            \"Oaxaca  \"\n        ],\n        \"restrictions\": \"Valor fijo\",\n        \"additional\": []\n    },\n    {\n        \"id\": \"5faf4348aee23c7bef3bc666\",\n        \"title\": \"Italiana\",\n        \"img\": \"https://cfiles.link/image/su_pizza/pizzas_5faf4348aee23c7bef3bc666_1605321545.png/720x720\",\n        \"price\": 0,\n        \"ingredients\": [\n            \"Jamon\",\n            \"Salchicha\",\n            \"Salami\",\n            \"Pimiento\"\n        ],\n        \"restrictions\": \"Valor fijo\",\n        \"additional\": []\n    },\n    {\n        \"id\": \"5faf42faaee23c7bef3bc665\",\n        \"title\": \"Pastor\",\n        \"img\": \"https://cfiles.link/image/su_pizza/pizzas_5faf42faaee23c7bef3bc665_1605321466.png/720x720\",\n        \"price\": 0,\n        \"ingredients\": [\n            \"Pastor\",\n            \"Piña\",\n            \"Cebolla\",\n            \"Tocino\"\n        ],\n        \"restrictions\": \"Valor fijo\",\n        \"additional\": []\n    },\n    {\n        \"id\": \"5faf42a9aee23c7bef3bc664\",\n        \"title\": \"Kanter\",\n        \"img\": \"https://cfiles.link/image/su_pizza/pizzas_5faf42a9aee23c7bef3bc664_1605321385.png/720x720\",\n        \"price\": 0,\n        \"ingredients\": [\n            \"Champiñon \",\n            \"Tocino\",\n            \"Salami\",\n            \"Pepperoni\"\n        ],\n        \"restrictions\": \"Valor fijo\",\n        \"additional\": []\n    },\n    {\n        \"id\": \"5faf4244aee23c7bef3bc663\",\n        \"title\": \"4 Quesos\",\n        \"img\": \"https://cfiles.link/image/su_pizza/pizzas_5faf4244aee23c7bef3bc663_1605321284.png/720x720\",\n        \"price\": 0,\n        \"ingredients\": [\n            \"Queso Amarillo\",\n            \"Oaxaca  \",\n            \"Mozarella\",\n            \"Gouda\"\n        ],\n        \"restrictions\": \"Valor fijo\",\n        \"additional\": []\n    },\n    {\n        \"id\": \"5faf41e6aee23c7bef3bc662\",\n        \"title\": \"Cubana \",\n        \"img\": \"https://cfiles.link/image/su_pizza/pizzas_5faf41e6aee23c7bef3bc662_1605321190.png/720x720\",\n        \"price\": 0,\n        \"ingredients\": [\n            \"Jamon\",\n            \"Tocino\",\n            \"Chorizo\",\n            \"Queso Amarillo\"\n        ],\n        \"restrictions\": \"Valor fijo\",\n        \"additional\": []\n    },\n    {\n        \"id\": \"5faf417eaee23c7bef3bc661\",\n        \"title\": \"Romana\",\n        \"img\": \"https://cfiles.link/image/su_pizza/pizzas_5faf417eaee23c7bef3bc661_1605321086.png/720x720\",\n        \"price\": 0,\n        \"ingredients\": [\n            \"Champiñon \",\n            \"Chorizo\",\n            \"Jalapeño\",\n            \"Tocino\"\n        ],\n        \"restrictions\": \"Valor fijo\",\n        \"additional\": []\n    },\n    {\n        \"id\": \"5faf412aaee23c7bef3bc660\",\n        \"title\": \"Norteña \",\n        \"img\": \"https://cfiles.link/image/su_pizza/pizzas_5faf412aaee23c7bef3bc660_1605321002.png/720x720\",\n        \"price\": 0,\n        \"ingredients\": [\n            \"Chorizo\",\n            \"Tocino\",\n            \"Pimiento\",\n            \"Elote\"\n        ],\n        \"restrictions\": \"Valor fijo\",\n        \"additional\": []\n    },\n    {\n        \"id\": \"5faf40d3aee23c7bef3bc65f\",\n        \"title\": \"Marina\",\n        \"img\": \"https://cfiles.link/image/su_pizza/pizzas_5faf40d3aee23c7bef3bc65f_1605320916.png/720x720\",\n        \"price\": 0,\n        \"ingredients\": [\n            \"Atun\",\n            \"Elote\",\n            \"Pimiento\",\n            \"Cebolla\"\n        ],\n        \"restrictions\": \"Valor fijo\",\n        \"additional\": []\n    },\n    {\n        \"id\": \"5faf407baee23c7bef3bc65e\",\n        \"title\": \"Emperatriz \",\n        \"img\": \"https://cfiles.link/image/su_pizza/pizzas_5faf407baee23c7bef3bc65e_1605320828.png/720x720\",\n        \"price\": 0,\n        \"ingredients\": [\n            \"Pepperoni\",\n            \"Pimiento\",\n            \"Carne Molida\",\n            \"Tocino\"\n        ],\n        \"restrictions\": \"Valor fijo\",\n        \"additional\": []\n    },\n    {\n        \"id\": \"5faf3faaaee23c7bef3bc65d\",\n        \"title\": \"A la Diabla \",\n        \"img\": \"https://cfiles.link/image/su_pizza/pizzas_5faf3faaaee23c7bef3bc65d_1605320618.png/720x720\",\n        \"price\": 0,\n        \"ingredients\": [\n            \"Pastor\",\n            \"Chipotle\",\n            \"Jalapeño\",\n            \"Chorizo\"\n        ],\n        \"restrictions\": \"Valor fijo\",\n        \"additional\": []\n    },\n    {\n        \"id\": \"5faf3f08aee23c7bef3bc65c\",\n        \"title\": \"Del Mar\",\n        \"img\": \"https://cfiles.link/image/su_pizza/pizzas_5faf3f08aee23c7bef3bc65c_1605320456.png/720x720\",\n        \"price\": 0,\n        \"ingredients\": [\n            \"Camaron \",\n            \"Atun\",\n            \"Pimiento\",\n            \"Cebolla\"\n        ],\n        \"restrictions\": \"Valor fijo\",\n        \"additional\": []\n    },\n    {\n        \"id\": \"5faf3e8caee23c7bef3bc65b\",\n        \"title\": \"Mexicana\",\n        \"img\": \"https://cfiles.link/image/su_pizza/pizzas_5faf3e8caee23c7bef3bc65b_1605320332.png/720x720\",\n        \"price\": 0,\n        \"ingredients\": [\n            \"Carne Molida\",\n            \"Tocino\",\n            \"Jalapeño\",\n            \"Chorizo\"\n        ],\n        \"restrictions\": \"Valor fijo\",\n        \"additional\": []\n    },\n    {\n        \"id\": \"5faf3e01aee23c7bef3bc65a\",\n        \"title\": \"Burger\",\n        \"img\": \"https://cfiles.link/image/su_pizza/pizzas_5faf3e01aee23c7bef3bc65a_1605320193.png/720x720\",\n        \"price\": 0,\n        \"ingredients\": [\n            \"Carne Molida\",\n            \"Salami\",\n            \"Tocino\",\n            \"Queso Amarillo\"\n        ],\n        \"restrictions\": \"Valor fijo\",\n        \"additional\": []\n    },\n    {\n        \"id\": \"5faf3d2daee23c7bef3bc659\",\n        \"title\": \"Carnes Frias \",\n        \"img\": \"https://cfiles.link/image/su_pizza/pizzas_5faf3d2daee23c7bef3bc659_1605319982.png/720x720\",\n        \"price\": 0,\n        \"ingredients\": [\n            \"Jamon\",\n            \"Salchicha\",\n            \"Salami\",\n            \"Pimiento\"\n        ],\n        \"restrictions\": \"Valor fijo\",\n        \"additional\": []\n    },\n    {\n        \"id\": \"5faf3c99aee23c7bef3bc658\",\n        \"title\": \"Ranchera \",\n        \"img\": \"https://cfiles.link/image/su_pizza/pizzas_5faf3c99aee23c7bef3bc658_1605319833.png/720x720\",\n        \"price\": 0,\n        \"ingredients\": [\n            \"Frijol\",\n            \"Chorizo\",\n            \"Cebolla\",\n            \"Jalapeño\"\n        ],\n        \"restrictions\": \"Valor fijo\",\n        \"additional\": []\n    },\n    {\n        \"id\": \"5faf3bf3aee23c7bef3bc657\",\n        \"title\": \"Vegetariana\",\n        \"img\": \"https://cfiles.link/image/su_pizza/pizzas_5faf3bf3aee23c7bef3bc657_1605319667.png/720x720\",\n        \"price\": 0,\n        \"ingredients\": [\n            \"Champiñon \",\n            \"Piña\",\n            \"Pimiento\",\n            \"Cebolla\"\n        ],\n        \"restrictions\": \"Valor fijo\",\n        \"additional\": []\n    },\n    {\n        \"id\": \"5faf2cb2aee23c7bef3bc636\",\n        \"title\": \"Pepperoni\",\n        \"img\": \"https://cfiles.link/image/su_pizza/pizzas_5faf2cb2aee23c7bef3bc636_1605318570.png/720x720\",\n        \"price\": 0,\n        \"ingredients\": [\n            \"Extra pepperoni\",\n            \"Extra Queso\"\n        ],\n        \"restrictions\": \"Valor fijo\",\n        \"additional\": []\n    },\n    {\n        \"id\": \"5faf2bfeaee23c7bef3bc635\",\n        \"title\": \"Hawaiana\",\n        \"img\": \"https://cfiles.link/image/su_pizza/pizzas_5faf2bfeaee23c7bef3bc635_1605318634.png/720x720\",\n        \"price\": 0,\n        \"ingredients\": [\n            \"Jamon\",\n            \"Piña\",\n            \"Cereza\",\n            \"Extra Queso\"\n        ],\n        \"restrictions\": \"Valor fijo\",\n        \"additional\": []\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "pizzasReadOne",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/pizzas/{{pizzaId}}",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"pizzas",
+								"{{pizzaId}}"
+							]
+						},
+						"description": "Obtiene informacion de una pizza"
+					},
+					"response": []
+				},
+				{
+					"name": "pizzasCreateOne",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"descripcion\": \"descripcion\",\n    \"ingredientes\": [\"5f25d124808b697461116c53\", \"5fa1c10734047c112d9456f9\"],\n    \"limite_ingr\": \"4\",\n    \"nombre\": \"nombre\",\n    \"tamanos\": [\"636bf7708cdf0f25dc831907\", \"616edd36fa141611bae1b06e\"],\n    \"urlImg\": \"data:image/png;base64\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/pizzas",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"pizzas"
+							]
+						},
+						"description": "Crea una pizza"
+					},
+					"response": []
+				},
+				{
+					"name": "pizzasUpdateteOne",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"descripcion\": \"descripcion\",\n    \"ingredientes\": [\"5f25d124808b697461116c53\", \"5fa1c10734047c112d9456f9\"],\n    \"limite_ingr\": \"4\",\n    \"nombre\": \"nombre\",\n    \"tamanos\": [\"636bf7708cdf0f25dc831907\", \"616edd36fa141611bae1b06e\"],\n    \"urlImg\": \"data:image/png;base64\",\n    \"_id\": \"5fa862bdbdf04e0b18a1b71f\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/pizzas/{{pizzaId}}",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"pizzas",
+								"{{pizzaId}}"
+							]
+						},
+						"description": "Actualiza una pizza"
+					},
+					"response": []
+				},
+				{
+					"name": "pizzasDeleteOne",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/pizzas/{{pizzaId}}",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"pizzas",
+								"{{pizzaId}}"
+							]
+						},
+						"description": "Elimina una pizza"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Repartidores",
+			"item": [
+				{
+					"name": "repartidoresReadAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/repartidores",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"repartidores"
+							]
+						},
+						"description": "Obtiene listado de todos los repartidores"
+					},
+					"response": []
+				},
+				{
+					"name": "repartidoresReadAllDisponibles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/repartidores_disponibles",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"repartidores_disponibles"
+							]
+						},
+						"description": "Obtiene listado de todos los repartidores disponibles"
+					},
+					"response": []
+				},
+				{
+					"name": "repartidoresCreateOne",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apellidos\": \"apellido\",\n    \"mail\": \"correo@corre.com\",\n    \"matricula\": \"matricula\",\n    \"nombres\": \"nombre\",\n    \"password\": \"contrase;a\",\n    \"status\": true,\n    \"telefono\": \"928384837\",\n    \"urlImg\": \"data:image/png;base64\",\n    \"vehiculo\": \"Motocicleta\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/repartidores",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"repartidores"
+							]
+						},
+						"description": "Crea un repartidor"
+					},
+					"response": []
+				},
+				{
+					"name": "repartidoresUpdateteOne",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apellidos\": \"apellido\",\n    \"mail\": \"correo@corre.com\",\n    \"matricula\": \"matricula\",\n    \"nombres\": \"nombre\",\n    \"password\": \"contrase;a\",\n    \"status\": true,\n    \"telefono\": \"928384837\",\n    \"urlImg\": \"data:image/png;base64\",\n    \"vehiculo\": \"Motocicleta\",\n    \"_id\": \"5fa862bdbdf04e0b18a1b71f\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/repartidores/{{repartidorId}}",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"repartidores",
+								"{{repartidorId}}"
+							]
+						},
+						"description": "Actualiza un repartidor"
+					},
+					"response": []
+				},
+				{
+					"name": "repartidoresDeleteOne",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/repartidores/{{repartidorId}}",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"repartidores",
+								"{{repartidorId}}"
+							]
+						},
+						"description": "Elimina un repartidor"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Trabajadores",
+			"item": [
+				{
+					"name": "trabajadoresReadAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/trabajadores",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"trabajadores"
+							]
+						},
+						"description": "Obtiene listado de todos los trabajadores"
+					},
+					"response": []
+				},
+				{
+					"name": "trabajadoresFindById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/trabajadores/{{trabajadorId}}",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"trabajadores",
+								"{{trabajadorId}}"
+							]
+						},
+						"description": "Obtiene la informacion de un trabajador segun su id"
+					},
+					"response": []
+				},
+				{
+					"name": "trabajadoresCreateOne",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apellidos\": \"apellido\",\n    \"mail\": \"correo@corre.com\",\n    \"claveEncargado\":\"\",\n    \"nombres\": \"nombre\",\n    \"password\": \"contrase;a\",\n    \"status\": true,\n    \"telefono\": \"928384837\",\n    \"urlImg\": \"data:image/png;base64\",\n    \"rol\": \"5f5fd62156a9e2fe307b76c4\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/trabajadores",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"trabajadores"
+							]
+						},
+						"description": "Crea un trabajador"
+					},
+					"response": []
+				},
+				{
+					"name": "trabajadoresUpdateteOne",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apellidos\": \"apellido\",\n    \"mail\": \"correo@corre.com\",\n    \"claveEncargado\":\"\",\n    \"nombres\": \"nombre\",\n    \"password\": \"contrase;a\",\n    \"status\": true,\n    \"telefono\": \"928384837\",\n    \"urlImg\": \"data:image/png;base64\",\n    \"rol\": \"5f5fd62156a9e2fe307b76c4\",\n    \"_id\": \"5fa862bdbdf04e0b18a1b71f\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/trabajadores/{{trabajadorId}}",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"trabajadores",
+								"{{trabajadorId}}"
+							]
+						},
+						"description": "Actualiza un trabajador"
+					},
+					"response": []
+				},
+				{
+					"name": "trabajadoresDeleteOne",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/trabajadores/{{trabajadorId}}",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"trabajadores",
+								"{{trabajadorId}}"
+							]
+						},
+						"description": "Elimina un trabajador"
+					},
+					"response": []
+				},
+				{
+					"name": "rolesReadAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/trabajadores_roles",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"trabajadores_roles"
+							]
+						},
+						"description": "Obtiene todos los roles del sistema"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Promos",
+			"item": [
+				{
+					"name": "promosReadAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/promos",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"promos"
+							]
+						},
+						"description": "Obtiene listado de todas las promociones"
+					},
+					"response": []
+				},
+				{
+					"name": "promosReadAllForDay",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/promos/{{day}}/days",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"promos",
+								"{{day}}",
+								"days"
+							]
+						},
+						"description": "Obtiene listado de todas las promociones de un determinado dia"
+					},
+					"response": []
+				},
+				{
+					"name": "promosCreateOne",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bebidas\": [{ \"_id\": \"636d6e223d552305f63fb661\", \"stock\": 21, \"precio\": 14.9, \"nombre\": \"Refresco Manzanita 355ml\"}],\n    \"complementos\": [{ \"_id\": \"5fa862a2bdf04e0b18a1b71e\", \"peso\": 500, \"precio\": 40, \"descripcion\": \"son delgadas, crujientes. Ideales para ese antojo de papas a la francesa en casa. \", \"nombre\": \"Papas a la fransesa\"}],\n    \"modificar\": true,\n    \"nombre\": \"nombre\",\n    \"pizzas\": [{ \"descripcion\": \"Deliciosa pizza Italiana\", \"ingredientes\": [{ \"nombre\": \"Salchicha\", \"precio\": 10, \"_id\": \"5f25cfe6808b697461116c4d\" }], \"limite_ingr\": 4, \"nombre\": \"Italiana\", \"tamanos\": [{ \"nombre\": \"Mediana\", \"precio\": 70, \"rebanadas\": 8, \"tamano\": 25, \"_id\":\"616edd12fa141611bae1b06d\" }] }],\n    \"precio\": \"200\",\n    \"tipo\": \"Promocion\",\n    \"urlImg\": \"data:image/png;base64\",\n    \"valid_days\": [{ \"status\": true, \"dia\": \"Lunes\"}, {\"status\": true, \"dia\": \"Martes\"}, {\"status\": false, \"dia\": \"Miércoles\"}, {\"status\": false, \"dia\": \"Jueves\"}, {\"status\": true, \"dia\":\"Viernes\"}, {\"status\": true, \"dia\": \"Sábado\"}, {\"status\": true, \"dia\": \"Domingo\"} ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/promos",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"promos"
+							]
+						},
+						"description": "Crea una promocion"
+					},
+					"response": []
+				},
+				{
+					"name": "promosUpdateteOne",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bebidas\": [{ \"_id\": \"636d6e223d552305f63fb661\", \"stock\": 21, \"precio\": 14.9, \"nombre\": \"Refresco Manzanita 355ml\"}],\n    \"complementos\": [{ \"_id\": \"5fa862a2bdf04e0b18a1b71e\", \"peso\": 500, \"precio\": 40, \"descripcion\": \"son delgadas, crujientes. Ideales para ese antojo de papas a la francesa en casa. \", \"nombre\": \"Papas a la fransesa\"}],\n    \"modificar\": true,\n    \"nombre\": \"nombre\",\n    \"pizzas\": [{ \"descripcion\": \"Deliciosa pizza Italiana\", \"ingredientes\": [{ \"nombre\": \"Salchicha\", \"precio\": 10, \"_id\": \"5f25cfe6808b697461116c4d\" }], \"limite_ingr\": 4, \"nombre\": \"Italiana\", \"tamanos\": [{ \"nombre\": \"Mediana\", \"precio\": 70, \"rebanadas\": 8, \"tamano\": 25, \"_id\":\"616edd12fa141611bae1b06d\" }] }],\n    \"precio\": \"200\",\n    \"tipo\": \"Promocion\",\n    \"urlImg\": \"data:image/png;base64\",\n    \"valid_days\": [{ \"status\": true, \"dia\": \"Lunes\"}, {\"status\": true, \"dia\": \"Martes\"}, {\"status\": false, \"dia\": \"Miércoles\"}, {\"status\": false, \"dia\": \"Jueves\"}, {\"status\": true, \"dia\":\"Viernes\"}, {\"status\": true, \"dia\": \"Sábado\"}, {\"status\": true, \"dia\": \"Domingo\"} ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/promos/{{promoId}}",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"promos",
+								"{{promoId}}"
+							]
+						},
+						"description": "Actualiza una promocion"
+					},
+					"response": []
+				},
+				{
+					"name": "promosDeleteOne",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/promos/{{promoId}}",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"promos",
+								"{{promoId}}"
+							]
+						},
+						"description": "Elimina una promocion"
+					},
+					"response": []
+				},
+				{
+					"name": "promosReadOne",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/promos/{{promoId}}",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"promos",
+								"{{promoId}}"
+							]
+						},
+						"description": "Obtiene la informacion de una promocion"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Bebidas",
+			"item": [
+				{
+					"name": "bebidasReadAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/bebidas",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"bebidas"
+							]
+						},
+						"description": "Obtiene listado de todas las bebidas"
+					},
+					"response": [
+						{
+							"name": "bebidasReadAll",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/bebidas",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"bebidas"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1231"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4cf-NJaMQfse+X3Gub4aKjZnZAlyV0Q\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Apr 2023 23:01:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"63473096019637565f31af61\",\n        \"name\": \"Manzanita Sol 1.5L\",\n        \"img\": \"https://cfiles.link/image/su_pizza/bebidas_63473096019637565f31af61_1665609878.png/720x720\",\n        \"price\": 20\n    },\n    {\n        \"id\": \"61f9e9966ba98a3fceaeaf74\",\n        \"name\": \"Refresco Mirinda 355Ml\",\n        \"img\": \"https://cfiles.link/image/su_pizza/bebidas_61f9e9966ba98a3fceaeaf74_1643768214.png/720x720\",\n        \"price\": 14.9\n    },\n    {\n        \"id\": \"61f9e8486ba98a3fceaeaf73\",\n        \"name\": \"Refresco Mirinda 1.5L\",\n        \"img\": \"https://cfiles.link/image/su_pizza/bebidas_61f9e8486ba98a3fceaeaf73_1643767880.png/720x720\",\n        \"price\": 19.9\n    },\n    {\n        \"id\": \"61f9aaa86ba98a3fceaeaf6f\",\n        \"name\": \"Refresco 7up de 1.5L\",\n        \"img\": \"https://cfiles.link/image/su_pizza/bebidas_61f9aaa86ba98a3fceaeaf6f_1643752104.png/720x720\",\n        \"price\": 19.9\n    },\n    {\n        \"id\": \"61f9aa456ba98a3fceaeaf6e\",\n        \"name\": \"Refresco 7up de 355Ml\",\n        \"img\": \"https://cfiles.link/image/su_pizza/bebidas_61f9aa456ba98a3fceaeaf6e_1643752005.png/720x720\",\n        \"price\": 14.9\n    },\n    {\n        \"id\": \"61f9a9986ba98a3fceaeaf6c\",\n        \"name\": \"Refresco Manzanita Sol de 355Ml\",\n        \"img\": \"https://cfiles.link/image/su_pizza/bebidas_61f9a9986ba98a3fceaeaf6c_1643751832.png/720x720\",\n        \"price\": 14.9\n    },\n    {\n        \"id\": \"5fda2fe94ad1c51d5381c6a5\",\n        \"name\": \"Agua 1L\",\n        \"img\": \"https://cfiles.link/image/su_pizza/bebidas_5fda2fe94ad1c51d5381c6a5_1643767822.png/720x720\",\n        \"price\": 14.9\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "bebidasCreateOne",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"nombre\",\n    \"stock\": \"50\",\n    \"precio\": \"500\",\n    \"urlImg\": \"data:image/png;base64\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/bebidas",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"bebidas"
+							]
+						},
+						"description": "Crea una bebida"
+					},
+					"response": []
+				},
+				{
+					"name": "bebidasUpdateteOne",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"nombre\",\n    \"stock\": \"50\",\n    \"precio\": \"500\",\n    \"urlImg\": \"data:image/png;base64\",\n    \"_id\": \"5fa862bdbdf04e0b18a1b71f\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/bebidas/{{bebidaId}}",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"bebidas",
+								"{{bebidaId}}"
+							]
+						},
+						"description": "Actualiza una bebida"
+					},
+					"response": []
+				},
+				{
+					"name": "bebidasDeleteOne",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/bebidas/{{bebidaId}}",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"bebidas",
+								"{{bebidaId}}"
+							]
+						},
+						"description": "Elimina una bebida"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ingredientes",
+			"item": [
+				{
+					"name": "ingredientesReadAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/ingredientes",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"ingredientes"
+							]
+						},
+						"description": "Obtiene listado de todos los ingredientes"
+					},
+					"response": []
+				},
+				{
+					"name": "ingredientesCreateOne",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"nombre\",\n    \"precio\": \"500\",\n    \"urlImg\": \"data:image/png;base64\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/ingredientes",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"ingredientes"
+							]
+						},
+						"description": "Crea un ingrediente"
+					},
+					"response": []
+				},
+				{
+					"name": "ingredientesUpdateteOne",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"nombre\",\n    \"precio\": \"500\",\n    \"urlImg\": \"data:image/png;base64\",\n    \"_id\": \"5fa862bdbdf04e0b18a1b71f\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/ingredientes/{{ingredienteId}}",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"ingredientes",
+								"{{ingredienteId}}"
+							]
+						},
+						"description": "Actualiza un ingrediente"
+					},
+					"response": []
+				},
+				{
+					"name": "ingredientesDeleteOne",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/ingredientes/{{ingredienteId}}",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"ingredientes",
+								"{{ingredienteId}}"
+							]
+						},
+						"description": "Elimina un ingrediente"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pedidos",
+			"item": [
+				{
+					"name": "pedidosCreateOne",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bebidas\": [{\n        \"_id\": \"637418ca5bd1316121c1f891\",\n        \"stock\": 12,\n        \"precio\": 19.9,\n        \"nombre\": \"Refresco Miranda 1.5L\",\n        \"urlImg\": {\n            \"large\": \"https://image-uploader.prbs.li/image/su_pizza/bebidas_637418ca5bd1316121c1f891_1668552906.png/1080x1080\",\n            \"medium\": \"https://image-uploader.prbs.li/image/su_pizza/bebidas_637418ca5bd1316121c1f891_1668552906.png/720x720\",\n            \"small\": \"https://image-uploader.prbs.li/image/su_pizza/bebidas_637418ca5bd1316121c1f891_1668552906.png/480x480\",\n            \"very_small\": \"https://image-uploader.prbs.li/image/su_pizza/bebidas_637418ca5bd1316121c1f891_1668552906.png/360x360\"\n        },\n        \"created_at\": \"2022-11-15T22:55:07.668Z\",\n        \"updatedAt\": \"2022-11-18T02:25:31.324Z\",\n        \"tipo\": \"bebida\",\n        \"cantidad\": 2\n    }],\n    \"cliente\": \"636aefe1e26cc9783ad22bc6\",\n    \"complementos\": [{\n        \"urlImg\": {\n            \"large\": \"https://image-uploader.prbs.li/image/su_pizza/complementos_5fa862bdbdf04e0b18a1b71f_1634727723.png/1080x1080\",\n            \"medium\": \"https://image-uploader.prbs.li/image/su_pizza/complementos_5fa862bdbdf04e0b18a1b71f_1634727723.png/720x720\",\n            \"small\": \"https://image-uploader.prbs.li/image/su_pizza/complementos_5fa862bdbdf04e0b18a1b71f_1634727723.png/480x480\",\n            \"very_small\": \"https://image-uploader.prbs.li/image/su_pizza/complementos_5fa862bdbdf04e0b18a1b71f_1634727723.png/360x360\"\n        },\n        \"_id\": \"5fa862bdbdf04e0b18a1b71f\",\n        \"peso\": 500,\n        \"precio\": 41,\n        \"descripcion\": \"Papas gajo son nuestro complemento del día, como todos los demás\",\n        \"nombre\": \"Papass  gajo\",\n        \"created_at\": \"2020-11-08T21:27:27.662Z\",\n        \"updatedAt\": \"2023-02-02T01:52:02.497Z\",\n        \"__v\": 0,\n        \"tipo\": \"complemento\",\n        \"cantidad\": 2\n    }],\n    \"direccion\": \"636b063ce26cc9783ad22bc7\",\n    \"entrega\": \"Sucursal\",\n    \"fecha\": \"2023-02-03T18:08:59.489Z\",\n    \"forma_pago\": \"Efectivo\",\n    \"monto_pagado\": 400,\n    \"nota\": \"nota\",\n    \"pagado\": true,\n    \"pizzas\": [{\n        \"urlImg\": {\n            \"large\": \"https://image-uploader.prbs.li/image/su_pizza/pizzas_636f02d058787627e7787276_1668219600.png/1080x1080\",\n            \"medium\": \"https://image-uploader.prbs.li/image/su_pizza/pizzas_636f02d058787627e7787276_1668219600.png/720x720\",\n            \"small\": \"https://image-uploader.prbs.li/image/su_pizza/pizzas_636f02d058787627e7787276_1668219600.png/480x480\",\n            \"very_small\": \"https://image-uploader.prbs.li/image/su_pizza/pizzas_636f02d058787627e7787276_1668219600.png/360x360\"\n        },\n        \"tamanos\": [\n            {\n                \"urlImg\": {\n                    \"large\": \"https://image-uploader.prbs.li/image/su_pizza/sizes_616edcb8fa141611bae1b06c_1634728375.png/1080x1080\",\n                    \"medium\": \"https://image-uploader.prbs.li/image/su_pizza/sizes_616edcb8fa141611bae1b06c_1634728375.png/720x720\",\n                    \"small\": \"https://image-uploader.prbs.li/image/su_pizza/sizes_616edcb8fa141611bae1b06c_1634728375.png/480x480\",\n                    \"very_small\": \"https://image-uploader.prbs.li/image/su_pizza/sizes_616edcb8fa141611bae1b06c_1634728375.png/360x360\"\n                },\n                \"_id\": \"616edcb8fa141611bae1b06c\",\n                \"precio\": 45,\n                \"rebanadas\": 4,\n                \"tamano\": 20,\n                \"nombre\": \"Chica\",\n                \"created_at\": \"2021-10-19T14:56:57.898Z\",\n                \"updatedAt\": \"2021-10-20T11:13:52.366Z\",\n                \"__v\": 0\n            }\n        ],\n        \"ingredientes\": [\n            {\n                \"urlImg\": {\n                    \"large\": \"https://image-uploader.prbs.li/image/su_pizza/ingredientes_5f1a1ecdf713d33e349e3645_1634764162.png/1080x1080\",\n                    \"medium\": \"https://image-uploader.prbs.li/image/su_pizza/ingredientes_5f1a1ecdf713d33e349e3645_1634764162.png/720x720\",\n                    \"small\": \"https://image-uploader.prbs.li/image/su_pizza/ingredientes_5f1a1ecdf713d33e349e3645_1634764162.png/480x480\",\n                    \"very_small\": \"https://image-uploader.prbs.li/image/su_pizza/ingredientes_5f1a1ecdf713d33e349e3645_1634764162.png/360x360\"\n                },\n                \"_id\": \"5f1a1ecdf713d33e349e3645\",\n                \"precio\": 10,\n                \"nombre\": \"Queso extra\",\n                \"created_at\": \"2020-07-23T23:35:41.737Z\",\n                \"updatedAt\": \"2021-10-20T21:09:24.401Z\",\n                \"__v\": 0\n            },\n            {\n                \"urlImg\": {\n                    \"large\": \"https://pizza-back.prbs.li/img/Ingredientes/ingredientes_5f1a1ebff713d33e349e3644/08lbm2r.jpg\",\n                    \"medium\": \"https://pizza-back.prbs.li/img/Ingredientes/5f1a1ebff713d33e349e3644/0wisnpa.jpg\",\n                    \"small\": \"https://pizza-back.prbs.li/img/Ingredientes/5f1a1ebff713d33e349e3644/0exa7a6.jpg\",\n                    \"very_small\": \"https://pizza-back.prbs.li/img/Ingredientes/5f1a1ebff713d33e349e3644/05cxg9z.jpg\"\n                },\n                \"_id\": \"5f1a1ebff713d33e349e3644\",\n                \"precio\": 10,\n                \"nombre\": \"Jamón\",\n                \"created_at\": \"2020-07-23T23:35:27.058Z\",\n                \"updatedAt\": \"2021-06-25T17:52:17.849Z\",\n                \"__v\": 0\n            },\n            {\n                \"urlImg\": {\n                    \"large\": \"https://pizza-back.prbs.li/img/Ingredientes/ingredientes_5f25cf06808b697461116c49/0kqoxpz.jpg\",\n                    \"medium\": \"https://pizza-back.prbs.li/img/Ingredientes/5f25cf06808b697461116c49/0ausqg3.jpg\",\n                    \"small\": \"https://pizza-back.prbs.li/img/Ingredientes/5f25cf06808b697461116c49/005v8fq.jpg\",\n                    \"very_small\": \"https://pizza-back.prbs.li/img/Ingredientes/5f25cf06808b697461116c49/0dj025j.jpg\"\n                },\n                \"_id\": \"5f25cf06808b697461116c49\",\n                \"precio\": 10,\n                \"nombre\": \"Pimientos\",\n                \"created_at\": \"2020-08-01T20:22:30.246Z\",\n                \"updatedAt\": \"2020-08-01T20:22:30.246Z\",\n                \"__v\": 0\n            },\n            {\n                \"urlImg\": {\n                    \"large\": \"https://pizza-back.prbs.li/img/Ingredientes/ingredientes_5f25d170808b697461116c55/05cic97.jpg\",\n                    \"medium\": \"https://pizza-back.prbs.li/img/Ingredientes/5f25d170808b697461116c55/0pt5ci8.jpg\",\n                    \"small\": \"https://pizza-back.prbs.li/img/Ingredientes/5f25d170808b697461116c55/09zthc4.jpg\",\n                    \"very_small\": \"https://pizza-back.prbs.li/img/Ingredientes/5f25d170808b697461116c55/0qejv21.jpg\"\n                },\n                \"_id\": \"5f25d170808b697461116c55\",\n                \"precio\": 10,\n                \"nombre\": \"Pollo\",\n                \"created_at\": \"2020-08-01T20:32:48.169Z\",\n                \"updatedAt\": \"2020-08-20T20:20:12.055Z\",\n                \"__v\": 0\n            }\n        ],\n        \"_id\": \"636f02d058787627e7787276\",\n        \"limite_ingr\": 4,\n        \"descripcion\": \"Deliciosa pizza Al Gusto \",\n        \"nombre\": \"Al Gusto\",\n        \"created_at\": \"2022-11-12T02:20:02.424Z\",\n        \"updatedAt\": \"2022-11-12T02:20:02.424Z\",\n        \"__v\": 0,\n        \"tipo\": \"pizza\",\n        \"cantidad\": 2,\n        \"precio\": 45\n    }],\n    \"promos\": [\n    {\n        \"urlImg\": {\n            \"large\": \"https://pizza-back.prbs.li/img/Promos/5f4c1f1b90bc3362fcf229c8/0lbhymm_1200.png\",\n            \"medium\": \"https://pizza-back.prbs.li/img/Promos/5f4c1f1b90bc3362fcf229c8/0u5px53_640.png\",\n            \"small\": \"https://pizza-back.prbs.li/img/Promos/5f4c1f1b90bc3362fcf229c8/0wg2fjx_480.png\",\n            \"very_small\": \"https://pizza-back.prbs.li/img/Promos/5f4c1f1b90bc3362fcf229c8/0mxjxsn_360.png\"\n        },\n        \"valid_days\": [\n            {\n                \"status\": true,\n                \"dia\": \"Lunes\"\n            },\n            {\n                \"status\": true,\n                \"dia\": \"Martes\"\n            },\n            {\n                \"status\": true,\n                \"dia\": \"Miércoles\"\n            },\n            {\n                \"status\": true,\n                \"dia\": \"Jueves\"\n            },\n            {\n                \"status\": true,\n                \"dia\": \"Viernes\"\n            },\n            {\n                \"status\": true,\n                \"dia\": \"Sábado\"\n            },\n            {\n                \"status\": true,\n                \"dia\": \"Domingo\"\n            }\n        ],\n        \"pizzas\": [\n            {\n                \"urlImg\": {\n                    \"large\": \"https://image-uploader.prbs.li/image/su_pizza/pizzas_5fa04aa0f31ad56aadc27fa4_1634655964.png/1080x1080\",\n                    \"medium\": \"https://image-uploader.prbs.li/image/su_pizza/pizzas_5fa04aa0f31ad56aadc27fa4_1634655964.png/720x720\",\n                    \"small\": \"https://image-uploader.prbs.li/image/su_pizza/pizzas_5fa04aa0f31ad56aadc27fa4_1634655964.png/480x480\",\n                    \"very_small\": \"https://image-uploader.prbs.li/image/su_pizza/pizzas_5fa04aa0f31ad56aadc27fa4_1634655964.png/360x360\"\n                },\n                \"ingredientes\": [\n                    {\n                        \"urlImg\": {\n                            \"large\": \"https://pizza-back.prbs.li/img/Ingredientes/ingredientes_5f25d170808b697461116c55/05cic97.jpg\",\n                            \"medium\": \"https://pizza-back.prbs.li/img/Ingredientes/5f25d170808b697461116c55/0pt5ci8.jpg\",\n                            \"small\": \"https://pizza-back.prbs.li/img/Ingredientes/5f25d170808b697461116c55/09zthc4.jpg\",\n                            \"very_small\": \"https://pizza-back.prbs.li/img/Ingredientes/5f25d170808b697461116c55/0qejv21.jpg\"\n                        },\n                        \"_id\": \"5f25d170808b697461116c55\",\n                        \"precio\": 10,\n                        \"nombre\": \"Pollo\",\n                        \"created_at\": \"2020-08-01T20:32:48.169Z\",\n                        \"updatedAt\": \"2020-08-20T20:20:12.055Z\",\n                        \"__v\": 0\n                    },\n                    {\n                        \"urlImg\": {\n                            \"large\": \"https://pizza-back.prbs.li/img/Ingredientes/ingredientes_5f1a1ebff713d33e349e3644/08lbm2r.jpg\",\n                            \"medium\": \"https://pizza-back.prbs.li/img/Ingredientes/5f1a1ebff713d33e349e3644/0wisnpa.jpg\",\n                            \"small\": \"https://pizza-back.prbs.li/img/Ingredientes/5f1a1ebff713d33e349e3644/0exa7a6.jpg\",\n                            \"very_small\": \"https://pizza-back.prbs.li/img/Ingredientes/5f1a1ebff713d33e349e3644/05cxg9z.jpg\"\n                        },\n                        \"_id\": \"5f1a1ebff713d33e349e3644\",\n                        \"precio\": 10,\n                        \"nombre\": \"Jamón\",\n                        \"created_at\": \"2020-07-23T23:35:27.058Z\",\n                        \"updatedAt\": \"2021-06-25T17:52:17.849Z\",\n                        \"__v\": 0\n                    },\n                    {\n                        \"urlImg\": {\n                            \"large\": \"https://image-uploader.prbs.li/image/su_pizza/ingredientes_5f25d083808b697461116c50_1634763520.jpeg/1080x1080\",\n                            \"medium\": \"https://image-uploader.prbs.li/image/su_pizza/ingredientes_5f25d083808b697461116c50_1634763520.jpeg/720x720\",\n                            \"small\": \"https://image-uploader.prbs.li/image/su_pizza/ingredientes_5f25d083808b697461116c50_1634763520.jpeg/480x480\",\n                            \"very_small\": \"https://image-uploader.prbs.li/image/su_pizza/ingredientes_5f25d083808b697461116c50_1634763520.jpeg/360x360\"\n                        },\n                        \"_id\": \"5f25d083808b697461116c50\",\n                        \"precio\": 14,\n                        \"nombre\": \"Tocino\",\n                        \"created_at\": \"2020-08-01T20:28:51.231Z\",\n                        \"updatedAt\": \"2021-10-29T00:30:48.868Z\",\n                        \"__v\": 0\n                    },\n                    {\n                        \"urlImg\": {\n                            \"large\": \"https://pizza-back.prbs.li/img/Ingredientes/ingredientes_5f25d0e3808b697461116c51/074l1cz.jpg\",\n                            \"medium\": \"https://pizza-back.prbs.li/img/Ingredientes/5f25d0e3808b697461116c51/0uupd43.jpg\",\n                            \"small\": \"https://pizza-back.prbs.li/img/Ingredientes/5f25d0e3808b697461116c51/0f4eua4.jpg\",\n                            \"very_small\": \"https://pizza-back.prbs.li/img/Ingredientes/5f25d0e3808b697461116c51/0te9ejk.jpg\"\n                        },\n                        \"_id\": \"5f25d0e3808b697461116c51\",\n                        \"precio\": 10,\n                        \"nombre\": \"Queso Amarillo\",\n                        \"created_at\": \"2020-08-01T20:30:27.664Z\",\n                        \"updatedAt\": \"2020-08-01T20:30:27.664Z\",\n                        \"__v\": 0\n                    }\n                ],\n                \"nombre\": \"Cordón Bleu\",\n                \"descripcion\": \"Deliciosa pizza de pollo con jamón, tocino y queso amarillo\",\n                \"tamanos\": [\n                    {\n                        \"urlImg\": {\n                            \"large\": \"https://image-uploader.prbs.li/image/su_pizza/sizes_616edcb8fa141611bae1b06c_1634728375.png/1080x1080\",\n                            \"medium\": \"https://image-uploader.prbs.li/image/su_pizza/sizes_616edcb8fa141611bae1b06c_1634728375.png/720x720\",\n                            \"small\": \"https://image-uploader.prbs.li/image/su_pizza/sizes_616edcb8fa141611bae1b06c_1634728375.png/480x480\",\n                            \"very_small\": \"https://image-uploader.prbs.li/image/su_pizza/sizes_616edcb8fa141611bae1b06c_1634728375.png/360x360\"\n                        },\n                        \"_id\": \"616edcb8fa141611bae1b06c\",\n                        \"precio\": 45,\n                        \"rebanadas\": 4,\n                        \"tamano\": 20,\n                        \"nombre\": \"Chica\",\n                        \"created_at\": \"2021-10-19T14:56:57.898Z\",\n                        \"updatedAt\": \"2021-10-20T11:13:52.366Z\",\n                        \"__v\": 0\n                    }\n                ]\n            }\n        ],\n        \"bebidas\": [\n            {\n                \"_id\": \"637418335bd1316121c1f88f\",\n                \"stock\": 36,\n                \"precio\": 14.9,\n                \"nombre\": \"Pepsi 355ml\",\n                \"urlImg\": {\n                    \"large\": \"https://image-uploader.prbs.li/image/su_pizza/bebidas_637418335bd1316121c1f88f_1668552756.png/1080x1080\",\n                    \"medium\": \"https://image-uploader.prbs.li/image/su_pizza/bebidas_637418335bd1316121c1f88f_1668552756.png/720x720\",\n                    \"small\": \"https://image-uploader.prbs.li/image/su_pizza/bebidas_637418335bd1316121c1f88f_1668552756.png/480x480\",\n                    \"very_small\": \"https://image-uploader.prbs.li/image/su_pizza/bebidas_637418335bd1316121c1f88f_1668552756.png/360x360\"\n                },\n                \"created_at\": \"2022-11-15T22:52:37.519Z\",\n                \"updatedAt\": \"2023-02-02T23:08:00.955Z\",\n                \"__v\": 0\n            }\n        ],\n        \"complementos\": [],\n        \"_id\": \"5f4c1f1b90bc3362fcf229c8\",\n        \"modificar\": true,\n        \"nombre\": \"Combo 1\",\n        \"precio\": 49.9,\n        \"tipo\": \"promocion\",\n        \"created_at\": \"2020-08-30T21:50:21.031Z\",\n        \"updatedAt\": \"2022-11-16T01:52:10.657Z\",\n        \"__v\": 0,\n        \"cantidad\": 2,\n        \"bebida_requerida\": false\n    }],\n    \"repartidor\": null,\n    \"status\": \"Completado\",\n    \"sucursal\": \"Juárez\",\n    \"tipo\": \"Panel\",\n    \"total\": 311.6\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/pedidos",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"pedidos"
+							]
+						},
+						"description": "Crear un pedido"
+					},
+					"response": []
+				},
+				{
+					"name": "pedidosReadAllCajeros",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/pedidos_cajero",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"pedidos_cajero"
+							]
+						},
+						"description": "Obtiene el listado de los pedidos levantados por caja"
+					},
+					"response": []
+				},
+				{
+					"name": "pedidosReadAllApp",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/pedidos_app",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"pedidos_app"
+							]
+						},
+						"description": "Obtiene el listado de los pedidos levantados desde el app"
+					},
+					"response": []
+				},
+				{
+					"name": "pedidosFindById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://supizza-back.prbs.li/api/pedidos/{{pedidoId}}",
+							"protocol": "https",
+							"host": [
+								"supizza-back",
+								"prbs",
+								"li"
+							],
+							"path": [
+								"api",
+								"pedidos",
+								"{{pedidoId}}"
+							]
+						},
+						"description": "Obtiene la informacion de un pedido buscando por id"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SuPizzaLink",
+			"item": [
+				{
+					"name": "loginCliente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"telefono\": \"4435517070\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/login_cliente",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"login_cliente"
+							]
+						},
+						"description": "Realiza autenticacion mediante usuario y contraseña devolviendo los modulos a los cuales tiene acceso el usuario y el token de acceso"
+					},
+					"response": []
+				},
+				{
+					"name": "verificarCliente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"telefono\": \"4431384235\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/verificar",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"verificar"
+							]
+						},
+						"description": "Realiza autenticacion mediante usuario y contraseña devolviendo los modulos a los cuales tiene acceso el usuario y el token de acceso"
+					},
+					"response": []
+				},
+				{
+					"name": "clienteCreateOne",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"telefono\": \"123456789\",\n    \"nombres\": \"testcalaverita@gmail.com\",\n    \"apellidos\": \"testcalaverita@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/registro_app",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"registro_app"
+							]
+						},
+						"description": "Realiza autenticacion mediante usuario y contraseña devolviendo los modulos a los cuales tiene acceso el usuario y el token de acceso"
+					},
+					"response": []
+				},
+				{
+					"name": "pedidoCreateOne",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"addressId\": \"5f371b743506142d4110bfac\",\n  \"clientId\": \"5f39ec82422df50c437a006c\",\n  \"paymentType\": \"Efectivo\",\n  \"orderOffers\": [\n      {\n          \"qty\": 1,\n          \"type\": \"pizzas\",\n          \"additional\": [\n              {\n                  \"id\": \"1\",\n                  \"selected\": [\n                      {\n                          \"desc\": \"\",\n                          \"name\": \"Pollo\",\n                          \"price\": 10,\n                          \"qty\": 1,\n                          \"id\": \"5f25d170808b697461116c55\"\n                      }\n                  ]\n              }\n          ],\n          \"offer\": {\n              \"id\": \"5fa1bf3434047c112d9456f8\",\n              \"title\": \"Italiana\",\n              \"img\": \"https://image-uploader.prbs.li/image/su_pizza/pizzas_5fa1bf3434047c112d9456f8_1634734158.png/720x720\",\n              \"price\": 0,\n              \"ingredients\": [\n                  \"Salchicha\",\n                  \"Pimientos\",\n                  \"Cebolla\",\n                  \"Champiñones\"\n              ],\n              \"restrictions\": 4,\n              \"comment\": \"Para este adicional es necesario cargar todo el arreglo ingredients [] dentro de items, los ingrediets marcados deben de aparecer preseleccionados\",\n              \"additional\": [\n                  {\n                      \"id\": 1,\n                      \"title\": \"Personaliza los ingredientes de tu pizza\",\n                      \"desc\": \"\",\n                      \"optional\": false,\n                      \"type\": \"check_box\",\n                      \"min\": 1,\n                      \"max\": 4,\n                      \"items\": []\n                  },\n                  {\n                      \"id\": 2,\n                      \"title\": \"Opciones\",\n                      \"desc\": \"Selecciona el tamaño de tu pizza\",\n                      \"type\": \"radio\",\n                      \"min\": 1,\n                      \"max\": 4,\n                      \"items\": []\n                  }\n              ]\n          }\n      }\n  ],\n  \"deliveryType\": \"Encontrarse afuera\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/pedidos_app_link",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pedidos_app_link"
+							]
+						},
+						"description": "Realiza autenticacion mediante usuario y contraseña devolviendo los modulos a los cuales tiene acceso el usuario y el token de acceso"
+					},
+					"response": []
+				},
+				{
+					"name": "promosReadAll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/promosApp",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"promosApp"
+							]
+						},
+						"description": "Realiza autenticacion mediante usuario y contraseña devolviendo los modulos a los cuales tiene acceso el usuario y el token de acceso"
+					},
+					"response": []
+				},
+				{
+					"name": "pizzasReadAll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/pizzasApp",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pizzasApp"
+							]
+						},
+						"description": "Realiza autenticacion mediante usuario y contraseña devolviendo los modulos a los cuales tiene acceso el usuario y el token de acceso"
+					},
+					"response": []
+				},
+				{
+					"name": "sizesReadAll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/sizesApp",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"sizesApp"
+							]
+						},
+						"description": "Realiza autenticacion mediante usuario y contraseña devolviendo los modulos a los cuales tiene acceso el usuario y el token de acceso"
+					},
+					"response": []
+				},
+				{
+					"name": "ingredientesReadAll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/ingredientesApp",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ingredientesApp"
+							]
+						},
+						"description": "Realiza autenticacion mediante usuario y contraseña devolviendo los modulos a los cuales tiene acceso el usuario y el token de acceso"
+					},
+					"response": []
+				},
+				{
+					"name": "bebidassReadAll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/bebidasApp",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bebidasApp"
+							]
+						},
+						"description": "Realiza autenticacion mediante usuario y contraseña devolviendo los modulos a los cuales tiene acceso el usuario y el token de acceso"
+					},
+					"response": []
+				},
+				{
+					"name": "complementosReadAll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/complementosApp",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"complementosApp"
+							]
+						},
+						"description": "Realiza autenticacion mediante usuario y contraseña devolviendo los modulos a los cuales tiene acceso el usuario y el token de acceso"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\": \"Clvrt.pass(54321);\",\n    \"username\": \"testcalaverita@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://supizza-back.prbs.li/api/login_admin",
+					"protocol": "https",
+					"host": [
+						"supizza-back",
+						"prbs",
+						"li"
+					],
+					"path": [
+						"api",
+						"login_admin"
+					]
+				},
+				"description": "Realiza autenticacion mediante usuario y contraseña devolviendo los modulos a los cuales tiene acceso el usuario y el token de acceso"
+			},
+			"response": []
+		},
+		{
+			"name": "Autorizacion Cortesia",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"claveEncargado\": \"Clvrt.pass(54321);\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://supizza-back.prbs.li/api/trabajadores_seguridad",
+					"protocol": "https",
+					"host": [
+						"supizza-back",
+						"prbs",
+						"li"
+					],
+					"path": [
+						"api",
+						"trabajadores_seguridad"
+					]
+				},
+				"description": "Recibe la contraseña de acceso al sistema de un usuario comprueba si es un usuario autoizado para permitir una cortesia y retorna un boleano segun sea el resultado de la operacion"
+			},
+			"response": []
+		},
+		{
+			"name": "settingsReadAll",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://supizza-back.prbs.li/api/settings",
+					"protocol": "https",
+					"host": [
+						"supizza-back",
+						"prbs",
+						"li"
+					],
+					"path": [
+						"api",
+						"settings"
+					]
+				},
+				"description": "Obtiene las configuraciones del sistema"
+			},
+			"response": []
+		},
+		{
+			"name": "settingsUpdateOne",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"consumoMinimo\": 1,\n    \"costoPorMinuto\": 3,\n    \"created_at\": \"2020-07-25T09:50:57.541Z\",\n    \"tarifaMinima\": 1.75,\n    \"tolerancia\": 1,\n    \"updatedAt\": \"2021-10-20T23:42:39.375Z\",\n    \"_id\": \"5f1c00813e86af1328dd8ec5\",\n    \"cobertura\": [{ \"geometry\": { \"coordinates\": [[\"101.26028417716606\",\"19.70973172058406\"]], \"type\": \"Polygon\" }, \"id\": \"a86167af1188973328821188f09b71af\", \"properties\": {}, \"type\": \"Feature\" }]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://supizza-back.prbs.li/api/settings",
+					"protocol": "https",
+					"host": [
+						"supizza-back",
+						"prbs",
+						"li"
+					],
+					"path": [
+						"api",
+						"settings"
+					]
+				},
+				"description": "Actualiza las configuraciones del sistema"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "server",
+			"value": "http://localhost:3000/"
+		}
+	]
+}
