@@ -8,6 +8,7 @@ import {
 } from "vue";
 import { ROUTE_NAME } from "@/router";
 import { useDataStore } from "@/store";
+import { useRouter } from "vue-router";
 // Components
 const HomeNav = defineAsyncComponent(
   () => import("@/components/menu/HomeNav.vue")
@@ -31,8 +32,11 @@ const SearchForm = defineAsyncComponent(
   () => import("@/components/forms/SearchForm.vue")
 );
 
+// Composables
+const $router = useRouter();
 const $store = useDataStore();
 
+// Data
 const complements = computed(() => $store.complements);
 const drinks = computed(() => $store.drinks);
 const pizzas = computed(() => $store.pizzas);
@@ -42,6 +46,22 @@ const search = ref<string>("");
 
 const cart = computed(() => $store.cart);
 
+// Methods
+
+/**
+ * goToOffer
+ * @param type
+ * @param id
+ */
+function goToOffer(type: "pizza" | "promo", id: string) {
+  if (type === "pizza")
+    $router.push({
+      name: ROUTE_NAME.PIZZA_DETAILS,
+      params: {
+        pizzaId: id,
+      },
+    });
+}
 onBeforeMount(() => {
   scrollTo({ top: 0, behavior: "smooth" });
 });
@@ -75,6 +95,8 @@ onBeforeMount(() => {
       <div
         v-for="(pizza, pizzaKey) in pizzas"
         :key="`pizza-${pizzaKey}-${pizza._id}`"
+        class="cursor-pointer"
+        @click="() => goToOffer('pizza', pizza._id)"
       >
         <PizzaWidget :data="pizza" />
         <div class="my-4 border border-slate-300"></div>

@@ -57,6 +57,7 @@ export const useDataStore = defineStore(STORE_KEY, () => {
         .catch((error) => reject(error));
     });
 
+    // Obtener datos de complementos, bebidas e ingredientes
     Promise.all([listComplement, listDrink, listIngredient]);
 
     // Obtener datos que dependen de los anteriores

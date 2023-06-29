@@ -8,9 +8,9 @@ export const routes: RouteRecordRaw[] = [
     component: () => import("@/pages/HomePage.vue"),
   },
   {
-    path: "/details",
-    name: ROUTE_NAME.OFFER_DETAILS,
-    component: () => import("@/pages/OfferDetails.vue"),
+    path: "/pizza/:pizzaId",
+    name: ROUTE_NAME.PIZZA_DETAILS,
+    component: () => import("@/pages/PizzaDetails.vue"),
   },
   {
     path: "/map",
