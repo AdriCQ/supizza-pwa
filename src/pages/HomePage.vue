@@ -61,6 +61,13 @@ function goToOffer(type: "pizza" | "promo", id: string) {
         pizzaId: id,
       },
     });
+  else if (type === "promo")
+    $router.push({
+      name: ROUTE_NAME.PROMO_DETAILS,
+      params: {
+        promoId: id,
+      },
+    });
 }
 onBeforeMount(() => {
   scrollTo({ top: 0, behavior: "smooth" });
@@ -80,6 +87,8 @@ onBeforeMount(() => {
       <div
         v-for="(promo, promoKey) in promos"
         :key="`promo-${promoKey}-${promo._id}`"
+        class="cursor-pointer"
+        @click="() => goToOffer('promo', promo._id)"
       >
         <PromoWidget :data="promo" />
         <div class="my-4 border border-slate-300"></div>

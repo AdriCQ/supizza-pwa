@@ -13,6 +13,11 @@ export const routes: RouteRecordRaw[] = [
     component: () => import("@/pages/PizzaDetails.vue"),
   },
   {
+    path: "/promo/:promoId",
+    name: ROUTE_NAME.PROMO_DETAILS,
+    component: () => import("@/pages/PromoDetails.vue"),
+  },
+  {
     path: "/map",
     name: ROUTE_NAME.MAP_SELECTOR,
     component: () => import("@/pages/MapPage.vue"),
