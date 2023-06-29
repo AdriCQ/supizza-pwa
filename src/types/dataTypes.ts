@@ -57,6 +57,7 @@ export interface Promo {
   precio: number;
   tipo: string;
   urlImg: UrlImage;
+  limites: PromoLimits;
 }
 
 export interface PromoLimits {
