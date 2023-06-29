@@ -5,15 +5,22 @@ import { setDefaultImage, toCurrency } from "@/helpers";
 import { ROUTE_NAME } from "@/router";
 import { useDataStore } from "@/store";
 import type { Promo } from "@/types";
+/**
+ * -----------------------------------------
+ *	Types
+ * -----------------------------------------
+ */
+interface QtySelector {
+  pizza: number[];
+  complement: number[];
+  drink: number[];
+}
 // Components
 const NavTop = defineAsyncComponent(
   () => import("@/components/menu/NavTop.vue")
 );
 const MultipleSelector = defineAsyncComponent(
   () => import("@/components/forms/selectors/MultipleSelector.vue")
-);
-const SimpleSelector = defineAsyncComponent(
-  () => import("@/components/forms/selectors/SimpleSelector.vue")
 );
 /**
  * -----------------------------------------
@@ -29,14 +36,17 @@ const $router = useRouter();
  *	Data
  * -----------------------------------------
  */
-const allPizzas = computed(() => $dataStore.pizzas);
 const canComplete = ref(true);
-const complementAvailable = computed(() => promo.value?.complementos);
+const complementsAvailable = computed(() => promo.value?.complementos);
 const drinksAvailable = computed(() => promo.value?.bebidas);
-const promoLimits = computed(() => promo.value?.limites);
 const pizzasAvailable = computed(() => promo.value?.pizzas);
 const promo = ref<Promo>();
 const qty = ref<number>(1);
+const qtySelector = ref<QtySelector>({
+  complement: [],
+  drink: [],
+  pizza: [],
+});
 const subtotal = computed(() => {
   if (promo.value) {
     return promo.value.precio * qty.value;
@@ -57,17 +67,7 @@ function addToCart() {
     void $router.push({ name: ROUTE_NAME.HOME });
   }
 }
-/**
- * handleCanComplete
- * @param complete
- */
-function handleCanComplete(complete: boolean) {
-  canComplete.value = complete;
-}
 
-function onSetPromo() {
-  console.log("onSetpromo");
-}
 /**
  * onBeforeMount
  */
@@ -84,6 +84,21 @@ onBeforeMount(() => {
   if (promoIndex >= 0) {
     promo.value = $dataStore.promos[promoIndex];
   }
+
+  // rellenar cantidad complemento
+  promo.value?.complementos.forEach(() => {
+    qtySelector.value.complement.push(0);
+  });
+
+  // rellenar cantidad bebida
+  promo.value?.bebidas.forEach(() => {
+    qtySelector.value.drink.push(0);
+  });
+
+  // rellenar cantidad pizza
+  promo.value?.pizzas.forEach(() => {
+    qtySelector.value.pizza.push(0);
+  });
 
   console.log({
     promo: promo.value,
@@ -118,23 +133,77 @@ onBeforeMount(() => {
         </h1>
       </div>
 
-      <!-- Ingredientes -->
+      <!-- Pizzas -->
       <div class="rounded-md border bg-slate-200 p-4">
-        <h3 class="text-center text-lg">Ingredientes Incluidos</h3>
-      </div>
-      <!-- / Ingredientes -->
+        <h3 class="text-center text-lg font-semibold">Pizzas</h3>
 
-      <!-- Tamanos -->
-      <div class="mt-4 rounded-md border bg-slate-200 p-4">
-        <h3 class="text-center text-lg">Tamaños</h3>
+        <div
+          class="mt-2"
+          v-for="(pizza, pizzaIndex) in pizzasAvailable"
+          :key="`pizza-available-${qtySelector.pizza[pizzaIndex]}-${pizzaIndex}`"
+        >
+          <div class="flex items-center">
+            <div class="flex-1">{{ pizza.nombre }}</div>
+            <div class="flex-none cursor-pointer">
+              <MultipleSelector
+                v-model="qtySelector.pizza[pizzaIndex]"
+                can-add
+              />
+            </div>
+          </div>
+        </div>
       </div>
-      <!-- / Tamanos -->
+      <!-- / Pizzas -->
 
-      <!-- Ingredientes Extras -->
-      <div class="rounded-lg bg-slate-200 py-4 px-8">
-        <h3 class="text-center text-lg font-semibold">Ingredientes Extra</h3>
+      <!-- bebidas -->
+      <div
+        class="rounded-md border bg-slate-200 p-4"
+        v-if="drinksAvailable?.length"
+      >
+        <h3 class="text-center text-lg font-semibold">Bebidas</h3>
+
+        <div
+          class="mt-2"
+          v-for="(drink, drinkIndex) in drinksAvailable"
+          :key="`drink-available-${qtySelector.drink[drinkIndex]}-${drinkIndex}`"
+        >
+          <div class="flex items-center">
+            <div class="flex-1">{{ drink.nombre }}</div>
+            <div class="flex-none cursor-pointer">
+              <MultipleSelector
+                v-model="qtySelector.drink[drinkIndex]"
+                can-add
+              />
+            </div>
+          </div>
+        </div>
       </div>
-      <!-- / Ingredientes Extras -->
+      <!-- / bebidas -->
+
+      <!-- Complements -->
+      <div
+        class="rounded-md border bg-slate-200 p-4"
+        v-if="complementsAvailable?.length"
+      >
+        <h3 class="text-center text-lg font-semibold">Complementos</h3>
+
+        <div
+          class="mt-2"
+          v-for="(complement, complementIndex) in complementsAvailable"
+          :key="`complement-available-${qtySelector.complement[complementIndex]}-${complementIndex}`"
+        >
+          <div class="flex items-center">
+            <div class="flex-1">{{ complement.nombre }}</div>
+            <div class="flex-none cursor-pointer">
+              <MultipleSelector
+                v-model="qtySelector.complement[complementIndex]"
+                can-add
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- / Complements -->
     </section>
     <!-- / Content -->
 

@@ -54,17 +54,6 @@ function addToCart() {
   }
 }
 /**
- * handleCanComplete
- * @param complete
- */
-function handleCanComplete(complete: boolean) {
-  canComplete.value = complete;
-}
-
-function onSetPizza() {
-  console.log("onSetPizza");
-}
-/**
  * onBeforeMount
  */
 onBeforeMount(() => {
