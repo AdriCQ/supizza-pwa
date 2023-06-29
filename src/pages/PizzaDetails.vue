@@ -121,7 +121,7 @@ onBeforeMount(() => {
 
       <!-- Tamanos -->
       <div class="mt-4 rounded-md border bg-slate-200 p-4">
-        <h3 class="text-center text-lg">Tamaños</h3>
+        <h3 class="text-center text-lg font-semibold">Tamaños</h3>
 
         <div
           class="mt-2"
@@ -132,7 +132,7 @@ onBeforeMount(() => {
             class="my-4"
             :price="tamano.precio"
             :label="tamano.nombre"
-            :selected="false"
+            :selected="tKey === 0"
           />
         </div>
       </div>

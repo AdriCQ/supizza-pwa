@@ -15,12 +15,19 @@ interface QtySelector {
   complement: number[];
   drink: number[];
 }
+interface Limit {
+  min: number;
+  max: number;
+}
 // Components
 const NavTop = defineAsyncComponent(
   () => import("@/components/menu/NavTop.vue")
 );
 const MultipleSelector = defineAsyncComponent(
   () => import("@/components/forms/selectors/MultipleSelector.vue")
+);
+const SimpleSelector = defineAsyncComponent(
+  () => import("@/components/forms/selectors/SimpleSelector.vue")
 );
 /**
  * -----------------------------------------
@@ -36,17 +43,57 @@ const $router = useRouter();
  *	Data
  * -----------------------------------------
  */
-const canComplete = ref(true);
+const canComplete = computed(() => {
+  if (promo.value) {
+    let pizzaQty = 0;
+    // let drinkQty = 0;
+    // let complementQty = 0;
+
+    // qtySelector.value.complement.forEach((i) => (complementQty += i));
+    // qtySelector.value.drink.forEach((i) => (drinkQty += i));
+    qtySelector.value.pizza.forEach((i) => (pizzaQty += i));
+
+    // validar cantidad de pizza
+    if (
+      pizzaQty > promo.value.limites.maxPizza ||
+      pizzaQty < promo.value.limites.minPizza
+    )
+      return false;
+
+    // validar cantidad de complementos
+    // if (
+    //   complementQty > promo.value.limites.maxComplemento ||
+    //   complementQty < promo.value.limites.minComplemento
+    // )
+    //   return false;
+
+    // // validar cantidad de bebidas
+    // if (
+    //   drinkQty > promo.value.limites.maxBebida ||
+    //   drinkQty < promo.value.limites.minBebida
+    // )
+    //   return false;
+
+    return true;
+  }
+  return false;
+});
+// complementos incluidas en la promo
 const complementsAvailable = computed(() => promo.value?.complementos);
+// bebidas incluidas en la promo
 const drinksAvailable = computed(() => promo.value?.bebidas);
+// pizzas incluidas en la promo
 const pizzasAvailable = computed(() => promo.value?.pizzas);
 const promo = ref<Promo>();
+// cantidad de promos
 const qty = ref<number>(1);
+// almacena las cantidades
 const qtySelector = ref<QtySelector>({
   complement: [],
   drink: [],
   pizza: [],
 });
+// subtotal
 const subtotal = computed(() => {
   if (promo.value) {
     return promo.value.precio * qty.value;
@@ -67,6 +114,51 @@ function addToCart() {
     void $router.push({ name: ROUTE_NAME.HOME });
   }
 }
+/**
+ * verifica si se puede añadir
+ * @param type
+ */
+function canAdd(
+  type: "complement" | "drink" | "pizza",
+  index: number
+): boolean {
+  if (promo.value) {
+    let limit: Limit;
+    let currentQty: number;
+    switch (type) {
+      // case "complement":
+      //   // obtener limites de commplemento
+      //   limit = {
+      //     max: promo.value.limites.maxComplemento,
+      //     min: promo.value.limites.minComplemento,
+      //   };
+      //   // obtenr cantidad actual
+      //   currentQty = qtySelector.value.complement[index];
+      //   return !isNaN(currentQty) && limit.max >= currentQty + 1;
+      // case "drink":
+      //   // obtener limites de drink
+      //   limit = {
+      //     max: promo.value.limites.maxBebida,
+      //     min: promo.value.limites.minBebida,
+      //   };
+      //   // obtenr cantidad actual
+      //   currentQty = qtySelector.value.drink[index];
+      //   return !isNaN(currentQty) && limit.max >= currentQty + 1;
+      case "pizza":
+        // obtener limites de pizza
+        limit = {
+          max: promo.value.limites.maxPizza,
+          min: promo.value.limites.minPizza,
+        };
+        // obtenr cantidad actual
+        currentQty = qtySelector.value.pizza[index];
+        return !isNaN(currentQty) && limit.max >= currentQty + 1;
+      default:
+        return false;
+    }
+  }
+  return false;
+}
 
 /**
  * onBeforeMount
@@ -86,14 +178,14 @@ onBeforeMount(() => {
   }
 
   // rellenar cantidad complemento
-  promo.value?.complementos.forEach(() => {
-    qtySelector.value.complement.push(0);
-  });
+  // promo.value?.complementos.forEach(() => {
+  //   qtySelector.value.complement.push(0);
+  // });
 
   // rellenar cantidad bebida
-  promo.value?.bebidas.forEach(() => {
-    qtySelector.value.drink.push(0);
-  });
+  // promo.value?.bebidas.forEach(() => {
+  //   qtySelector.value.drink.push(0);
+  // });
 
   // rellenar cantidad pizza
   promo.value?.pizzas.forEach(() => {
@@ -147,7 +239,7 @@ onBeforeMount(() => {
             <div class="flex-none cursor-pointer">
               <MultipleSelector
                 v-model="qtySelector.pizza[pizzaIndex]"
-                can-add
+                :can-add="canAdd('pizza', pizzaIndex)"
               />
             </div>
           </div>
@@ -165,17 +257,9 @@ onBeforeMount(() => {
         <div
           class="mt-2"
           v-for="(drink, drinkIndex) in drinksAvailable"
-          :key="`drink-available-${qtySelector.drink[drinkIndex]}-${drinkIndex}`"
+          :key="`drink-available-${drink._id}-${drinkIndex}`"
         >
-          <div class="flex items-center">
-            <div class="flex-1">{{ drink.nombre }}</div>
-            <div class="flex-none cursor-pointer">
-              <MultipleSelector
-                v-model="qtySelector.drink[drinkIndex]"
-                can-add
-              />
-            </div>
-          </div>
+          <SimpleSelector :label="drink.nombre" selected />
         </div>
       </div>
       <!-- / bebidas -->
@@ -190,17 +274,9 @@ onBeforeMount(() => {
         <div
           class="mt-2"
           v-for="(complement, complementIndex) in complementsAvailable"
-          :key="`complement-available-${qtySelector.complement[complementIndex]}-${complementIndex}`"
+          :key="`complement-available-${complement._id}-${complementIndex}`"
         >
-          <div class="flex items-center">
-            <div class="flex-1">{{ complement.nombre }}</div>
-            <div class="flex-none cursor-pointer">
-              <MultipleSelector
-                v-model="qtySelector.complement[complementIndex]"
-                can-add
-              />
-            </div>
-          </div>
+          <SimpleSelector :label="complement.nombre" selected class="mt-2" />
         </div>
       </div>
       <!-- / Complements -->
