@@ -4,7 +4,7 @@ import { useRoute, useRouter } from "vue-router";
 import { setDefaultImage, toCurrency } from "@/helpers";
 import { ROUTE_NAME } from "@/router";
 import { useDataStore } from "@/store";
-import type { Pizza } from "@/types";
+import type { Pizza, PizzaIngredient, PizzaSize } from "@/types";
 // Components
 const NavTop = defineAsyncComponent(
   () => import("@/components/menu/NavTop.vue")
@@ -30,12 +30,26 @@ const $router = useRouter();
  * -----------------------------------------
  */
 const canComplete = ref(true);
-const extraIngredients = computed(() => $dataStore.pizzaIngredients);
+const extraIngredients = computed<PizzaIngredient[]>(() => {
+  const diff = $dataStore.pizzaIngredients.filter((ing) => {
+    return !initialIngredients.value.find((initial) => initial._id === ing._id);
+  });
+
+  return diff;
+});
+const initialIngredients = ref<PizzaIngredient[]>([]);
 const pizza = ref<Pizza>();
 const qty = ref<number>(1);
+const selectedTamano = ref<PizzaSize>();
 const subtotal = computed(() => {
   if (pizza.value) {
-    return pizza.value.tamanos[0].precio * qty.value;
+    // precio inicial por tamano
+    let price = selectedTamano.value?.precio as number;
+    // Precio por ingredientes
+    pizza.value.ingredientes.forEach((ing) => {
+      price += ing.precio;
+    });
+    return price * qty.value;
   }
   return 0;
 });
@@ -49,10 +63,47 @@ const subtotal = computed(() => {
  * addToCart
  */
 function addToCart() {
-  if (canComplete.value) {
+  if (canComplete.value && pizza.value) {
+    // Añadir al carrito
+    $dataStore.addToPedido(pizza.value, "pizza", qty.value);
     void $router.push({ name: ROUTE_NAME.HOME });
   }
 }
+
+/**
+ * isSelectedIngredient
+ * @param ingredientId
+ */
+function isSelectedIngredient(ingredientId: string) {
+  if (pizza.value) {
+    return (
+      pizza.value.ingredientes.findIndex((i) => i._id === ingredientId) >= 0
+    );
+  }
+  return false;
+}
+
+/**
+ * toggleIngredient
+ * @param ingredientId
+ */
+function toggleIngredient(ingredientId: string) {
+  if (pizza.value) {
+    // check if exists
+    const index = pizza.value.ingredientes.findIndex(
+      (i) => i._id === ingredientId
+    );
+    if (index >= 0) {
+      pizza.value.ingredientes.splice(index, 1);
+    } else {
+      const ingredient = extraIngredients.value.find(
+        (i) => i._id === ingredientId
+      );
+      pizza.value.ingredientes.push(ingredient as PizzaIngredient);
+    }
+  }
+}
+
 /**
  * onBeforeMount
  */
@@ -68,6 +119,18 @@ onBeforeMount(() => {
   const pizzaIndex = $dataStore.pizzas.findIndex((p) => p._id == pizzaId);
   if (pizzaIndex >= 0) {
     pizza.value = $dataStore.pizzas[pizzaIndex];
+    // Poner ingredientes incluidos en cero
+    const ingredients = pizza.value.ingredientes.map((i) => ({
+      ...i,
+      precio: 0,
+    }));
+    pizza.value.ingredientes = ingredients;
+    // Seleccionar tamano por defecto
+    selectedTamano.value = pizza.value.tamanos[0];
+    // Guardar Ingredientes incluidos
+    initialIngredients.value = JSON.parse(
+      JSON.stringify(ingredients)
+    ) as PizzaIngredient[];
   }
 
   console.log({
@@ -109,7 +172,7 @@ onBeforeMount(() => {
         <h3 class="text-center text-lg">Ingredientes Incluidos</h3>
         <div class="mt-2 flex flex-wrap gap-2">
           <div
-            v-for="(ingredient, ingredientKey) in pizza.ingredientes"
+            v-for="(ingredient, ingredientKey) in initialIngredients"
             :key="`ingrediente-inl-${ingredientKey}`"
             class="rounded-full border bg-white px-2.5 py-1"
           >
@@ -118,7 +181,6 @@ onBeforeMount(() => {
         </div>
       </div>
       <!-- / Ingredientes -->
-
       <!-- Tamanos -->
       <div class="mt-4 rounded-md border bg-slate-200 p-4">
         <h3 class="text-center text-lg font-semibold">Tamaños</h3>
@@ -132,7 +194,8 @@ onBeforeMount(() => {
             class="my-4"
             :price="tamano.precio"
             :label="tamano.nombre"
-            :selected="tKey === 0"
+            :selected="selectedTamano?._id === tamano._id"
+            @click="selectedTamano = tamano"
           />
         </div>
       </div>
@@ -150,7 +213,8 @@ onBeforeMount(() => {
             class="my-4"
             :price="extra.precio"
             :label="extra.nombre"
-            :selected="false"
+            :selected="isSelectedIngredient(extra._id)"
+            @click="() => toggleIngredient(extra._id)"
           />
         </div>
       </div>
