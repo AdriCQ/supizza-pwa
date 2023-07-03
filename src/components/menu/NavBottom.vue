@@ -16,14 +16,8 @@ defineProps<IProps>();
 
 const $dataStore = useDataStore();
 const $router = useRouter();
-const cart = computed(() => $dataStore.cart);
-const qty = computed(() => {
-  let ret = 0;
-  cart.value.offers.forEach((offer) => {
-    ret += offer.qty;
-  });
-  return ret;
-});
+const pedidoCounter = computed(() => $dataStore.pedidoCounter);
+const pedidoPrecio = computed(() => $dataStore.pedidoPrecio);
 </script>
 
 <template>
@@ -45,11 +39,11 @@ const qty = computed(() => {
           <div
             class="flex h-4 w-4 items-center justify-center rounded-full bg-red-600 text-xs text-white"
           >
-            {{ qty }}
+            {{ pedidoCounter }}
           </div>
         </div>
       </div>
-      <div class="font-bold">Total {{ toCurrency(cart.price) }}</div>
+      <div class="font-bold">Total {{ toCurrency(pedidoPrecio) }}</div>
       <div class="ml-2 h-6 border border-white"></div>
       <div class="font-bold">{{ label }}</div>
       <BaseIcon

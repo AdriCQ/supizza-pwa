@@ -44,6 +44,8 @@ onBeforeMount(async () => {
 
 <template>
   <main class="min-h-screen bg-white text-slate-800">
-    <RouterView />
+    <Suspense>
+      <RouterView />
+    </Suspense>
   </main>
 </template>

@@ -1,20 +1,12 @@
 <script setup lang="ts">
-import {
-  computed,
-  defineAsyncComponent,
-  defineComponent,
-  onBeforeMount,
-  ref,
-} from "vue";
+import { computed, defineAsyncComponent, onBeforeMount, ref } from "vue";
 import { ROUTE_NAME } from "@/router";
 import { useDataStore } from "@/store";
 import { useRouter } from "vue-router";
+import NavBottom from "@/components/menu/NavBottom.vue";
 // Components
 const HomeNav = defineAsyncComponent(
   () => import("@/components/menu/HomeNav.vue")
-);
-const NavBottom = defineComponent(
-  () => import("@/components/menu/NavBottom.vue")
 );
 const ComplementWidget = defineAsyncComponent(
   () => import("@/components/widgets/ComplementWidget.vue")
@@ -44,7 +36,14 @@ const promos = computed(() => $store.promos);
 
 const search = ref<string>("");
 
-const cart = computed(() => $store.cart);
+const pedido = computed(() => $store.pedido);
+const countPedido = computed(
+  () =>
+    pedido.value.bebidas.length +
+    pedido.value.complementos.length +
+    pedido.value.pizzas.length +
+    pedido.value.promos.length
+);
 
 // Methods
 
@@ -144,5 +143,5 @@ onBeforeMount(() => {
     <!-- / Complementos -->
   </div>
 
-  <NavBottom label="Ver Carrito" :next="ROUTE_NAME.CART" v-if="cart.length" />
+  <NavBottom label="Ver Carrito" :next="ROUTE_NAME.CART" v-if="countPedido" />
 </template>
