@@ -110,7 +110,13 @@ const subtotal = computed(() => {
  * addToCart
  */
 function addToCart() {
-  if (canComplete.value) {
+  if (canComplete.value && promo.value) {
+    $dataStore.addToPedido({
+      cantidad: qty.value,
+      offert: promo.value,
+      precio: subtotal.value,
+      tipo: "promo",
+    });
     void $router.push({ name: ROUTE_NAME.HOME });
   }
 }
