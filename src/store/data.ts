@@ -44,6 +44,8 @@ export const useDataStore = defineStore(STORE_KEY, () => {
     tipo: "Panel",
     total: 0,
   });
+  const pedidoCounter = ref(0);
+  const pedidoPrecio = ref(0);
 
   /**
    * getOffers
@@ -89,17 +91,11 @@ export const useDataStore = defineStore(STORE_KEY, () => {
 
   /**
    * addToPedido
-   * @param offert
-   * @param tipo
-   * @param cantidad
    * @returns
    */
-  function addToPedido(
-    offert: Pizza | Promo | Complement | Drink,
-    tipo: "bebida" | "complemento" | "pizza" | "promo",
-    cantidad: number
-  ) {
+  function addToPedido(params: AddToPedido) {
     let offerIndex: number;
+    const { cantidad, offert, precio, tipo } = params;
 
     switch (tipo) {
       case "bebida":
@@ -135,6 +131,7 @@ export const useDataStore = defineStore(STORE_KEY, () => {
             tipo,
           });
         }
+
         break;
       case "pizza":
         offerIndex = pedido.value.pizzas.findIndex(
@@ -152,6 +149,7 @@ export const useDataStore = defineStore(STORE_KEY, () => {
             tipo,
           });
         }
+
         break;
       case "promo":
         offerIndex = pedido.value.promos.findIndex(
@@ -169,12 +167,16 @@ export const useDataStore = defineStore(STORE_KEY, () => {
             tipo,
           });
         }
+
         break;
       default:
         return;
     }
 
-    $storage.set({ pedido: pedido.value });
+    pedidoCounter.value += cantidad;
+    pedidoPrecio.value += precio;
+
+    saveStorage();
   }
 
   /**
@@ -183,11 +185,9 @@ export const useDataStore = defineStore(STORE_KEY, () => {
    * @param tipo
    * @returns
    */
-  function removeFromPedido(
-    offert: Pizza | Promo | Complement | Drink,
-    tipo: "bebida" | "complemento" | "pizza" | "promo"
-  ) {
+  function removeFromPedido(params: AddToPedido) {
     let offerIndex: number;
+    const { cantidad, offert, precio, tipo } = params;
 
     switch (tipo) {
       case "bebida":
@@ -196,6 +196,9 @@ export const useDataStore = defineStore(STORE_KEY, () => {
         );
         // ya existe
         if (offerIndex >= 0) {
+          // reducir cantidad
+          pedidoCounter.value -= pedido.value.bebidas[offerIndex].cantidad;
+          // eliminar del pedido
           pedido.value.bebidas.splice(offerIndex);
         }
         break;
@@ -205,6 +208,7 @@ export const useDataStore = defineStore(STORE_KEY, () => {
         );
         // ya existe
         if (offerIndex >= 0) {
+          // eliminar del pedido
           pedido.value.complementos.splice(offerIndex);
         }
         break;
@@ -214,6 +218,7 @@ export const useDataStore = defineStore(STORE_KEY, () => {
         );
         // ya existe
         if (offerIndex >= 0) {
+          // eliminar del pedido
           pedido.value.pizzas.splice(offerIndex);
         }
         break;
@@ -223,6 +228,7 @@ export const useDataStore = defineStore(STORE_KEY, () => {
         );
         // ya existe
         if (offerIndex >= 0) {
+          // eliminar del pedido
           pedido.value.promos.splice(offerIndex);
         }
         break;
@@ -230,7 +236,10 @@ export const useDataStore = defineStore(STORE_KEY, () => {
         return;
     }
 
-    $storage.set({ pedido: pedido.value });
+    pedidoCounter.value -= cantidad;
+    pedidoPrecio.value -= precio;
+
+    saveStorage();
   }
 
   /**
@@ -240,7 +249,17 @@ export const useDataStore = defineStore(STORE_KEY, () => {
     const data = $storage.get();
     if (data) {
       pedido.value = data.pedido;
+      pedidoCounter.value = data.pedidoCounter;
+      pedidoPrecio.value = data.pedidoPrecio;
     }
+  }
+
+  function saveStorage() {
+    $storage.set({
+      pedido: pedido.value,
+      pedidoCounter: pedidoCounter.value,
+      pedidoPrecio: pedidoPrecio.value,
+    });
   }
 
   return {
@@ -248,6 +267,9 @@ export const useDataStore = defineStore(STORE_KEY, () => {
     cart,
     complements,
     drinks,
+    pedido,
+    pedidoCounter,
+    pedidoPrecio,
     pizzas,
     pizzaIngredients,
     promos,
@@ -262,4 +284,13 @@ export const useDataStore = defineStore(STORE_KEY, () => {
 
 interface Storage {
   pedido: PedidoCreate;
+  pedidoCounter: number;
+  pedidoPrecio: number;
+}
+
+interface AddToPedido {
+  offert: Pizza | Promo | Complement | Drink;
+  tipo: "bebida" | "complemento" | "pizza" | "promo";
+  cantidad: number;
+  precio: number;
 }

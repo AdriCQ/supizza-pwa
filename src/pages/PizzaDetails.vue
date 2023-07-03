@@ -65,7 +65,12 @@ const subtotal = computed(() => {
 function addToCart() {
   if (canComplete.value && pizza.value) {
     // Añadir al carrito
-    $dataStore.addToPedido(pizza.value, "pizza", qty.value);
+    $dataStore.addToPedido({
+      cantidad: qty.value,
+      offert: pizza.value,
+      precio: subtotal.value,
+      tipo: "pizza",
+    });
     void $router.push({ name: ROUTE_NAME.HOME });
   }
 }
