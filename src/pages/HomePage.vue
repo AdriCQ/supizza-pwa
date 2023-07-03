@@ -46,6 +46,15 @@ const countPedido = computed(
     pedido.value.promos.length
 );
 
+const showNav = computed(
+  () =>
+    countPedido.value &&
+    (complements.value.length ||
+      drinks.value.length ||
+      pizzas.value.length ||
+      promos.value.length)
+);
+
 // Methods
 
 /**
@@ -231,5 +240,5 @@ onBeforeMount(() => {
     </template>
   </div>
 
-  <NavBottom label="Ver Carrito" :next="ROUTE_NAME.CART" v-if="countPedido" />
+  <NavBottom label="Ver Carrito" :next="ROUTE_NAME.CART" v-if="showNav" />
 </template>

@@ -27,7 +27,7 @@ const user = computed(() => $user.user);
 onBeforeMount(async () => {
   // Cargar usuario del storage
   $user.load();
-
+  $store.loadStorage();
   // Pedidos al servidor
   try {
     // Cargar direcciones
