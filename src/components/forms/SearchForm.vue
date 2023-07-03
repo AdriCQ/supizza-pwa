@@ -1,25 +1,21 @@
 <script setup lang="ts">
-import BaseIcon from "../BaseIcon.vue";
+import { ref } from "vue";
 import { mdiMagnify } from "@mdi/js";
+import { useDataStore } from "@/store";
+import BaseIcon from "../BaseIcon.vue";
 
-const $emit = defineEmits<{
-  (e: "update:model-value", v: string): void;
-  (e: "search"): void;
-}>();
-defineProps<{ modelValue: string }>();
+const $store = useDataStore();
 
-function handleOnChange(e: Event) {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  $emit("update:model-value", e.target.value);
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  if (e.target.value === "") $emit("search");
+const search = ref();
+
+function onSubmit() {
+  console.log("submit");
+  $store.searchData(search.value);
 }
 </script>
 
 <template>
-  <form @submit.prevent="() => $emit('search')">
+  <form @submit.prevent="onSubmit">
     <div class="flex items-center justify-center gap-2">
       <label
         class="flex-none"
@@ -35,8 +31,7 @@ function handleOnChange(e: Event) {
       <div class="flex-1">
         <input
           id="search-input"
-          :value="modelValue"
-          @change="handleOnChange"
+          v-model="search"
           type="search"
           class="p-xs input-bordered input input-md w-full max-w-xs rounded-md bg-white"
           placeholder="Buscar"

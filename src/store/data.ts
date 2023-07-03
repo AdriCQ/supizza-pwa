@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useStorage } from "@/helpers";
 import type {
   Complement,
@@ -28,7 +28,20 @@ export const useDataStore = defineStore(STORE_KEY, () => {
   const pizzaIngredients = ref<PizzaIngredient[]>([]);
   const promos = ref<Promo[]>([]);
 
-  const search = ref<unknown[]>();
+  const search = ref<SearchData>({
+    bebidas: [],
+    complementos: [],
+    pizzas: [],
+    promos: [],
+  });
+
+  const isSearch = computed(
+    () =>
+      search.value.bebidas.length ||
+      search.value.complementos.length ||
+      search.value.pizzas.length ||
+      search.value.promos.length
+  );
 
   const pedido = ref<PedidoCreate>({
     bebidas: [],
@@ -243,6 +256,56 @@ export const useDataStore = defineStore(STORE_KEY, () => {
   }
 
   /**
+   * searchData
+   * @param data
+   */
+  function searchData(searchString?: string) {
+    if (searchString) {
+      const data = searchString.toLocaleLowerCase();
+      // buscar bebidas
+      const bebidasSearch: Drink[] = [];
+      drinks.value.forEach((drink) => {
+        if (drink.nombre.toLocaleLowerCase().includes(data))
+          bebidasSearch.push(drink);
+      });
+
+      // buscar complementos
+      const complementosSearch: Complement[] = [];
+      complements.value.forEach((c) => {
+        if (c.nombre.toLocaleLowerCase().includes(data))
+          complementosSearch.push(c);
+      });
+
+      // buscar pizzas
+      const pizzasSearch: Pizza[] = [];
+      pizzas.value.forEach((c) => {
+        if (c.nombre.toLocaleLowerCase().includes(data)) pizzasSearch.push(c);
+      });
+
+      // buscar promos
+      const promosSearch: Promo[] = [];
+      promos.value.forEach((c) => {
+        if (c.nombre.toLocaleLowerCase().includes(data)) promosSearch.push(c);
+      });
+
+      // asignar a la busqueda
+      search.value = {
+        bebidas: bebidasSearch,
+        complementos: complementosSearch,
+        pizzas: pizzasSearch,
+        promos: promosSearch,
+      };
+    } else {
+      search.value = {
+        bebidas: [],
+        complementos: [],
+        pizzas: [],
+        promos: [],
+      };
+    }
+  }
+
+  /**
    * loadStorage
    */
   function loadStorage() {
@@ -274,11 +337,13 @@ export const useDataStore = defineStore(STORE_KEY, () => {
     pizzaIngredients,
     promos,
     search,
+    isSearch,
     // Methods
     addToPedido,
     getOffers,
     loadStorage,
     removeFromPedido,
+    searchData,
   };
 });
 
@@ -293,4 +358,11 @@ interface AddToPedido {
   tipo: "bebida" | "complemento" | "pizza" | "promo";
   cantidad: number;
   precio: number;
+}
+
+export interface SearchData {
+  bebidas: Drink[];
+  complementos: Complement[];
+  pizzas: Pizza[];
+  promos: Promo[];
 }
