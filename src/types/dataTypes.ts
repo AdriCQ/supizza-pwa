@@ -1,3 +1,4 @@
+import { User } from "./user";
 import type { UrlImage } from "./global";
 
 export interface Complement {
@@ -79,4 +80,61 @@ export interface DiaStatus {
     | "Viernes"
     | "Sábado"
     | "Domingo";
+}
+
+export interface Pedido {
+  _id: string;
+  bebidas: PedidoBebida[];
+  complementos: PedidoComplemento[];
+  pizzas: PedidoPizza[];
+  promos: PedidoPromo[];
+  monto_pagado: number;
+  pagado: boolean;
+  total: number;
+  forma_pago: "Efectivo";
+  cliente: User;
+  fecha: string;
+  sucursal: string;
+  entrega: string;
+  status: "COMPLETADO";
+  tipo: "Panel";
+  direccion: string;
+  nota: string;
+  repartidor?: null;
+  cajero: string;
+}
+
+export interface PedidoCreate
+  extends Omit<
+    Pedido,
+    | "_id"
+    | "repartidor"
+    | "cajero"
+    | "pagado"
+    | "monto_pagado"
+    | "fecha"
+    | "cliente"
+    | "status"
+  > {
+  cliente: string;
+}
+
+export interface PedidoComplemento extends Complement {
+  cantidad: number;
+  tipo: "complemento";
+}
+
+export interface PedidoBebida extends Drink {
+  cantidad: number;
+  tipo: "bebida";
+}
+
+export interface PedidoPizza extends Pizza {
+  cantidad: number;
+  tipo: "pizza";
+}
+
+export interface PedidoPromo extends Promo {
+  cantidad: number;
+  tipo: "promo";
 }
