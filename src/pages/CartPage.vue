@@ -3,6 +3,18 @@ import { computed, defineAsyncComponent, onBeforeMount, ref } from "vue";
 import { mdiCart } from "@mdi/js";
 import { ROUTE_NAME } from "@/router";
 import { useDataStore } from "@/store";
+import {
+  PedidoBebida,
+  PedidoComplemento,
+  PedidoPizza,
+  PedidoPromo,
+} from "@/types";
+
+interface ActionParam {
+  type: "bebida" | "complemento" | "pizza" | "promo";
+  offer: PedidoBebida | PedidoComplemento | PedidoPizza | PedidoPromo;
+}
+
 // Components
 const OrderOffer = defineAsyncComponent(
   () => import("@/components/widgets/OrderOffer.vue")
@@ -30,6 +42,7 @@ const $dataStore = useDataStore();
 const modalOpen = ref(false);
 const pedido = computed(() => $dataStore.pedido);
 const pedidoCounter = computed(() => $dataStore.pedidoCounter);
+const selectedOffer = ref<ActionParam>();
 
 const bebidas = computed(() => pedido.value.bebidas);
 const complementos = computed(() => pedido.value.complementos);
@@ -39,18 +52,27 @@ const promos = computed(() => pedido.value.promos);
 /**
  * onEdit
  */
-function onEdit() {
-  console.log("onedit");
+function onEdit(param: ActionParam) {
+  console.log("onedit", { ...param });
 }
 /**
  * onDelete
  * @param v
  */
-function onDelete() {
+function onDelete(param: ActionParam) {
+  selectedOffer.value = param;
   modalOpen.value = true;
 }
 
-function handleDelete() {
+function confirmDelete() {
+  if (selectedOffer.value) {
+    $dataStore.removeFromPedido({
+      cantidad: selectedOffer.value?.offer.cantidad,
+      offert: selectedOffer.value.offer,
+      precio: selectedOffer.value.offer.precioOferta,
+      tipo: selectedOffer.value.type,
+    });
+  }
   closeModal();
 }
 /**
@@ -78,7 +100,17 @@ onBeforeMount(() => {
         />
         Carrito
       </h1>
+
+      <!-- Elementos del pedido -->
       <div class="mt-8 rounded-lg bg-slate-200 py-2 px-6" v-if="pedidoCounter">
+        <!-- Promos -->
+
+        <div
+          class="border-t-slate-800 pt-2 text-center font-semibold"
+          v-if="promos.length"
+        >
+          Promos
+        </div>
         <div
           v-for="(promo, key) in promos"
           :key="`cart-promo-${key}`"
@@ -88,8 +120,8 @@ onBeforeMount(() => {
             :cantidad="promo.cantidad"
             :offer="promo"
             type="promo"
-            @delete="onDelete"
-            @edit="onEdit"
+            @delete="() => onDelete({ offer: promo, type: 'promo' })"
+            @edit="() => onEdit({ offer: promo, type: 'promo' })"
             editable
           />
 
@@ -98,19 +130,30 @@ onBeforeMount(() => {
             v-if="key < promos.length - 1"
           ></div>
         </div>
+        <!-- / Promos -->
+
+        <!-- Pizzas  -->
+
+        <div
+          class="border-t-slate-800 pt-4 text-center font-semibold"
+          v-if="pizzas.length"
+        >
+          Pizzas
+        </div>
         <div
           v-for="(pizza, key) in pizzas"
           :key="`cart-pizza-${key}`"
-          class="mt-2 py-2"
+          class="py-2"
         >
           <OrderOffer
             :cantidad="pizza.cantidad"
             :offer="pizza"
             type="pizza"
-            @delete="onDelete"
-            @edit="onEdit"
+            @delete="() => onDelete({ offer: pizza, type: 'pizza' })"
+            @edit="() => onEdit({ offer: pizza, type: 'pizza' })"
             editable
           />
+          <!-- / Promos -->
 
           <div
             class="mt-4 border border-slate-800"
@@ -118,6 +161,7 @@ onBeforeMount(() => {
           ></div>
         </div>
       </div>
+      <!-- / Elementos del pedido -->
     </div>
   </div>
 
@@ -126,7 +170,7 @@ onBeforeMount(() => {
     <p class="my-4">Está seguro que desea eliminar la oferta?</p>
     <div class="modal-action">
       <button @click="closeModal" class="btn-sm btn">No</button>
-      <button @click="handleDelete" class="btn-error btn-sm btn">
+      <button @click="confirmDelete" class="btn-error btn-sm btn">
         Eliminar
       </button>
     </div>

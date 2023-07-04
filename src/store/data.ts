@@ -145,6 +145,7 @@ export const useDataStore = defineStore(STORE_KEY, () => {
             ...(offert as Drink),
             cantidad,
             tipo,
+            precioOferta: precio,
           });
         }
         break;
@@ -162,6 +163,7 @@ export const useDataStore = defineStore(STORE_KEY, () => {
             ...(offert as Complement),
             cantidad,
             tipo,
+            precioOferta: precio,
           });
         }
 
@@ -180,6 +182,7 @@ export const useDataStore = defineStore(STORE_KEY, () => {
             ...(offert as Pizza),
             cantidad,
             tipo,
+            precioOferta: precio,
           });
         }
 
@@ -198,6 +201,7 @@ export const useDataStore = defineStore(STORE_KEY, () => {
             ...(offert as Promo),
             cantidad,
             tipo,
+            precioOferta: precio,
           });
         }
 
