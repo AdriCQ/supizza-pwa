@@ -4,7 +4,7 @@ import { useRoute, useRouter } from "vue-router";
 import { setDefaultImage, toCurrency } from "@/helpers";
 import { ROUTE_NAME } from "@/router";
 import { useDataStore } from "@/store";
-import type { Promo } from "@/types";
+import type { Pizza, Promo } from "@/types";
 /**
  * -----------------------------------------
  *	Types
@@ -111,6 +111,22 @@ const subtotal = computed(() => {
  */
 function addToCart() {
   if (canComplete.value && promo.value) {
+    // Actualizar las pizzas seleccionadas
+    const pizzasInPromo: Pizza[] = [];
+    qtySelector.value.pizza.forEach((qty, index) => {
+      const currentPizza = promo.value?.pizzas[index];
+      if (currentPizza) {
+        for (let qtyIterator = 0; qtyIterator < qty; qtyIterator++) {
+          pizzasInPromo.push(currentPizza);
+        }
+      }
+    });
+
+    // asignar a la promo
+    promo.value.pizzas = pizzasInPromo;
+    console.log({ pizzasInPromo });
+
+    // Almacenar el pedido
     $dataStore.addToPedido({
       cantidad: qty.value,
       offert: promo.value,
@@ -130,7 +146,7 @@ function canAdd(
 ): boolean {
   if (promo.value) {
     let limit: Limit;
-    let currentQty: number;
+    let currentQty = 0;
     switch (type) {
       // case "complement":
       //   // obtener limites de commplemento
@@ -157,8 +173,10 @@ function canAdd(
           min: promo.value.limites.minPizza,
         };
         // obtenr cantidad actual
-        currentQty = qtySelector.value.pizza[index];
-        return !isNaN(currentQty) && limit.max >= currentQty + 1;
+        qtySelector.value.pizza.forEach((s) => {
+          currentQty += s;
+        });
+        return currentQty < limit.max;
       default:
         return false;
     }

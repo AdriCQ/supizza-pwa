@@ -93,13 +93,33 @@ export const useDataStore = defineStore(STORE_KEY, () => {
         })
         .catch((error) => reject(error));
     });
+    const listPizza = new Promise((resolve, reject) => {
+      $service.offers
+        .listPizza()
+        .then((resp) => {
+          pizzas.value = resp.data;
+          resolve(pizzas.value);
+        })
+        .catch((error) => reject(error));
+    });
+    const listPromo = new Promise((resolve, reject) => {
+      $service.offers
+        .listPromo()
+        .then((resp) => {
+          promos.value = resp.data;
+          resolve(promos.value);
+        })
+        .catch((error) => reject(error));
+    });
 
     // Obtener datos de complementos, bebidas e ingredientes
-    Promise.all([listComplement, listDrink, listIngredient]);
-
-    // Obtener datos que dependen de los anteriores
-    pizzas.value = (await $service.offers.listPizza()).data;
-    promos.value = (await $service.offers.listPromo()).data;
+    Promise.all([
+      listPizza,
+      listPromo,
+      listComplement,
+      listDrink,
+      listIngredient,
+    ]);
   }
 
   /**
