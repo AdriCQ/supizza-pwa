@@ -1,28 +1,51 @@
 <script setup lang="ts">
-import { computed, onBeforeMount, ref } from "vue";
+import { computed, defineAsyncComponent, onBeforeMount, ref } from "vue";
 import { useRouter } from "vue-router";
 import { ROUTE_NAME } from "@/router";
-import type { Address, OrderCreate } from "@/types";
-import { useDataStore, useUserStore } from "@/store";
 import { toCurrency } from "@/helpers";
-import InputText from "./InputText.vue";
 import { useService } from "@/services";
+import { useAppStore, useDataStore, useUserStore } from "@/store";
+import type { Address, PedidoCreate } from "@/types";
 
-const $cart = useDataStore();
+const InputText = defineAsyncComponent(() => import("./InputText.vue"));
+
+/**
+ * ************************************
+ *	Composables
+ * ************************************
+ */
+
+const $app = useAppStore();
+const $dataStore = useDataStore();
 const $router = useRouter();
 const $service = useService();
 const $user = useUserStore();
+/**
+ * ************************************
+ *	Data
+ * ************************************
+ */
 
-const addressArray = computed<Address[]>(() => $user.address);
+const addressList = computed<Address[]>(() => $user.addressList);
 
-const form = ref<OrderCreate>({
-  addressId: "",
-  clientId: "",
-  deliveryType: "Encontrarse afuera",
-  orderOffers: [],
-  paymentType: "Efectivo",
-  totalPrice: 0,
+const form = ref<PedidoCreate>({
+  bebidas: [],
+  cliente: "",
+  complementos: [],
+  direccion: "",
+  entrega: "Domicilio",
+  forma_pago: "Efectivo",
+  nota: "",
+  pizzas: [],
+  promos: [],
+  sucursal: "Domicilio",
+  tipo: "Panel",
+  total: 0,
+  pagado: false,
+  status: "Pendiente",
 });
+
+const pedidoPrecio = computed(() => $dataStore.pedidoPrecio);
 
 const userForm = ref<{
   Telefono: string;
@@ -38,17 +61,40 @@ const user = computed(() => $user.user);
  */
 async function onSubmit() {
   if ($user.user) {
-    form.value.clientId = $user.user._id;
-    form.value.orderOffers = $cart.cart.offers;
-    form.value.totalPrice = $cart.cart.price;
-    console.log({
-      form: form.value,
-    });
+    form.value.cliente = $user.user._id;
+    form.value.bebidas = $dataStore.pedido.bebidas;
+    form.value.complementos = $dataStore.pedido.complementos;
+    form.value.pizzas = $dataStore.pedido.pizzas;
+    form.value.promos = $dataStore.pedido.promos;
+    form.value.total = $dataStore.pedidoPrecio;
+
     try {
-      const resp = await $service.orders.createOrder(form.value);
-      console.log({ order: resp.data });
+      await $service.orders.createOrder(form.value);
+      $app.success("Ya recibimos su pedido");
+      // Reiniciar pedido
+      $dataStore.pedido = {
+        bebidas: [],
+        cliente: "",
+        complementos: [],
+        direccion: "",
+        entrega: "",
+        forma_pago: "Efectivo",
+        nota: "",
+        pizzas: [],
+        promos: [],
+        sucursal: "",
+        tipo: "Panel",
+        total: 0,
+        pagado: false,
+        status: "Pendiente",
+      };
+      $dataStore.clearStorage();
+      // Redirigir a vista principal
+      $router.push({
+        name: ROUTE_NAME.HOME,
+      });
     } catch (error) {
-      console.log({ orderError: error });
+      $app.axiosError(error);
     }
   }
 }
@@ -156,9 +202,9 @@ onBeforeMount(() => {
         <!-- Dirección de entrega -->
         <div class="card-body mt-4 rounded-md bg-slate-200">
           <h2 class="text-lg font-semibold">Dirección de entrega</h2>
-          <select class="select w-full max-w-xs" v-model="form.addressId">
+          <select class="select w-full max-w-xs" v-model="form.direccion">
             <option
-              v-for="(address, addressKey) in addressArray"
+              v-for="(address, addressKey) in addressList"
               :key="`address-${addressKey}-${address._id}`"
               :value="address._id"
             >
@@ -189,8 +235,8 @@ onBeforeMount(() => {
                 type="radio"
                 name="metodo_pago"
                 class="radio-primary radio"
-                :checked="form.paymentType === 'Efectivo'"
-                @click="() => (form.paymentType = 'Efectivo')"
+                :checked="form.forma_pago === 'Efectivo'"
+                @click="() => (form.forma_pago = 'Efectivo')"
               />
             </div>
             <div class="flex items-center justify-between gap-2">
@@ -199,8 +245,8 @@ onBeforeMount(() => {
                 type="radio"
                 name="metodo_pago"
                 class="radio-primary radio"
-                :checked="form.paymentType === 'Tarjeta'"
-                @click="() => (form.paymentType = 'Tarjeta')"
+                :checked="form.forma_pago === 'Tarjeta'"
+                @click="() => (form.forma_pago = 'Tarjeta')"
               />
             </div>
           </div>
@@ -211,7 +257,7 @@ onBeforeMount(() => {
 
     <div class="p-2" v-if="user">
       <button type="submit" class="btn-primary btn w-full">
-        {{ toCurrency($cart.cart.price) }} | Completar
+        {{ toCurrency(pedidoPrecio) }} | Completar
       </button>
     </div>
   </form>

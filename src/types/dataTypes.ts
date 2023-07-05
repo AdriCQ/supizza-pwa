@@ -91,12 +91,12 @@ export interface Pedido {
   monto_pagado: number;
   pagado: boolean;
   total: number;
-  forma_pago: "Efectivo";
+  forma_pago: "Efectivo" | "Tarjeta";
   cliente: User;
   fecha: string;
   sucursal: string;
   entrega: string;
-  status: "COMPLETADO";
+  status: "COMPLETADO" | "Pendiente";
   tipo: "Panel";
   direccion: string;
   nota: string;
@@ -107,14 +107,7 @@ export interface Pedido {
 export interface PedidoCreate
   extends Omit<
     Pedido,
-    | "_id"
-    | "repartidor"
-    | "cajero"
-    | "pagado"
-    | "monto_pagado"
-    | "fecha"
-    | "cliente"
-    | "status"
+    "_id" | "repartidor" | "cajero" | "monto_pagado" | "fecha" | "cliente"
   > {
   cliente: string;
 }

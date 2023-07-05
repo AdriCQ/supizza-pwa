@@ -20,8 +20,6 @@ const $service = useService();
  * useDataStore
  */
 export const useDataStore = defineStore(STORE_KEY, () => {
-  const cart = ref<unknown[]>([]);
-
   const complements = ref<Complement[]>([]);
   const drinks = ref<Drink[]>([]);
   const pizzas = ref<Pizza[]>([]);
@@ -56,6 +54,8 @@ export const useDataStore = defineStore(STORE_KEY, () => {
     sucursal: "",
     tipo: "Panel",
     total: 0,
+    pagado: false,
+    status: "Pendiente",
   });
   const pedidoCounter = ref(0);
   const pedidoPrecio = ref(0);
@@ -329,6 +329,10 @@ export const useDataStore = defineStore(STORE_KEY, () => {
     }
   }
 
+  function clearStorage() {
+    $storage.remove();
+  }
+
   /**
    * loadStorage
    */
@@ -351,7 +355,6 @@ export const useDataStore = defineStore(STORE_KEY, () => {
 
   return {
     // Data
-    cart,
     complements,
     drinks,
     pedido,
@@ -364,6 +367,7 @@ export const useDataStore = defineStore(STORE_KEY, () => {
     isSearch,
     // Methods
     addToPedido,
+    clearStorage,
     getOffers,
     loadStorage,
     removeFromPedido,

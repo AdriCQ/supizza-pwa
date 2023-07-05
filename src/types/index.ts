@@ -21,5 +21,5 @@ export interface MapGeolocation {
 
 export * from "./dataTypes";
 export * from "./geo";
-export * from "./order";
+// export * from "./order";
 export * from "./user";
