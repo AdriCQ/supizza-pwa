@@ -69,7 +69,7 @@ function confirmDelete() {
     $dataStore.removeFromPedido({
       cantidad: selectedOffer.value?.offer.cantidad,
       offert: selectedOffer.value.offer,
-      precio: selectedOffer.value.offer.precioOferta,
+      precio: selectedOffer.value.offer.precio,
       tipo: selectedOffer.value.type,
     });
   }
@@ -133,7 +133,6 @@ onBeforeMount(() => {
         <!-- / Promos -->
 
         <!-- Pizzas  -->
-
         <div
           class="border-t-slate-800 pt-4 text-center font-semibold"
           v-if="pizzas.length"
@@ -160,6 +159,66 @@ onBeforeMount(() => {
             v-if="key < pizzas.length - 1"
           ></div>
         </div>
+        <!-- /Pizzas  -->
+
+        <!-- Complementos  -->
+        <div
+          class="border-t-slate-800 pt-4 text-center font-semibold"
+          v-if="complementos.length"
+        >
+          Complementos
+        </div>
+        <div
+          v-for="(complemento, key) in complementos"
+          :key="`cart-complemento-${key}`"
+          class="py-2"
+        >
+          <OrderOffer
+            :cantidad="complemento.cantidad"
+            :offer="complemento"
+            type="complemento"
+            @delete="
+              () => onDelete({ offer: complemento, type: 'complemento' })
+            "
+            @edit="() => onEdit({ offer: complemento, type: 'complemento' })"
+            editable
+          />
+          <!-- / Promos -->
+
+          <div
+            class="mt-4 border border-slate-800"
+            v-if="key < complementos.length - 1"
+          ></div>
+        </div>
+
+        <!-- BEbidas  -->
+        <div
+          class="border-t-slate-800 pt-4 text-center font-semibold"
+          v-if="bebidas.length"
+        >
+          Bebidas
+        </div>
+        <div
+          v-for="(bebida, key) in bebidas"
+          :key="`cart-bebida-${key}`"
+          class="py-2"
+        >
+          <OrderOffer
+            :cantidad="bebida.cantidad"
+            :offer="bebida"
+            type="bebida"
+            @delete="() => onDelete({ offer: bebida, type: 'bebida' })"
+            @edit="() => onEdit({ offer: bebida, type: 'bebida' })"
+            editable
+          />
+          <!-- / Promos -->
+
+          <div
+            class="mt-4 border border-slate-800"
+            v-if="key < bebidas.length - 1"
+          ></div>
+        </div>
+        <!-- /complementos  -->
       </div>
       <!-- / Elementos del pedido -->
     </div>

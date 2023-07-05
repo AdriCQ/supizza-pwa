@@ -69,30 +69,37 @@ async function onSubmit() {
     form.value.total = $dataStore.pedidoPrecio;
 
     try {
-      await $service.orders.createOrder(form.value);
-      $app.success("Ya recibimos su pedido");
-      // Reiniciar pedido
-      $dataStore.pedido = {
-        bebidas: [],
-        cliente: "",
-        complementos: [],
-        direccion: "",
-        entrega: "",
-        forma_pago: "Efectivo",
-        nota: "",
-        pizzas: [],
-        promos: [],
-        sucursal: "",
-        tipo: "Panel",
-        total: 0,
-        pagado: false,
-        status: "Pendiente",
-      };
-      $dataStore.clearStorage();
-      // Redirigir a vista principal
-      $router.push({
-        name: ROUTE_NAME.HOME,
-      });
+      const resp = await $service.orders.createOrder(form.value);
+      console.log({ resp, form: form.value });
+      if (resp.status == 202) {
+        $app.error(String(resp.data));
+      } else {
+        // Reiniciar pedido
+        $dataStore.pedido = {
+          bebidas: [],
+          cliente: "",
+          complementos: [],
+          direccion: "",
+          entrega: "",
+          forma_pago: "Efectivo",
+          nota: "",
+          pizzas: [],
+          promos: [],
+          sucursal: "",
+          tipo: "Panel",
+          total: 0,
+          pagado: false,
+          status: "Pendiente",
+        };
+        $dataStore.clearStorage();
+        $dataStore.pedidoCounter = 0;
+        $dataStore.pedidoPrecio = 0;
+        // Redirigir a vista principal
+        $router.push({
+          name: ROUTE_NAME.HOME,
+        });
+        $app.success("Ya recibimos su pedido");
+      }
     } catch (error) {
       $app.axiosError(error);
     }

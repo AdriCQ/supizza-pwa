@@ -62,7 +62,10 @@ const showNav = computed(
  * @param type
  * @param id
  */
-function goToOffer(type: "pizza" | "promo", id: string) {
+function goToOffer(
+  type: "pizza" | "promo" | "bebida" | "complemento",
+  id: string
+) {
   if (type === "pizza")
     $router.push({
       name: ROUTE_NAME.PIZZA_DETAILS,
@@ -77,6 +80,17 @@ function goToOffer(type: "pizza" | "promo", id: string) {
         promoId: id,
       },
     });
+  else {
+    $router.push({
+      name: ROUTE_NAME.OFFER_DETAILS,
+      params: {
+        offerId: id,
+      },
+      query: {
+        type,
+      },
+    });
+  }
 }
 onBeforeMount(() => {
   scrollTo({ top: 0, behavior: "smooth" });
@@ -214,6 +228,8 @@ onBeforeMount(() => {
         <div
           v-for="(complement, complementKey) in complements"
           :key="`complement-${complementKey}-${complement._id}`"
+          class="cursor-pointer"
+          @click="() => goToOffer('complemento', complement._id)"
         >
           <ComplementWidget :data="complement" />
           <div class="my-4 border border-slate-300"></div>
@@ -231,6 +247,8 @@ onBeforeMount(() => {
         <div
           v-for="(drink, drinkKey) in drinks"
           :key="`drink-${drinkKey}-${drink._id}`"
+          class="cursor-pointer"
+          @click="() => goToOffer('bebida', drink._id)"
         >
           <DrinkWidget :data="drink" />
           <div class="my-4 border border-slate-300"></div>

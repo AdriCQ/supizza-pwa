@@ -115,23 +115,23 @@ export interface PedidoCreate
 export interface PedidoComplemento extends Complement {
   cantidad: number;
   tipo: "complemento";
-  precioOferta: number;
+  precio: number;
 }
 
 export interface PedidoBebida extends Drink {
   cantidad: number;
   tipo: "bebida";
-  precioOferta: number;
+  precio: number;
 }
 
 export interface PedidoPizza extends Pizza {
   cantidad: number;
   tipo: "pizza";
-  precioOferta: number;
+  precio: number;
 }
 
 export interface PedidoPromo extends Promo {
   cantidad: number;
   tipo: "promo";
-  precioOferta: number;
+  precio: number;
 }

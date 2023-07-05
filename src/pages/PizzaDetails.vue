@@ -64,6 +64,8 @@ const subtotal = computed(() => {
  */
 function addToCart() {
   if (canComplete.value && pizza.value) {
+    // Marcar un solo tamaño
+    pizza.value.tamanos = [selectedTamano.value as PizzaSize];
     // Añadir al carrito
     $dataStore.addToPedido({
       cantidad: qty.value,

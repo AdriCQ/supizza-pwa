@@ -18,6 +18,7 @@ export const useAppStore = defineStore(STORE_KEY, () => {
       notifications.value.pop();
     }, 4000);
   }
+
   /**
    * error
    * @param content

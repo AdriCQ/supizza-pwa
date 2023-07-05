@@ -1,6 +1,15 @@
 <script lang="ts" setup>
-import { computed, onBeforeMount } from "vue";
+import { computed, defineAsyncComponent, onBeforeMount } from "vue";
 import { useAppStore, useDataStore, useUserStore } from "@/store";
+/**
+ * -----------------------------------------
+ *	Components
+ * -----------------------------------------
+ */
+
+const NotificationContainer = defineAsyncComponent(
+  () => import("@/components/NotificationContainer.vue")
+);
 /**
  * -----------------------------------------
  *	composables
@@ -47,5 +56,7 @@ onBeforeMount(async () => {
     <Suspense>
       <RouterView />
     </Suspense>
+
+    <NotificationContainer class="fixed right-0 top-0 z-50" />
   </main>
 </template>
