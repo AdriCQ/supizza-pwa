@@ -4,7 +4,7 @@ import { useRoute, useRouter } from "vue-router";
 import { setDefaultImage, toCurrency } from "@/helpers";
 import { ROUTE_NAME } from "@/router";
 import { useDataStore } from "@/store";
-import type { Pizza, Promo } from "@/types";
+import type { Complement, Drink, Pizza, Promo } from "@/types";
 /**
  * -----------------------------------------
  *	Types
@@ -46,11 +46,11 @@ const $router = useRouter();
 const canComplete = computed(() => {
   if (promo.value) {
     let pizzaQty = 0;
-    // let drinkQty = 0;
-    // let complementQty = 0;
+    let drinkQty = 0;
+    let complementQty = 0;
 
-    // qtySelector.value.complement.forEach((i) => (complementQty += i));
-    // qtySelector.value.drink.forEach((i) => (drinkQty += i));
+    qtySelector.value.complement.forEach((i) => (complementQty += i));
+    qtySelector.value.drink.forEach((i) => (drinkQty += i));
     qtySelector.value.pizza.forEach((i) => (pizzaQty += i));
 
     // validar cantidad de pizza
@@ -61,18 +61,18 @@ const canComplete = computed(() => {
       return false;
 
     // validar cantidad de complementos
-    // if (
-    //   complementQty > promo.value.limites.maxComplemento ||
-    //   complementQty < promo.value.limites.minComplemento
-    // )
-    //   return false;
+    if (
+      complementQty > promo.value.limites.maxComplemento ||
+      complementQty < promo.value.limites.minComplemento
+    )
+      return false;
 
     // // validar cantidad de bebidas
-    // if (
-    //   drinkQty > promo.value.limites.maxBebida ||
-    //   drinkQty < promo.value.limites.minBebida
-    // )
-    //   return false;
+    if (
+      drinkQty > promo.value.limites.maxBebida ||
+      drinkQty < promo.value.limites.minBebida
+    )
+      return false;
 
     return true;
   }
@@ -80,10 +80,25 @@ const canComplete = computed(() => {
 });
 // complementos incluidas en la promo
 const complementsAvailable = computed(() => promo.value?.complementos);
+const complementQty = computed(() => {
+  let qty = 0;
+  qtySelector.value.complement.forEach((c) => (qty += c));
+  return qty;
+});
 // bebidas incluidas en la promo
 const drinksAvailable = computed(() => promo.value?.bebidas);
+const drinkQty = computed(() => {
+  let qty = 0;
+  qtySelector.value.drink.forEach((c) => (qty += c));
+  return qty;
+});
 // pizzas incluidas en la promo
 const pizzasAvailable = computed(() => promo.value?.pizzas);
+const pizzaQty = computed(() => {
+  let qty = 0;
+  qtySelector.value.pizza.forEach((c) => (qty += c));
+  return qty;
+});
 const promo = ref<Promo>();
 // cantidad de promos
 const qty = ref<number>(1);
@@ -113,6 +128,10 @@ function addToCart() {
   if (canComplete.value && promo.value) {
     // Actualizar las pizzas seleccionadas
     const pizzasInPromo: Pizza[] = [];
+    const bebidaInPromo: Drink[] = [];
+    const complementoInPromo: Complement[] = [];
+
+    // Obtener pizzas seleccionadas
     qtySelector.value.pizza.forEach((qty, index) => {
       const currentPizza = promo.value?.pizzas[index];
       if (currentPizza) {
@@ -122,9 +141,26 @@ function addToCart() {
       }
     });
 
+    // Obtener bebidas seleccionadas
+    qtySelector.value.drink.forEach((qty, index) => {
+      const current = promo.value?.bebidas[index];
+      if (current && qty > 0) {
+        bebidaInPromo.push(current);
+      }
+    });
+
+    // Obtener complementos seleccionados
+    qtySelector.value.complement.forEach((qty, index) => {
+      const current = promo.value?.complementos[index];
+      if (current && qty > 0) {
+        complementoInPromo.push(current);
+      }
+    });
+
     // asignar a la promo
     promo.value.pizzas = pizzasInPromo;
-    console.log({ pizzasInPromo });
+    promo.value.bebidas = bebidaInPromo;
+    promo.value.complementos = complementoInPromo;
 
     // Almacenar el pedido
     $dataStore.addToPedido({
@@ -146,37 +182,32 @@ function canAdd(
 ): boolean {
   if (promo.value) {
     let limit: Limit;
-    let currentQty = 0;
     switch (type) {
-      // case "complement":
-      //   // obtener limites de commplemento
-      //   limit = {
-      //     max: promo.value.limites.maxComplemento,
-      //     min: promo.value.limites.minComplemento,
-      //   };
-      //   // obtenr cantidad actual
-      //   currentQty = qtySelector.value.complement[index];
-      //   return !isNaN(currentQty) && limit.max >= currentQty + 1;
-      // case "drink":
-      //   // obtener limites de drink
-      //   limit = {
-      //     max: promo.value.limites.maxBebida,
-      //     min: promo.value.limites.minBebida,
-      //   };
-      //   // obtenr cantidad actual
-      //   currentQty = qtySelector.value.drink[index];
-      //   return !isNaN(currentQty) && limit.max >= currentQty + 1;
+      case "complement":
+        // obtener limites de commplemento
+        limit = {
+          max: promo.value.limites.maxComplemento,
+          min: promo.value.limites.minComplemento,
+        };
+        // obtenr cantidad actual
+        return (
+          !isNaN(complementQty.value) && limit.max >= complementQty.value + 1
+        );
+      case "drink":
+        // obtener limites de drink
+        limit = {
+          max: promo.value.limites.maxBebida,
+          min: promo.value.limites.minBebida,
+        };
+        // obtenr cantidad actual
+        return !isNaN(drinkQty.value) && limit.max >= drinkQty.value + 1;
       case "pizza":
         // obtener limites de pizza
         limit = {
           max: promo.value.limites.maxPizza,
           min: promo.value.limites.minPizza,
         };
-        // obtenr cantidad actual
-        qtySelector.value.pizza.forEach((s) => {
-          currentQty += s;
-        });
-        return currentQty < limit.max;
+        return pizzaQty.value < limit.max;
       default:
         return false;
     }
@@ -184,6 +215,18 @@ function canAdd(
   return false;
 }
 
+/**
+ * toggleSelect
+ * @param type
+ * @param index
+ */
+function toggleSelect(type: "complement" | "drink" | "pizza", index: number) {
+  if (qtySelector.value[type][index]) {
+    qtySelector.value[type][index] = 0;
+  } else if (canAdd(type, index)) {
+    qtySelector.value[type][index] = 1;
+  }
+}
 /**
  * onBeforeMount
  */
@@ -202,14 +245,14 @@ onBeforeMount(() => {
   }
 
   // rellenar cantidad complemento
-  // promo.value?.complementos.forEach(() => {
-  //   qtySelector.value.complement.push(0);
-  // });
+  promo.value?.complementos.forEach(() => {
+    qtySelector.value.complement.push(0);
+  });
 
   // rellenar cantidad bebida
-  // promo.value?.bebidas.forEach(() => {
-  //   qtySelector.value.drink.push(0);
-  // });
+  promo.value?.bebidas.forEach(() => {
+    qtySelector.value.drink.push(0);
+  });
 
   // rellenar cantidad pizza
   promo.value?.pizzas.forEach(() => {
@@ -283,7 +326,11 @@ onBeforeMount(() => {
           v-for="(drink, drinkIndex) in drinksAvailable"
           :key="`drink-available-${drink._id}-${drinkIndex}`"
         >
-          <SimpleSelector :label="drink.nombre" selected />
+          <SimpleSelector
+            :label="drink.nombre"
+            :selected="Boolean(qtySelector.drink[drinkIndex])"
+            @click="() => toggleSelect('drink', drinkIndex)"
+          />
         </div>
       </div>
       <!-- / bebidas -->
@@ -300,7 +347,12 @@ onBeforeMount(() => {
           v-for="(complement, complementIndex) in complementsAvailable"
           :key="`complement-available-${complement._id}-${complementIndex}`"
         >
-          <SimpleSelector :label="complement.nombre" selected class="mt-2" />
+          <SimpleSelector
+            :label="complement.nombre"
+            :selected="Boolean(qtySelector.complement[complementIndex])"
+            class="mt-2"
+            @click="() => toggleSelect('complement', complementIndex)"
+          />
         </div>
       </div>
       <!-- / Complements -->

@@ -210,6 +210,8 @@ export const useDataStore = defineStore(STORE_KEY, () => {
         return;
     }
 
+    console.log({ pedido: pedido.value });
+
     pedidoCounter.value += cantidad;
     pedidoPrecio.value += precio;
 
